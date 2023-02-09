@@ -1,0 +1,22 @@
+<div class="contenedor">
+    <ngb-carousel>
+        <p></p>
+        <ng-template ngbSlide *ngFor="let image of images">
+            <div class="wrapper">
+                <img class="carousel-wall" [src]="image.src" height="500" width="100%" alt="Random first slide">
+            </div>
+        </ng-template>
+    </ngb-carousel>
+
+    <div class="d-flex justify-content-center centrado">
+        <div class="col-md-4">
+            <div class="form">
+                <i class="fa fa-search"></i>
+                <input type="text" class="form-control form-input" placeholder="Buscar Wallpapers...">
+            </div>
+        </div>
+    </div>
+
+    <h3 class="superior">Personaliza tu escritorio</h3>
+    <p class="inferior" >Holaaaa</p>
+</div>
