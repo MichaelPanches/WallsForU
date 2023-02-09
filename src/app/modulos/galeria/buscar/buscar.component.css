@@ -21,7 +21,7 @@ img {
 
 .inferior {
     position: absolute;
-    top: calc(65% - 28px);
+    top: calc(67% - 28px);
     left: 0;
     text-align: center;
     width: 100%;
@@ -36,7 +36,6 @@ img {
 }
 
 .form {
-
     position: relative;
 }
 
@@ -52,6 +51,7 @@ img {
     height: 55px;
     text-indent: 33px;
     border-radius: 20px;
+    
 }
 
 .form-input:focus {

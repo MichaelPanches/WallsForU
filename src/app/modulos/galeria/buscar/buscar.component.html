@@ -10,13 +10,13 @@
 
     <div class="d-flex justify-content-center centrado">
         <div class="col-md-4">
-            <div class="form">
-                <i class="fa fa-search"></i>
-                <input type="text" class="form-control form-input" placeholder="Buscar Wallpapers...">
+            <div class="form" (keyup.enter)="buscarImg()">
+                <i (click)="buscarImg()" class="fa fa-search"></i>
+                <input type="text" class="form-control form-input" placeholder="Buscar Wallpapers..." [(ngModel)] = "busqueda">
             </div>
         </div>
     </div>
 
-    <h3 class="superior">Personaliza tu escritorio</h3>
-    <p class="inferior" >Holaaaa</p>
+    <h3 class="superior">PERSONALIZA TU ESCRITORIO</h3>
+    <p class="inferior" >¡Marca tu estilo, encuentra tu wallpaper ideal!</p>
 </div>
