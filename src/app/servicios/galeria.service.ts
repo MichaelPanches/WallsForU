@@ -34,6 +34,48 @@ export class GaleriaService {
         categoria: 'Juego',
         precio: 8
       },
+      {
+        nombre: 'God Of War',
+        descripcion: 'Juego de fantasia',
+        categoria: 'Juego',
+        precio: 24
+      },
+      {
+        nombre: 'Mario Party',
+        descripcion: 'Juego de familia',
+        categoria: 'Juego',
+        precio: 15
+      },
+      {
+        nombre: 'Sonic Colors',
+        descripcion: 'Juego de carreras',
+        categoria: 'Juego',
+        precio: 8
+      },
+      {
+        nombre: 'Sonic Colors',
+        descripcion: 'Juego de carreras',
+        categoria: 'Juego',
+        precio: 8
+      },
+      {
+        nombre: 'God Of War',
+        descripcion: 'Juego de fantasia',
+        categoria: 'Juego',
+        precio: 24
+      },
+      {
+        nombre: 'Mario Party',
+        descripcion: 'Juego de familia',
+        categoria: 'Juego',
+        precio: 15
+      },
+      {
+        nombre: 'Sonic Colors',
+        descripcion: 'Juego de carreras',
+        categoria: 'Juego',
+        precio: 8
+      },
       ];
       localStorage.setItem('Catalogo', JSON.stringify(this.Datos));
     }

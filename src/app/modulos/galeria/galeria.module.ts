@@ -20,7 +20,8 @@ import { WallpaperComponent } from './wallpaper/wallpaper.component';
     FormsModule
   ],
   exports: [
-    BuscarComponent
+    BuscarComponent,
+    ListarComponent
   ]
 })
 export class GaleriaModule { }
