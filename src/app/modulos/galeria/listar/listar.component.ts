@@ -15,6 +15,7 @@ export class ListarComponent {
   busqueda = "";
   suscription: Subscription;
 
+
   constructor(private router: Router, public _galeriaService: GaleriaService) {
     console.log("si");
     this.suscription = this._galeriaService.getTermino().subscribe(data => {
@@ -32,6 +33,7 @@ export class ListarComponent {
     
     });
     
-  }
+  };
+  
 
 }

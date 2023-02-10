@@ -5,6 +5,9 @@ import { NgbCarouselConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { ListarComponent } from './listar/listar.component';
 import { WallpaperComponent } from './wallpaper/wallpaper.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from 'src/environments/environment.development';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 
 
@@ -17,7 +20,9 @@ import { WallpaperComponent } from './wallpaper/wallpaper.component';
   imports: [
     CommonModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage())
   ],
   exports: [
     BuscarComponent,

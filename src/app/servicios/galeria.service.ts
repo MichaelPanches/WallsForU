@@ -18,7 +18,7 @@ export class GaleriaService {
         autor: 'Maximus32',
         categorias: 'horizontal, oscuro',
         tags: 'Futuro, Aliens, Cielo, Nubes, Montañas',
-        ruta: '../assets/img/carousel1.jpg',
+        ruta: 'wallpapers/carousel1.jpg',
       },
       {
         nombre: 'City of Ligths',
@@ -26,7 +26,7 @@ export class GaleriaService {
         autor: 'Maria12',
         categorias: 'horizontal, Ciudad',
         tags: 'Ciudad, Lago, Cielo, Luces, Edificios',
-        ruta: '../assets/img/carousel3.jpg',
+        ruta: 'wallpapers/carousel3.jpg',
       },
       {
         nombre: 'Dark Future',
@@ -34,7 +34,7 @@ export class GaleriaService {
         autor: 'Maximus32',
         categorias: 'horizontal, oscuro',
         tags: 'Futuro, Aliens, Cielo, Nubes, Montañas',
-        ruta: '../assets/img/carousel1.jpg',
+        ruta: 'wallpapers/carousel1.jpg',
       },
       {
         nombre: 'City of Ligths',
@@ -42,7 +42,7 @@ export class GaleriaService {
         autor: 'Maria12',
         categorias: 'horizontal, Ciudad',
         tags: 'Ciudad, Lago, Cielo, Luces, Edificios',
-        ruta: '../assets/img/carousel3.jpg',
+        ruta: 'wallpapers/carousel3.jpg',
       },
       {
         nombre: 'Dark Future',
@@ -50,7 +50,7 @@ export class GaleriaService {
         autor: 'Maximus32',
         categorias: 'horizontal, oscuro',
         tags: 'Futuro, Aliens, Cielo, Nubes, Montañas',
-        ruta: '../assets/img/carousel1.jpg',
+        ruta: 'wallpapers/carousel1.jpg',
       },
       {
         nombre: 'City of Ligths',
@@ -58,7 +58,7 @@ export class GaleriaService {
         autor: 'Maria12',
         categorias: 'horizontal, Ciudad',
         tags: 'Ciudad, Lago, Cielo, Luces, Edificios',
-        ruta: '../assets/img/carousel3.jpg',
+        ruta: 'wallpapers/carousel3.jpg',
       },
       {
         nombre: 'City of Ligths',
@@ -66,7 +66,7 @@ export class GaleriaService {
         autor: 'Maria12',
         categorias: 'horizontal, Ciudad',
         tags: 'Ciudad, Lago, Cielo, Luces, Edificios',
-        ruta: '../assets/img/carousel3.jpg',
+        ruta: 'wallpapers/carousel3.jpg',
       },
       {
         nombre: 'Dark Future',
@@ -74,7 +74,7 @@ export class GaleriaService {
         autor: 'Maximus32',
         categorias: 'horizontal, oscuro',
         tags: 'Futuro, Aliens, Cielo, Nubes, Montañas',
-        ruta: '../assets/img/carousel1.jpg',
+        ruta: 'wallpapers/carousel1.jpg',
       },
       {
         nombre: 'City of Ligths',
@@ -82,7 +82,7 @@ export class GaleriaService {
         autor: 'Maria12',
         categorias: 'horizontal, Ciudad',
         tags: 'Ciudad, Lago, Cielo, Luces, Edificios',
-        ruta: '../assets/img/carousel3.jpg',
+        ruta: 'wallpapers/carousel3.jpg',
       },
       {
         nombre: 'Dark Future',
@@ -90,7 +90,7 @@ export class GaleriaService {
         autor: 'Maximus32',
         categorias: 'horizontal, oscuro',
         tags: 'Futuro, Aliens, Cielo, Nubes, Montañas',
-        ruta: '../assets/img/carousel1.jpg',
+        ruta: 'wallpapers/carousel1.jpg',
       },
       {
         nombre: 'City of Ligths',
@@ -98,7 +98,7 @@ export class GaleriaService {
         autor: 'Maria12',
         categorias: 'horizontal, Ciudad',
         tags: 'Ciudad, Lago, Cielo, Luces, Edificios',
-        ruta: '../assets/img/carousel3.jpg',
+        ruta: 'wallpapers/carousel3.jpg',
       }
       ];
       localStorage.setItem('Wallpapers', JSON.stringify(this.Datos));
