@@ -1,8 +1,8 @@
-<div class="d-flex container py-3 justify-content-center">
+<div class="d-flex container py-3 justify-content-center ">
 
-  <div class="row row-cols-md-auto g-3">
+  <div class="row row-cols-md-auto g-3 justify-content-center">
     <div *ngFor="let wallpaper of wallpapers">
-      <app-wallpaper></app-wallpaper>
+      <app-wallpaper [wallpaper]="wallpaper"></app-wallpaper>
     </div>
 
   </div>

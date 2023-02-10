@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { WallpaperInterfaz } from 'src/app/interfaces/WallpaperInterfaz';
 
 @Component({
   selector: 'app-wallpaper',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./wallpaper.component.css']
 })
 export class WallpaperComponent {
+  @Input() wallpaper!: WallpaperInterfaz;
 
 }

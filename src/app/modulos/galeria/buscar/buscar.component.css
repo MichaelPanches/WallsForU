@@ -17,6 +17,7 @@ img {
     text-align: center;
     width: 100%;
     color: white;
+    text-shadow: 2px 2px 0px rgb(0, 0, 0);
 }
 
 .inferior {
@@ -26,6 +27,7 @@ img {
     text-align: center;
     width: 100%;
     color: white;
+    text-shadow: 2px 2px 0px rgb(0, 0, 0);
 }
 
 .jumbotron {

@@ -1,6 +1,8 @@
 export interface WallpaperInterfaz {
     nombre: string;
     descripcion: string;
-    categoria: string;
-    precio: number;
+    autor: string;
+    categorias: string;
+    tags: string;
+    ruta: string;
 }
