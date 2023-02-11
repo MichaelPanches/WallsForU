@@ -16,7 +16,7 @@ import { ErrorComponent } from './componentes/error/error.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    GaleriaModule,
+    GaleriaModule
     
   ],
   providers: [],

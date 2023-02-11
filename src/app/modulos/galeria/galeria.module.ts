@@ -8,6 +8,8 @@ import { WallpaperComponent } from './wallpaper/wallpaper.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from 'src/environments/environment.development';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { HttpClientModule }from '@angular/common/http';
+import { GaleriaComponent } from './galeria/galeria.component';
 
 
 
@@ -15,14 +17,16 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
   declarations: [
     BuscarComponent,
     ListarComponent,
-    WallpaperComponent
+    WallpaperComponent,
+    GaleriaComponent,
   ],
   imports: [
     CommonModule,
     NgbModule,
     FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    HttpClientModule
   ],
   exports: [
     BuscarComponent,
