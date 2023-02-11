@@ -10,7 +10,6 @@ import { ErrorComponent } from './componentes/error/error.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     ErrorComponent
   ],
   imports: [

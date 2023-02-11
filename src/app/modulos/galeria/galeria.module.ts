@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment.development';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { HttpClientModule }from '@angular/common/http';
 import { GaleriaComponent } from './galeria/galeria.component';
+import { HeaderComponent } from 'src/app/componentes/header/header.component';
 
 
 
@@ -19,6 +20,7 @@ import { GaleriaComponent } from './galeria/galeria.component';
     ListarComponent,
     WallpaperComponent,
     GaleriaComponent,
+    HeaderComponent
   ],
   imports: [
     CommonModule,
