@@ -17,7 +17,6 @@ export class ListarComponent implements OnInit {
 
 
   constructor(private router: Router, public _galeriaService: GaleriaService) {
-    console.log("si");
     this.suscription = this._galeriaService.getTermino().subscribe(data => {
       this.busqueda = data;
       this.obtenerWallpapers();

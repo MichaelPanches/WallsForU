@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { LoginModalComponent } from '../login-modal/login-modal.component';
-import { RegisterModalComponent } from '../register-modal/register-modal.component';
+import { LoginModalComponent } from 'src/app/modulos/cuentas/login-modal/login-modal.component';
+import { RegisterModalComponent } from 'src/app/modulos/cuentas/register-modal/register-modal.component';
+import { SubirModalComponent } from 'src/app/modulos/gestion-wallpapers/subir-modal/subir-modal.component';
 
 @Component({
   selector: 'app-header',
@@ -38,6 +39,10 @@ export class HeaderComponent {
     const modalRef = this.modalService.open(RegisterModalComponent, { centered: true, size: 'md' });
   }
 
+  subirWallpaper(){
+    const modalRef = this.modalService.open(SubirModalComponent, { centered: true, size: 'xl' });
+  }
+
   cerrarSesion(){
     localStorage.removeItem('Usuario');
     this.refreshComponent();
@@ -47,6 +52,8 @@ export class HeaderComponent {
   refreshComponent(){
     this.route.navigate([this.route.url])
  }
+
+ 
 
 
 }

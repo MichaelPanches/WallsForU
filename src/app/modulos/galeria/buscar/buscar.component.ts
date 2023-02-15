@@ -31,7 +31,6 @@ export class BuscarComponent {
   }
 
   buscarImg(){
-    console.log(this.busqueda)
     this._galeriaService.sendTermino(this.busqueda);
 
   }

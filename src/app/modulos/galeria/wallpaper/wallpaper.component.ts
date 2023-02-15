@@ -29,7 +29,6 @@ export class WallpaperComponent implements OnInit {
     const url = await getDownloadURL(referencia);
 
     this.imagen = url;
-    console.log(url)
   }
 
   descargarWallpaper() {
@@ -44,7 +43,6 @@ export class WallpaperComponent implements OnInit {
 
   downloadImage() {
     this.getBase64ImageFromURL(this.imagen).subscribe((base64data: string) => {
-      console.log(base64data);
       this.base64Image = "data:image/jpg;base64," + base64data;
       // save image to disk
       var link = document.createElement("a");

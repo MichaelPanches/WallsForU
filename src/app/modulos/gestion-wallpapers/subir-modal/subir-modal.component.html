@@ -1,0 +1,64 @@
+<div class="modal-header text-center ">
+    <button type="button" class="btn-close" style="visibility: hidden;"></button>
+    <h4 class="modal-title w-100 font-weight-bold">Subir Wallpaper</h4>
+
+    <button type="button" class="btn-close d-flex justify-content-center" (click)="activeModal.close()"
+        aria-label="Close"></button>
+
+
+</div>
+
+
+<div class="modal-body">
+    <div class="row">
+
+        <div class="col-4">
+            <form>
+                <div class="form-group pb-1 mx-2">
+                    <label for="exampleInputEmail1" class="form-label mt-2">Titulo</label>
+                    <input type="email" class="form-control" id="email" required #titulo>
+                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+                </div>
+
+                <div class="form-group pb-1 mx-2">
+                    <label for="exampleFormControlTextarea1" class="form-label mt-2">Descripcion</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #descripcion></textarea>
+                </div>
+
+                <div class="form-group pb-1 mx-2">
+                    <label for="exampleInputEmail1" class="form-label mt-2">Categorias <span> (Separadas por
+                            comas)</span></label>
+                    <input type="email" class="form-control" id="email" required #categorias>
+                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+                </div>
+
+                <div class="form-group pb-1 mx-2">
+                    <label for="exampleInputEmail1" class="form-label mt-2">Etiquetas <span> (Separadas por
+                            comas)</span></label>
+                    <input type="email" class="form-control" id="email" required #etiquetas>
+                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+                </div>
+
+
+
+            </form>
+        </div>
+
+        <div class="col-8 justify-content-center">
+
+            <div class="card">
+                <div class="card-body">
+                    <input type="file" class="custom-file-input" id="customFileLang" (change)="guardarEvento($event)" lang="es">
+                </div>
+                <img class="card-img-bottom" src="{{imageSrc}}" >
+              </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+<div class="modal-footer d-flex justify-content-start">
+    <button type="submit" class="btn btn-primary" (click)="subirImagen(titulo.value, descripcion.value, categorias.value, etiquetas.value)">Ingresar</button>
+</div>

@@ -21,7 +21,7 @@
                 </div>
     
                 <div *ngSwitchCase="'logeado'" class="text-end">
-                    <button type="button" title="Subir Wallpaper" class="btn btn-outline-light me-2 subir"></button>
+                    <button type="button" title="Subir Wallpaper" class="btn btn-outline-light me-2 subir" (click)="subirWallpaper()"></button>
                     <div class="btn-group ">
                         <button type="button" class="btn btn-primary dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{usuario}}
