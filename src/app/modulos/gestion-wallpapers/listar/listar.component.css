@@ -1,0 +1,75 @@
+img {
+    object-fit: cover;
+    filter: brightness(50%);
+}
+
+.main-text {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    color: #FFF;
+}
+
+.superior {
+    position: absolute;
+    top: calc(35% - 28px);
+    left: 0;
+    text-align: center;
+    width: 100%;
+    color: white;
+    text-shadow: 2px 2px 0px rgb(0, 0, 0);
+}
+
+.inferior {
+    position: absolute;
+    top: calc(67% - 28px);
+    left: 0;
+    text-align: center;
+    width: 100%;
+    color: white;
+    text-shadow: 2px 2px 0px rgb(0, 0, 0);
+}
+
+.jumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #e9ecef;
+    border-radius: .3rem;
+}
+
+.form {
+    position: relative;
+}
+
+.form .fa-search {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #84878b;
+}
+
+
+.form-input {
+    height: 55px;
+    text-indent: 33px;
+    border-radius: 20px;
+    
+}
+
+.form-input:focus {
+
+    box-shadow: none;
+    border: none;
+}
+
+.contenedor {
+    position: relative;
+}
+
+.centrado {
+    position: absolute;
+    top: calc(50% - 28px);
+    left: 0;
+    text-align: center;
+    width: 100%;
+}

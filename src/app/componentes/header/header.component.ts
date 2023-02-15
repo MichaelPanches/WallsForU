@@ -4,6 +4,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { LoginModalComponent } from 'src/app/modulos/cuentas/login-modal/login-modal.component';
 import { RegisterModalComponent } from 'src/app/modulos/cuentas/register-modal/register-modal.component';
 import { SubirModalComponent } from 'src/app/modulos/gestion-wallpapers/subir-modal/subir-modal.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-header',

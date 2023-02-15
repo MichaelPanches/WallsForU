@@ -1,0 +1,18 @@
+<div class="col">
+    <div class="card shadow-sm mx-auto" width="100%">
+            <img [src]="imagen" class="card-img-top" width="100%" height="225" alt="">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+
+                <small class="text">{{wallpaper.nombre}}</small> 
+                <div class="btn-group">
+                    <button type="button" (click)="downloadImage()" class="btn btn-sm btn-outline-success">Descargar</button>
+                    <button type="button" (click)="editarWallpaper()" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button type="button" (click)="borrarWallpaper()" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3-fill"></i></button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

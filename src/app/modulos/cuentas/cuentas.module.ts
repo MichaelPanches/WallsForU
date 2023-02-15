@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginModalComponent } from './login-modal/login-modal.component';
 import { RegisterModalComponent } from './register-modal/register-modal.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 
@@ -16,7 +17,8 @@ import { RegisterModalComponent } from './register-modal/register-modal.componen
   ],
   exports: [
     LoginModalComponent,
-    RegisterModalComponent
+    RegisterModalComponent,
+    AppRoutingModule,
   ]
   
 })
