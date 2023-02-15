@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   menuType: String = "default";
+  adminMode: boolean = true;
   usuario: String | null | undefined;
 
   constructor(private route: Router, private modalService: NgbModal) {
@@ -24,12 +25,14 @@ export class HeaderComponent {
       if (val.url) {
         if (localStorage.getItem("Usuario") == "Admin") {
           this.usuario = localStorage.getItem("Usuario");
-          this.menuType = "admin";
+          this.adminMode = true;
         } else if (localStorage.getItem("Usuario") == "Usuario") {
+          this.adminMode = false;
           this.usuario = localStorage.getItem("Usuario");
           this.menuType = "logeado";
         } else {
           this.menuType = "default";
+          this.adminMode = false;
         }
       }
     })
@@ -50,6 +53,7 @@ export class HeaderComponent {
   cerrarSesion(){
     localStorage.removeItem('Usuario');
     this.refreshComponent();
+    this.route.navigate([""]);
 
   }
 

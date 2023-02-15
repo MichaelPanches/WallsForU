@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { NgbModule, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { WallpaperInterfaz } from 'src/app/interfaces/WallpaperInterfaz';
+import { WallpaperInterfaz } from 'src/app/interfaces/wallpaper.interface';
 import { GaleriaService } from 'src/app/servicios/galeria.service';
 
 @Component({

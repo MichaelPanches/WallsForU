@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WallpaperInterfaz } from 'src/app/interfaces/WallpaperInterfaz';
+import { WallpaperInterfaz } from 'src/app/interfaces/wallpaper.interface';
 
 import { Router } from '@angular/router';
 import { GaleriaService } from 'src/app/servicios/galeria.service';

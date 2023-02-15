@@ -1,5 +1,5 @@
 export interface WallpaperInterfaz {
-    nombre: string;
+    titulo: string;
     descripcion: string;
     autor: string;
     categorias: string;

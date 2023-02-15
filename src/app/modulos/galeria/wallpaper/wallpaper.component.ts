@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WallpaperInterfaz } from 'src/app/interfaces/WallpaperInterfaz';
+import { WallpaperInterfaz } from 'src/app/interfaces/wallpaper.interface';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL, list } from '@angular/fire/storage';
 import { saveAs } from 'file-saver';
 
@@ -50,7 +50,7 @@ export class WallpaperComponent implements OnInit {
       document.body.appendChild(link); // for Firefox
 
       link.setAttribute("href", this.base64Image);
-      link.setAttribute("download", this.wallpaper.autor + " - " + this.wallpaper.nombre + ".jpg");
+      link.setAttribute("download", this.wallpaper.autor + " - " + this.wallpaper.titulo + ".jpg");
       link.click();
     });
   }

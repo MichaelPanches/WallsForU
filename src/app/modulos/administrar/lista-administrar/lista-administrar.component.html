@@ -1,1 +1,14 @@
-<p>lista-administrar works!</p>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h4 class="jumbotron-heading text-muted">Todos los Wallpapers</h4>
+    </div>
+</section>
+<div class="d-flex container justify-content-center ">
+
+    <div class="row row-cols-md-auto g-3 justify-content-center">
+        <div *ngFor="let wallpaper of wallpapers">
+            <app-mi-wallpaper [wallpaper]="wallpaper"></app-mi-wallpaper>
+        </div>
+
+    </div>
+</div>

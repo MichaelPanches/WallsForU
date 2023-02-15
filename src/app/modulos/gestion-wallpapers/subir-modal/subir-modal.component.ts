@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL, list } from '@angular/fire/storage';
-import { WallpaperInterfaz } from 'src/app/interfaces/WallpaperInterfaz';
+import { WallpaperInterfaz } from 'src/app/interfaces/wallpaper.interface';
 import { GaleriaService } from 'src/app/servicios/galeria.service';
 
 @Component({
@@ -47,7 +47,7 @@ export class SubirModalComponent implements OnInit {
     const imgRef = ref(this.storage, ruta);
 
     this.wallpaper = {
-      nombre: titulo,
+      titulo: titulo,
       descripcion: descripcion,
       autor: localStorage.getItem("Usuario")!,
       categorias: categorias,

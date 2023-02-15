@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WallpaperInterfaz } from 'src/app/interfaces/WallpaperInterfaz';
+import { WallpaperInterfaz } from 'src/app/interfaces/wallpaper.interface';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL, list, deleteObject, StorageReference } from '@angular/fire/storage';
 
 import { Observable, Observer } from "rxjs";
@@ -72,7 +72,7 @@ export class MiWallpaperComponent {
       document.body.appendChild(link); // for Firefox
 
       link.setAttribute("href", this.base64Image);
-      link.setAttribute("download", this.wallpaper.autor + " - " + this.wallpaper.nombre + ".jpg");
+      link.setAttribute("download", this.wallpaper.autor + " - " + this.wallpaper.titulo + ".jpg");
       link.click();
     });
   }

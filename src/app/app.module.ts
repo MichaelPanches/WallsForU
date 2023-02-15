@@ -9,6 +9,8 @@ import { ErrorComponent } from './componentes/error/error.component';
 import { CuentasModule } from './modulos/cuentas/cuentas.module';
 import { RouterModule } from '@angular/router';
 import { GestionWallpapersModule } from './modulos/gestion-wallpapers/gestion-wallpapers.module';
+import { ListaAdministrarComponent } from './modulos/administrar/lista-administrar/lista-administrar.component';
+import { AdministrarModule } from './modulos/administrar/administrar.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { GestionWallpapersModule } from './modulos/gestion-wallpapers/gestion-wa
     AppRoutingModule,
     GaleriaModule,
     CuentasModule,
+    GestionWallpapersModule,
+    AdministrarModule
     
     
     

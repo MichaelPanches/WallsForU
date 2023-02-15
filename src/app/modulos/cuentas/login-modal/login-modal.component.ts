@@ -20,23 +20,22 @@ export class LoginModalComponent {
       alert('Inicio Correcto');
       localStorage.setItem("Usuario", "Admin");
       this.activeModal.close();
-      this.refreshComponent();
-      
+      this.router.navigate(['/inicioAdministrar']);
+
 
     } else if (usuario == 'Usuario' && password == '123') {
       alert('Inicio Correcto');
       localStorage.setItem("Usuario", "Usuario");
       this.activeModal.close();
       this.refreshComponent();
-      
 
     }
   }
 
-  
-  refreshComponent(){
+
+  refreshComponent() {
     this.router.navigate([this.router.url])
- }
+  }
 
 
 }

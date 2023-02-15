@@ -10,7 +10,6 @@ import { HeaderComponent } from 'src/app/componentes/header/header.component';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { ListarComponent } from './listar/listar.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { WallpaperComponent } from '../galeria/wallpaper/wallpaper.component';
 import { GaleriaModule } from '../galeria/galeria.module';
 import { MiWallpaperComponent } from './mi-wallpaper/mi-wallpaper.component';
 
@@ -36,6 +35,7 @@ import { MiWallpaperComponent } from './mi-wallpaper/mi-wallpaper.component';
   exports: [
     SubirModalComponent,
     ListarComponent,
+    MiWallpaperComponent
   ]
 })
 export class GestionWallpapersModule { }

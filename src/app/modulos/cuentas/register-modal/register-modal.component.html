@@ -12,8 +12,14 @@
 <div class="modal-body">
     <form>
         <div class="form-group pb-2 mx-2">
-            <label for="exampleInputEmail1" class="form-label mt-4">Nombre y Apellidos</label>
-            <input type="email" class="form-control" id="email" required #email>
+            <label for="exampleInputEmail1" class="form-label mt-4">Nombre</label>
+            <input type="email" class="form-control" id="email" required #nombre>
+            <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+        </div>
+
+        <div class="form-group pb-2 mx-2">
+            <label for="exampleInputEmail1" class="form-label mt-4">Apellidos</label>
+            <input type="email" class="form-control" id="email" required #apellidos>
             <div class="invalid-feedback">Correo Electronico incorrecto!</div>
         </div>
 
@@ -42,5 +48,5 @@
 
 </div>
 <div class="modal-footer d-flex justify-content-center">
-    <button type="submit" class="btn btn-primary" (click)="onSubmit(email.value, password.value)">Ingresar</button>
+    <button type="submit" class="btn btn-primary" (click)="onSubmit(email.value, password.value)">Registrarse</button>
 </div>
