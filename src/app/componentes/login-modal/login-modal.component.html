@@ -1,0 +1,34 @@
+<div class="modal-header text-center ">
+    <button type="button" class="btn-close" style="visibility: hidden;"></button>
+    <h4 class="modal-title w-100 font-weight-bold">Iniciar Sesión</h4>
+
+    <button type="button" class="btn-close d-flex justify-content-center" (click)="activeModal.close()"
+        aria-label="Close"></button>
+
+
+</div>
+
+
+<div class="modal-body">
+    <form>
+        <div class="form-group pb-3 mx-2">
+            <label for="exampleInputEmail1" class="form-label mt-4">Email address</label>
+            <input type="email" class="form-control" id="email" required #email>
+            <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+        </div>
+    
+          <div class="form-group pb-5 mx-2">
+            <label for="exampleInputPassword1" class="form-label mt-4">Password</label>
+            <input type="password" class="form-control" id="password" required #password>
+            <div class="invalid-feedback">Contraseña incorrecta!</div>
+          </div>
+    
+        <div class="d-flex justify-content-end mx-2">
+            <a href="#!">¿Olvidaste tu contraseña?</a>
+        </div>
+    </form>
+    
+</div>
+<div class="modal-footer d-flex justify-content-center">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit(email.value, password.value)">Ingresar</button>
+</div>

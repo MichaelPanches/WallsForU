@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WallpaperInterfaz } from 'src/app/interfaces/WallpaperInterfaz';
 
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './listar.component.html',
   styleUrls: ['./listar.component.css']
 })
-export class ListarComponent {
+export class ListarComponent implements OnInit {
   wallpapers!: WallpaperInterfaz[];
   busqueda = "";
   suscription: Subscription;
@@ -25,7 +25,13 @@ export class ListarComponent {
     });
 
 
-  };
+  }ngOnInit(): void {
+    this._galeriaService.getWallpapers("a").subscribe(data => {
+      this.wallpapers = data;
+    
+    });
+  }
+;
 
   obtenerWallpapers(){
     this._galeriaService.getWallpapers(this.busqueda).subscribe(data => {
