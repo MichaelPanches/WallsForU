@@ -24,6 +24,9 @@ export class HeaderComponent {
       if (val.url) {
         if (localStorage.getItem("Usuario") == "Admin") {
           this.usuario = localStorage.getItem("Usuario");
+          this.menuType = "admin";
+        } else if (localStorage.getItem("Usuario") == "Usuario") {
+          this.usuario = localStorage.getItem("Usuario");
           this.menuType = "logeado";
         } else {
           this.menuType = "default";

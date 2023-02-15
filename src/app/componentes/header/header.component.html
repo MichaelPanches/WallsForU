@@ -33,6 +33,22 @@
                           <a class="dropdown-item" (click)="cerrarSesion()">Cerrar Sesion</a>
                         </div>
                       </div>
+                </div>
+
+                <div *ngSwitchCase="'admin'" class="text-end">
+                    <button type="button" title="Subir Wallpaper" class="btn btn-outline-light me-2 subir" (click)="subirWallpaper()"></button>
+                    <div class="btn-group ">
+                        <button type="button" class="btn btn-primary dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{usuario}}
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" routerLink="/misWallpapers">Mis Wallpapers</a>
+                          <a class="dropdown-item" href="#">Mi Perfil</a>
+                          <a class="dropdown-item" routerLink="/listaAdministrar">Administrar</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" (click)="cerrarSesion()">Cerrar Sesion</a>
+                        </div>
+                      </div>
 
                     
                     

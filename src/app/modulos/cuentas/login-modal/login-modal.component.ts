@@ -16,9 +16,16 @@ export class LoginModalComponent {
   }
 
   onSubmit(usuario: String, password: String) {
-    if (usuario == '123' && password == '123') {
+    if (usuario == 'Admin' && password == '123') {
       alert('Inicio Correcto');
       localStorage.setItem("Usuario", "Admin");
+      this.activeModal.close();
+      this.refreshComponent();
+      
+
+    } else if (usuario == 'Usuario' && password == '123') {
+      alert('Inicio Correcto');
+      localStorage.setItem("Usuario", "Usuario");
       this.activeModal.close();
       this.refreshComponent();
       
