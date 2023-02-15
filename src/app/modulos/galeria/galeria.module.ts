@@ -11,6 +11,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { HttpClientModule }from '@angular/common/http';
 import { GaleriaComponent } from './galeria/galeria.component';
 import { HeaderComponent } from 'src/app/componentes/header/header.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 
@@ -20,7 +21,6 @@ import { HeaderComponent } from 'src/app/componentes/header/header.component';
     ListarComponent,
     WallpaperComponent,
     GaleriaComponent,
-    HeaderComponent
   ],
   imports: [
     CommonModule,
@@ -29,11 +29,13 @@ import { HeaderComponent } from 'src/app/componentes/header/header.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule,
   ],
   exports: [
     BuscarComponent,
-    ListarComponent
+    ListarComponent,
+    WallpaperComponent
   ]
 })
 export class GaleriaModule { }

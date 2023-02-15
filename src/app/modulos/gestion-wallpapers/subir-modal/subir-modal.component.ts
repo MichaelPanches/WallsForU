@@ -61,7 +61,7 @@ export class SubirModalComponent implements OnInit {
       )
     .catch(error => console.log(error))
 
-    //this.activeModal.close();
+    this.activeModal.close();
   }
 
 

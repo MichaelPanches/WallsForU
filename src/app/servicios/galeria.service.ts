@@ -9,6 +9,8 @@ export class GaleriaService {
 
   Datos!: WallpaperInterfaz[];
   private terminoBusqueda$ = new Subject<string>();
+  private subjectName = new Subject<any>(); 
+  
 
   constructor() {
     if (localStorage.getItem('Wallpapers') === null || JSON.parse(localStorage.getItem('Wallpapers')!).length === 0) {
@@ -36,29 +38,53 @@ export class GaleriaService {
   addWallpaper(dato: WallpaperInterfaz) {
     this.Datos.push(dato);
     let Datos = [];
-    if(localStorage.getItem('Wallpapers') === null) {
+    if (localStorage.getItem('Wallpapers') === null) {
       Datos = [];
       Datos.push(dato);
       localStorage.setItem('Wallpapers', JSON.stringify(Datos));
     } else {
       Datos = JSON.parse(localStorage.getItem('Wallpapers')!);
-      Datos.push(dato); 
+      Datos.push(dato);
       localStorage.setItem('Wallpapers', JSON.stringify(Datos));
     }
   }
 
-  getWallpapers(busqueda: string) : Observable<any[]> {
-    busqueda.toLowerCase();
-    this.Datos  = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { nombre: string; categorias: string; tags: string; }) => Wallpapers.nombre.toLowerCase().includes(busqueda) || Wallpapers.categorias.toLowerCase().includes(busqueda) || Wallpapers.tags.toLowerCase().includes(busqueda)));
+  sendUpdate(message: string) { //the component that wants to update something, calls this fn
+    this.subjectName.next({ text: message }); //next() will feed the value in Subject
+  }
+
+  getUpdate(): Observable<any> { //the receiver component calls this function 
+    return this.subjectName.asObservable(); //it returns as an observable to which the receiver funtion will subscribe
+  }
+
+  deleteWallpaper(dato: WallpaperInterfaz) {
+    let Datos: WallpaperInterfaz[] = [];
+    Datos = JSON.parse(localStorage.getItem('Wallpapers')!);
+    Datos.forEach((element: WallpaperInterfaz, index: any) => {
+      if (element.autor == dato.autor && element.nombre == dato.nombre) Datos.splice(index, 1);
+    });
+    localStorage.setItem('Wallpapers', JSON.stringify(Datos));
+  }
+
+  getWallpapers(busqueda: string): Observable<any[]> {
+    busqueda = busqueda.toLowerCase();
+    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { nombre: string; categorias: string; tags: string; }) => Wallpapers.nombre.toLowerCase().includes(busqueda) || Wallpapers.categorias.toLowerCase().includes(busqueda) || Wallpapers.tags.toLowerCase().includes(busqueda)));
 
     return of(this.Datos);
   }
 
-  sendTermino(busqueda: string){
+  getWallpapersByUser(user: string): Observable<any[]> {
+    user = user.toLowerCase();
+    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { autor: string;}) => Wallpapers.autor.toLowerCase().includes(user)));
+
+    return of(this.Datos);
+  }
+
+  sendTermino(busqueda: string) {
     this.terminoBusqueda$.next(busqueda);
   }
 
-  getTermino(): Observable<string>{
+  getTermino(): Observable<string> {
     return this.terminoBusqueda$.asObservable();
   }
 

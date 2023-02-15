@@ -8,12 +8,19 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from 'src/environments/environment.development';
 import { HeaderComponent } from 'src/app/componentes/header/header.component';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { ListarComponent } from './listar/listar.component';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { WallpaperComponent } from '../galeria/wallpaper/wallpaper.component';
+import { GaleriaModule } from '../galeria/galeria.module';
+import { MiWallpaperComponent } from './mi-wallpaper/mi-wallpaper.component';
 
 
 
 @NgModule({
   declarations: [
-    SubirModalComponent
+    SubirModalComponent,
+    ListarComponent,
+    MiWallpaperComponent,
   ],
   imports: [
     CommonModule,
@@ -23,9 +30,12 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
+    AppRoutingModule,
+    GaleriaModule
   ],
   exports: [
-    SubirModalComponent
+    SubirModalComponent,
+    ListarComponent,
   ]
 })
 export class GestionWallpapersModule { }
