@@ -4,6 +4,8 @@ import { ListaAdministrarComponent } from './lista-administrar/lista-administrar
 import { GestionWallpapersModule } from '../gestion-wallpapers/gestion-wallpapers.module';
 import { InicioAdministradorComponent } from './inicio-administrador/inicio-administrador.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
+import { AgregarUsuarioModalComponent } from './agregar-usuario-modal/agregar-usuario-modal.component';
+import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuario-modal.component';
 
 
 
@@ -12,6 +14,8 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
     ListaAdministrarComponent,
     InicioAdministradorComponent,
     ListaUsuariosComponent,
+    AgregarUsuarioModalComponent,
+    EditarUsuarioModalComponent,
   ],
   imports: [
     CommonModule,

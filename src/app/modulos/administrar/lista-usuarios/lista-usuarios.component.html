@@ -1,51 +1,60 @@
-<div class="container align-items-center">
-    <div class="row">
-        <form class="col-4 col-lg-auto py-3" role="search">
-            <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
-
-        </form>
-        <button type="button" class="btn btn-outline-primary col-2 col-lg-auto my-3">Login</button>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h4 class="jumbotron-heading text-muted">Administrar Usuarios</h4>
     </div>
+</section>
+
+    <div class="container align-items-center">
+        <div class="row">
+            <form class="col-4 col-lg-auto py-3" role="search">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+
+            </form>
+            <button type="button" class="btn btn-outline-primary col-2 col-lg-auto my-3">Buscar</button>
+
+            <button type="button" class="btn btn-outline-primary col-2 col-lg-auto my-3 mx-2"
+                (click)="openAgregar()">Agregar</button>
+        </div>
 
 
-<div class="table-responsive">
-    <table class="table table-hover table-bordered mx-auto">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col" class="col-sm-1">#</th>
-                <th scope="col" class="col-2">Nombre</th>
-                <th scope="col" class="col-2">Apellido</th>
-                <th scope="col" class="col-3">Email</th>
-                <th scope="col" class="col-2">Contraseña</th>
-                <th scope="col" class="col-1">Rol</th>
-                <th scope="col" class="col-1 col-auto">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let usuario of usuarios;">
-                <tr>
-                    <th scope="row">{{usuario.id}}</th>
-                    <td>{{usuario.nombre }}</td>
-                    <td>{{usuario.apellido }}</td>
-                    <td>{{usuario.email }}</td>
-                    <td>{{usuario.password }}</td>
-                    <td>{{usuario.rol }}</td>
-                    <td>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered mx-auto">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" class="col-sm-1">#</th>
+                        <th scope="col" class="col-2">Nombre</th>
+                        <th scope="col" class="col-2">Apellido</th>
+                        <th scope="col" class="col-3">Email</th>
+                        <th scope="col" class="col-2">Contraseña</th>
+                        <th scope="col" class="col-1">Rol</th>
+                        <th scope="col" class="col-1 col-auto">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let usuario of usuarios;">
+                        <tr>
+                            <th scope="row">{{usuario.id}}</th>
+                            <td>{{usuario.nombre }}</td>
+                            <td>{{usuario.apellido }}</td>
+                            <td>{{usuario.email }}</td>
+                            <td>{{usuario.password }}</td>
+                            <td>{{usuario.rol }}</td>
+                            <td>
 
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-primary" (click)="editarUsuario(usuario.id)"><i
-                                    class="bi bi-pencil-square"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-outline-danger" (click)="eliminarUsuario(usuario.id)"><i
-                                    class="bi bi-trash3-fill"></i></button>
-                        </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-primary"
+                                        (click)="openModificar(usuario.id)"><i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                        (click)="eliminarUsuario(usuario.id)"><i class="bi bi-trash3-fill"></i></button>
+                                </div>
 
 
-                    </td>
-                </tr>
-            </ng-container>
-        </tbody>
-    </table>
-</div>
-    
-</div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+
+    </div>

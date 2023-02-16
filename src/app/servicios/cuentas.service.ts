@@ -15,7 +15,7 @@ export class CuentasService {
           nombre: "string",
           apellido: "string",
           email: "string",
-          rol: 1,
+          rol: 0,
           password: "string",
         },
         {
@@ -23,7 +23,7 @@ export class CuentasService {
           nombre: "string",
           apellido: "aa",
           email: "string",
-          rol: 1,
+          rol: 0,
           password: "string",
         },
         {
@@ -31,7 +31,7 @@ export class CuentasService {
           nombre: "Admin",
           apellido: "A",
           email: "Admin",
-          rol: 2,
+          rol: 1,
           password: "123",
         }
       ]
@@ -46,6 +46,14 @@ export class CuentasService {
     return this.usuarios;
   }
 
+  getUsuario(id: number) {
+    var usuario: UsuarioInterfaz;
+    this.usuarios = JSON.parse(localStorage.getItem('Usuarios')!);
+    usuario = this.usuarios.find(x => x.id === id)!;
+    
+    return usuario;
+  }
+
   deleteUsuario(id: number) {
     this.usuarios = JSON.parse(localStorage.getItem('Usuarios')!);
 
@@ -56,8 +64,19 @@ export class CuentasService {
     localStorage.setItem('Usuarios', JSON.stringify(this.usuarios));
   }
 
+  modUsuario(usuarioNuevo: UsuarioInterfaz) {
+    this.usuarios = JSON.parse(localStorage.getItem('Usuarios')!);
+    var index = this.usuarios.findIndex(usuario => usuario.id === usuarioNuevo.id)
+
+    if (index !== -1) {
+      this.usuarios[index] = usuarioNuevo;
+    }
+    localStorage.setItem('Usuarios', JSON.stringify(this.usuarios));
+  }
+
   addUsuario(usuario: UsuarioInterfaz) {
     this.usuarios = JSON.parse(localStorage.getItem('Usuarios')!);
+    usuario.id = this.usuarios.length + 1;
     this.usuarios.push(usuario);
 
     localStorage.setItem('Usuarios', JSON.stringify(this.usuarios));
