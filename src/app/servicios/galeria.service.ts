@@ -66,6 +66,15 @@ export class GaleriaService {
     localStorage.setItem('Wallpapers', JSON.stringify(Datos));
   }
 
+  modWallpaper(wallpaperAnterior: WallpaperInterfaz, wallpaperNuevo: WallpaperInterfaz) {
+    let Datos: WallpaperInterfaz[] = [];
+    Datos = JSON.parse(localStorage.getItem('Wallpapers')!);
+    Datos.forEach((element: WallpaperInterfaz, index: any) => {
+      if (element.autor == wallpaperAnterior.autor && element.titulo == wallpaperAnterior.titulo) Datos[index] = wallpaperNuevo;
+    });
+    localStorage.setItem('Wallpapers', JSON.stringify(Datos));
+  }
+
   getWallpapers(busqueda: string): Observable<any[]> {
     busqueda = busqueda.toLowerCase();
     this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { titulo: string; categorias: string; tags: string; }) => Wallpapers.titulo.toLowerCase().includes(busqueda) || Wallpapers.categorias.toLowerCase().includes(busqueda) || Wallpapers.tags.toLowerCase().includes(busqueda)));

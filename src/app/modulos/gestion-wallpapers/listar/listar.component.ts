@@ -35,7 +35,7 @@ export class ListarComponent {
   }
 
   obtenerWallpapers(){
-    this._galeriaService.getWallpapersByUser(localStorage.getItem("Usuario")!).subscribe(data => {
+    this._galeriaService.getWallpapersByUser(JSON.parse(localStorage.getItem("Usuario")!).nombre).subscribe(data => {
       this.wallpapers = data;
     
     });

@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsuarioInterfaz } from 'src/app/interfaces/usuario.interface';
+import { CuentasService } from 'src/app/servicios/cuentas.service';
 
 @Component({
   selector: 'app-login-modal',
@@ -10,24 +12,31 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class LoginModalComponent {
   advertencia: string;
+  usu!: false |  UsuarioInterfaz;
 
-  constructor(private router: Router, public activeModal: NgbActiveModal) {
+  constructor(private router: Router, public activeModal: NgbActiveModal, private _cuentasService: CuentasService) {
     this.advertencia = "Incorrecto";
   }
 
-  onSubmit(usuario: String, password: String) {
-    if (usuario == 'Admin' && password == '123') {
-      alert('Inicio Correcto');
-      localStorage.setItem("Usuario", "Admin");
-      this.activeModal.close();
-      this.router.navigate(['/inicioAdministrar']);
+  onSubmit(usuario: string, password: string) {
+    this.usu  = this._cuentasService.validateUsuario(usuario, password);
 
 
-    } else if (usuario == 'Usuario' && password == '123') {
+    if (this._cuentasService.validateUsuario(usuario, password)) {
       alert('Inicio Correcto');
-      localStorage.setItem("Usuario", "Usuario");
       this.activeModal.close();
-      this.refreshComponent();
+
+      if (JSON.parse(localStorage.getItem("Usuario")!).rol == 1){
+        this.router.navigate(['/inicioAdministrar']);
+        this.activeModal.close();
+      } else {
+        this.refreshComponent();
+        this.activeModal.close();
+      }
+      
+    } else {
+      alert('Inicio Incorrecto');
+      this.activeModal.close();
 
     }
   }
