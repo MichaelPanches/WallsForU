@@ -23,12 +23,12 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.route.events.subscribe((val: any) => {
       if (val.url) {
-        if (localStorage.getItem("Usuario") == "Admin") {
-          this.usuario = localStorage.getItem("Usuario");
+        if (localStorage.getItem("Usuario") != null && JSON.parse(localStorage.getItem("Usuario")!).rol == 1) {
+          this.usuario = JSON.parse(localStorage.getItem("Usuario")!).nombre;
           this.adminMode = true;
-        } else if (localStorage.getItem("Usuario") == "Usuario") {
+        } else if (localStorage.getItem("Usuario") != null && JSON.parse(localStorage.getItem("Usuario")!).rol == 0) {
           this.adminMode = false;
-          this.usuario = localStorage.getItem("Usuario");
+          this.usuario = JSON.parse(localStorage.getItem("Usuario")!).nombre;
           this.menuType = "logeado";
         } else {
           this.menuType = "default";

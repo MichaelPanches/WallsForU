@@ -1,12 +1,13 @@
 .subir::after {
-content: "+";
-font-weight: bold;
+  content: "+";
+  font-weight: bold;
 }
+
 .subir:hover::after {
- content: "+ Subir Wallpaper";
- font-weight: normal;
+  content: "+ Subir Wallpaper";
+  font-weight: normal;
 }
 
 .dropdown:hover .dropdown-menu {
-    display: block;
-  }
+  display: block;
+}

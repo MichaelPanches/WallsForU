@@ -3,9 +3,34 @@
         <h4 class="jumbotron-heading text-muted">Administrar Wallpapers</h4>
     </div>
 </section>
-<div class="d-flex container justify-content-center ">
 
+<div class="d-flex container justify-content-center py-2">
+    <div class="row">
+        <div class="input-group mb-3 col-4">
+            <div class="input-group-prepend">
+                <select class="form-select" id="inputGroupSelect01">
+                    <option selected>Filtro..</option>
+                    <option value="1">Titulo</option>
+                    <option value="1">Autor</option>
+                    <option value="2">Categoria</option>
+                    <option value="3">Etiquetas</option>
+                  </select>
+              
+            </div>
+
+            
+            <input type="text" class="form-control" aria-label="Text input with dropdown button">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
+              </div>
+          </div>
+    </div>
+    
+</div>
+
+<div class="d-flex container justify-content-center ">
     <div class="row row-cols-md-auto g-3 justify-content-center">
+        
         <div *ngFor="let wallpaper of wallpapers">
             <app-mi-wallpaper [wallpaper]="wallpaper"></app-mi-wallpaper>
         </div>

@@ -82,5 +82,23 @@ export class CuentasService {
     localStorage.setItem('Usuarios', JSON.stringify(this.usuarios));
   }
 
+  validateUsuario(email: string, password: string){
+    this.usuarios = JSON.parse(localStorage.getItem('Usuarios')!);
+
+    if(this.usuarios.find(x => x.email === email)){
+      var index = this.usuarios.findIndex(usuario => usuario.email === email)
+      if(this.usuarios[index].password === password){
+        localStorage.setItem("Usuario", JSON.stringify(this.usuarios[index]));
+        return this.usuarios[index];
+        
+      } else {
+        return false;
+      }
+        
+    } else {
+      return false;
+    }
+  }
+
 
 }

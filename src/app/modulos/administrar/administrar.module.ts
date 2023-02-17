@@ -6,6 +6,7 @@ import { InicioAdministradorComponent } from './inicio-administrador/inicio-admi
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { AgregarUsuarioModalComponent } from './agregar-usuario-modal/agregar-usuario-modal.component';
 import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuario-modal.component';
+import { ModificarWallpaperModalComponent } from './modificar-wallpaper-modal/modificar-wallpaper-modal.component';
 
 
 
@@ -16,6 +17,7 @@ import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuar
     ListaUsuariosComponent,
     AgregarUsuarioModalComponent,
     EditarUsuarioModalComponent,
+    ModificarWallpaperModalComponent,
   ],
   imports: [
     CommonModule,

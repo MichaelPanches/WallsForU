@@ -5,6 +5,8 @@ import { Storage, ref, uploadBytes, listAll, getDownloadURL, list, deleteObject,
 import { Observable, Observer } from "rxjs";
 import { GaleriaService } from 'src/app/servicios/galeria.service';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModificarWallpaperModalComponent } from '../../administrar/modificar-wallpaper-modal/modificar-wallpaper-modal.component';
 
 @Component({
   selector: 'app-mi-wallpaper',
@@ -18,7 +20,7 @@ export class MiWallpaperComponent {
   name = "Mr";
   ref! : StorageReference;
 
-  constructor(private storage: Storage, private galeria:GaleriaService, private router:Router) { }
+  constructor(private storage: Storage, private galeria:GaleriaService, private router:Router, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.cargarWallpaper(this.wallpaper.ruta);
@@ -33,13 +35,10 @@ export class MiWallpaperComponent {
   }
 
   editarWallpaper() {
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = (event) => {
-      const blob = xhr.response;
-    };
-    xhr.open('GET', this.imagen);
-    xhr.send();
+    const modalRef = this.modalService.open(ModificarWallpaperModalComponent, { centered: true, size: 'xl' });
+    modalRef.componentInstance.wallpaperAnterior = this.wallpaper;
+    modalRef.componentInstance.imageSrc = this.imagen;
+    
   }
 
   borrarWallpaper() {

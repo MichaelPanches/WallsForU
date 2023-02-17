@@ -22,7 +22,7 @@ export class SubirModalComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = e => this.imageSrc = reader.result;
 
-    reader.readAsDataURL(this.file);
+
   }
 
   
@@ -40,7 +40,7 @@ export class SubirModalComponent implements OnInit {
   subirImagen(titulo: string, descripcion: string, categorias: string, etiquetas: string){
     
     var ext = this.file.type.split("/", 2);
-    var ruta = 'wallpapers/' + localStorage.getItem("Usuario") + " - " + titulo + "." + ext[1];
+    var ruta = 'wallpapers/' + JSON.parse(localStorage.getItem("Usuario")!).nombre + " - " + titulo + "." + ext[1];
 
     this.imageSrc = this.file.imagen;
 
@@ -49,7 +49,7 @@ export class SubirModalComponent implements OnInit {
     this.wallpaper = {
       titulo: titulo,
       descripcion: descripcion,
-      autor: localStorage.getItem("Usuario")!,
+      autor: JSON.parse(localStorage.getItem("Usuario")!).nombre,
       categorias: categorias,
       tags: etiquetas,
       ruta: ruta,
