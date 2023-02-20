@@ -4,5 +4,6 @@ export interface WallpaperInterfaz {
     autor: string;
     categorias: string;
     tags: string;
+    likes: number,
     ruta: string;
 }

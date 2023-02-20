@@ -13,13 +13,22 @@ import { EditarUsuarioModalComponent } from '../editar-usuario-modal/editar-usua
 })
 export class ListaUsuariosComponent implements OnInit {
   usuarios!: UsuarioInterfaz[];
+  busqueda = "";
+  filtro = "0";
 
   constructor(private _cuentasService: CuentasService, private router: Router, private modalService: NgbModal){
-    this.usuarios = _cuentasService.getUsuarios();
+
 
   }
   ngOnInit(): void {
-    this.usuarios = this._cuentasService.getUsuarios();
+    this.obtenerUsuarios(this.filtro, this.busqueda);
+    this._cuentasService.getUpdate().subscribe((value: boolean) => {
+      if(value) {
+  
+        this.obtenerUsuarios(this.filtro, this.busqueda);
+      }
+    
+  })
   }
 
   openAgregar(): void {
@@ -33,15 +42,30 @@ export class ListaUsuariosComponent implements OnInit {
     
   }
 
+  
 
   eliminarUsuario(id: number){
     this._cuentasService.deleteUsuario(id);
-    this.ngOnInit();
-
   }
 
   refreshComponent() {
     this.router.navigate([this.router.url])
   }
+
+  obtenerUsuarios(filtro: string, termino: string){
+    if(filtro == "0"){
+      this._cuentasService.getUsuariosSearch(termino).subscribe(data => {
+        this.usuarios = data;
+      });
+
+    }else{
+      this._cuentasService.getUsuariosByFilter(filtro, termino).subscribe(data => {
+        this.usuarios = data;
+      });
+
+    }
+    
+    
+  };
 
 }

@@ -9,17 +9,18 @@
             <div class="col-auto">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <select class="form-select" id="inputGroupSelect01">
-                            <option selected>Filtro..</option>
-                            <option value="1">Id</option>
-                            <option value="1">Nombre</option>
-                            <option value="2">Apellidos</option>
+                        <select class="form-select" id="inputGroupSelect01" #selector>
+                            <option value="0" selected>Filtro..</option>
+                            <option value="id">Id</option>
+                            <option value="nombre">Nombre</option>
+                            <option value="apellido">Apellidos</option>
+                            <option value="email">Email</option>
                           </select>
                       
                     </div>
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button" #busqueda>
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
+                        <button class="btn btn-outline-secondary" type="button" (click)="obtenerUsuarios(selector.value, busqueda.value)"><i class="bi bi-search"></i></button>
                       </div>
                   </div>
             </div>

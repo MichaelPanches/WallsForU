@@ -25,7 +25,7 @@ export class ListarComponent implements OnInit {
 
 
   }ngOnInit(): void {
-    this._galeriaService.getWallpapers("a").subscribe(data => {
+    this._galeriaService.getWallpapersAll().subscribe(data => {
       this.wallpapers = data;
     
     });

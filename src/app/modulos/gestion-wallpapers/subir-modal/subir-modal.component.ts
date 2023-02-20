@@ -52,6 +52,7 @@ export class SubirModalComponent implements OnInit {
       autor: JSON.parse(localStorage.getItem("Usuario")!).nombre,
       categorias: categorias,
       tags: etiquetas,
+      likes: 0,
       ruta: ruta,
     };
 

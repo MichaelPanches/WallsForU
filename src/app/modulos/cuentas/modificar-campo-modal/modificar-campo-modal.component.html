@@ -1,0 +1,53 @@
+<div class="modal-header text-center " >
+    <button type="button" class="btn-close" style="visibility: hidden;"></button>
+    <h4 class="modal-title w-100 font-weight-bold">Modificar {{campo}}</h4>
+
+    <button type="button" class="btn-close d-flex justify-content-center" (click)="activeModal.close()"
+        aria-label="Close"></button>
+
+
+</div>
+
+<div [ngSwitch]="propiedad">
+    <div *ngSwitchDefault>
+        <div class="modal-body">
+            <form>
+                <div class="form-group pb-3 mx-2 mt-3">
+                    <input type="email" class="form-control" id="email" [value]="valor" required #nuevoValor>
+                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+                </div>
+            </form>
+        </div>
+
+        <div class="modal-footer d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary" (click)="modificar(nuevoValor.value)">Guardar</button>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'password'">
+        <div class="modal-body">
+            <form>
+                <div class="form-group pb-3 mx-2 mt-3">
+                    <input type="email" class="form-control" placeholder="Anterior Contraseña" required #nuevoValor>
+                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+                </div>
+
+                <div class="form-group pb-3 mx-2 mt-3">
+                    <input type="email" class="form-control" placeholder="Nueva Contraseña" required #nuevoValor>
+                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+                </div>
+
+                <div class="form-group pb-3 mx-2 mt-3">
+                    <input type="email" class="form-control" id="email" placeholder="Repetir Contraseña" required #nuevoValor>
+                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+                </div>
+
+
+            </form>
+        </div>
+
+        <div class="modal-footer d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary" (click)="modificar(nuevoValor.value)">Guardar</button>
+        </div>
+    </div>
+</div>

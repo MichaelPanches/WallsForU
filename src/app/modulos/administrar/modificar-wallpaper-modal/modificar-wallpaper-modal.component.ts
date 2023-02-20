@@ -64,6 +64,7 @@ export class ModificarWallpaperModalComponent {
             autor: JSON.parse(localStorage.getItem("Usuario")!).nombre,
             categorias: categorias,
             tags: etiquetas,
+            likes: this.wallpaperAnterior.likes,
             ruta: ruta,
           };
 
@@ -72,10 +73,7 @@ export class ModificarWallpaperModalComponent {
           uploadBytes(imgRef, this.file)
             .then(() => {
               this.galeria.modWallpaper(this.wallpaperAnterior, this.wallpaperNuevo);
-              this.refreshComponent();
-              
               this.activeModal.close();
-              this.refreshComponent();
             })
             .catch(error => console.log(error))
         });
@@ -93,6 +91,7 @@ export class ModificarWallpaperModalComponent {
         autor: JSON.parse(localStorage.getItem("Usuario")!).nombre,
         categorias: categorias,
         tags: etiquetas,
+        likes: this.wallpaperAnterior.likes,
         ruta: ruta,
       };
 
@@ -101,11 +100,7 @@ export class ModificarWallpaperModalComponent {
       uploadBytes(imgRef, this.file)
         .then(() =>{
           this.galeria.modWallpaper(this.wallpaperAnterior, this.wallpaperNuevo);
-          
-          
-          this.refreshComponent();
         this.activeModal.close();
-        this.refreshComponent();
         
         }
         
@@ -123,7 +118,7 @@ export class ModificarWallpaperModalComponent {
 
   borrarWallpaper(wallpaper: WallpaperInterfaz) {
     this.ref = ref(this.storage, wallpaper.ruta);
-    this.sendMessage();
+    this.galeria.sendUpdate(true);
     
     deleteObject(this.ref).then(() => {
       
@@ -132,12 +127,6 @@ export class ModificarWallpaperModalComponent {
       // Uh-oh, an error occurred!
     });
   }
-
-  sendMessage(): void {
-    // send message to subscribers via observable subject
-    this.galeria.sendUpdate('Message from Sender Component to Receiver Component!');
-  }
-
 
 
 

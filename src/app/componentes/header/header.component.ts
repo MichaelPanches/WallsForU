@@ -5,6 +5,7 @@ import { LoginModalComponent } from 'src/app/modulos/cuentas/login-modal/login-m
 import { RegisterModalComponent } from 'src/app/modulos/cuentas/register-modal/register-modal.component';
 import { SubirModalComponent } from 'src/app/modulos/gestion-wallpapers/subir-modal/subir-modal.component';
 import { RouterModule } from '@angular/router';
+import { CuentasService } from 'src/app/servicios/cuentas.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,7 @@ export class HeaderComponent {
   adminMode: boolean = true;
   usuario: String | null | undefined;
 
-  constructor(private route: Router, private modalService: NgbModal) {
+  constructor(private route: Router, private modalService: NgbModal, _cuentasService: CuentasService) {
     this.ngOnInit();
   }
 

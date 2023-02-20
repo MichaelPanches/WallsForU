@@ -14,6 +14,7 @@ export class ListaAdministrarComponent {
   wallpapers!: WallpaperInterfaz[];
   busqueda = "";
   messageReceived: any;
+  filtro = "0";
   private subscriptionName: Subscription; //important to create a subscription
     
 
@@ -28,18 +29,33 @@ export class ListaAdministrarComponent {
   };
 
   ngOnInit(): void {
-    this.obtenerWallpapers();
+    this.obtenerWallpapers(this.filtro, this.busqueda);
+    this._galeriaService.getUpdate().subscribe((value: boolean) => {
+      if(value) {
+  
+        this.obtenerWallpapers(this.filtro, this.busqueda);
+      }
+    
+  })
   }
 
   refreshComponent(){
     this.router.navigate([this.router.url])
   }
 
-  obtenerWallpapers(){
-    this._galeriaService.getWallpapersAll().subscribe(data => {
-      this.wallpapers = data;
+  obtenerWallpapers(filtro: string, termino: string){
+    if(filtro == "0"){
+      this._galeriaService.getWallpapers(termino).subscribe(data => {
+        this.wallpapers = data;
+      });
+
+    }else{
+      this._galeriaService.getWallpapersByFilter(filtro, termino).subscribe(data => {
+        this.wallpapers = data;
+      });
+
+    }
     
-    });
     
   };
 

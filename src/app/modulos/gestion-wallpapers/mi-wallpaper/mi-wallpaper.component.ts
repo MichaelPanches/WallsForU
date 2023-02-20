@@ -27,11 +27,12 @@ export class MiWallpaperComponent {
   }
 
   async cargarWallpaper(ruta: string) {
-    const referencia = ref(this.storage, ruta);
-    const url = await getDownloadURL(referencia);
 
-    this.ref = referencia;
-    this.imagen = url;
+      const referencia = ref(this.storage, ruta);
+      const url = await getDownloadURL(referencia);
+      this.ref = referencia;
+      this.imagen = url;
+
   }
 
   editarWallpaper() {
@@ -43,7 +44,6 @@ export class MiWallpaperComponent {
 
   borrarWallpaper() {
     this.galeria.deleteWallpaper(this.wallpaper);
-    this.sendMessage();
     
     deleteObject(this.ref).then(() => {
       
@@ -51,11 +51,6 @@ export class MiWallpaperComponent {
     }).catch((error) => {
       // Uh-oh, an error occurred!
     });
-  }
-
-  sendMessage(): void {
-    // send message to subscribers via observable subject
-    this.galeria.sendUpdate('Message from Sender Component to Receiver Component!');
   }
 
   refreshComponent(){

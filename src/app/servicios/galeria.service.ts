@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject  } from 'rxjs';
+import { CategoriaInterfaz } from '../interfaces/categoria.interface';
 import { WallpaperInterfaz } from '../interfaces/wallpaper.interface';
 
 @Injectable({
@@ -8,9 +9,12 @@ import { WallpaperInterfaz } from '../interfaces/wallpaper.interface';
 export class GaleriaService {
 
   Datos!: WallpaperInterfaz[];
+  Categorias!: CategoriaInterfaz[];
   private terminoBusqueda$ = new Subject<string>();
-  private subjectName = new Subject<any>(); 
-  
+  private subjectName = new Subject<any>();
+  private refresh: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+
 
   constructor() {
     if (localStorage.getItem('Wallpapers') === null || JSON.parse(localStorage.getItem('Wallpapers')!).length === 0) {
@@ -20,6 +24,7 @@ export class GaleriaService {
         autor: 'Maximus32',
         categorias: 'horizontal, oscuro',
         tags: 'Futuro, Aliens, Cielo, Nubes, Montañas',
+        likes: 5,
         ruta: 'wallpapers/Admin - Dark Future.jpg',
       },
       {
@@ -28,10 +33,32 @@ export class GaleriaService {
         autor: 'Maria12',
         categorias: 'horizontal, Ciudad',
         tags: 'Ciudad, Lago, Cielo, Luces, Edificios',
+        likes: 13,
         ruta: 'wallpapers/Admin - City of Ligths.jpg',
       }
       ];
       localStorage.setItem('Wallpapers', JSON.stringify(this.Datos));
+    }
+
+    if (localStorage.getItem('Categorias') === null || JSON.parse(localStorage.getItem('Categorias')!).length === 0) {
+      this.Categorias = [{
+        titulo: 'Animales',
+        descripcion: 'Texto generico de categoria No 1.',
+      },
+      {
+        titulo: 'Paisajes',
+        descripcion: 'Texto generico de categoria No 2.',
+      },
+      {
+        titulo: 'Anime',
+        descripcion: 'Texto generico de categoria No 3.',
+      },
+      {
+        titulo: 'Futurista',
+        descripcion: 'Texto generico de categoria No 4.',
+      }
+      ];
+      localStorage.setItem('Categorias', JSON.stringify(this.Categorias));
     }
   }
 
@@ -42,20 +69,26 @@ export class GaleriaService {
       Datos = [];
       Datos.push(dato);
       localStorage.setItem('Wallpapers', JSON.stringify(Datos));
+      
     } else {
       Datos = JSON.parse(localStorage.getItem('Wallpapers')!);
       Datos.push(dato);
       localStorage.setItem('Wallpapers', JSON.stringify(Datos));
     }
+    this.sendUpdate(true);
   }
 
-  sendUpdate(message: string) { //the component that wants to update something, calls this fn
-    this.subjectName.next({ text: message }); //next() will feed the value in Subject
+  public getUpdate(): Observable<boolean> {
+
+    return this.refresh.asObservable();
   }
 
-  getUpdate(): Observable<any> { //the receiver component calls this function 
-    return this.subjectName.asObservable(); //it returns as an observable to which the receiver funtion will subscribe
+  public sendUpdate(value: boolean): void {
+
+    this.refresh.next(value);
   }
+
+
 
   deleteWallpaper(dato: WallpaperInterfaz) {
     let Datos: WallpaperInterfaz[] = [];
@@ -64,6 +97,7 @@ export class GaleriaService {
       if (element.autor == dato.autor && element.titulo == dato.titulo) Datos.splice(index, 1);
     });
     localStorage.setItem('Wallpapers', JSON.stringify(Datos));
+    this.sendUpdate(true);
   }
 
   modWallpaper(wallpaperAnterior: WallpaperInterfaz, wallpaperNuevo: WallpaperInterfaz) {
@@ -73,6 +107,7 @@ export class GaleriaService {
       if (element.autor == wallpaperAnterior.autor && element.titulo == wallpaperAnterior.titulo) Datos[index] = wallpaperNuevo;
     });
     localStorage.setItem('Wallpapers', JSON.stringify(Datos));
+    this.sendUpdate(true);
   }
 
   getWallpapers(busqueda: string): Observable<any[]> {
@@ -84,7 +119,15 @@ export class GaleriaService {
 
   getWallpapersByUser(user: string): Observable<any[]> {
     user = user.toLowerCase();
-    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { autor: string;}) => Wallpapers.autor.toLowerCase().includes(user)));
+    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { autor: string; }) => Wallpapers.autor.toLowerCase().includes(user)));
+
+    return of(this.Datos);
+  }
+
+  getWallpapersByFilter(propiedad: string, termino: string): Observable<any[]> {
+    termino = termino.toLowerCase();
+    const propiedadFiltro = propiedad;
+    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers : any) => Wallpapers[propiedadFiltro].toLowerCase().includes(termino)));
 
     return of(this.Datos);
   }
