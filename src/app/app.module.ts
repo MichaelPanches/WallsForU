@@ -25,7 +25,8 @@ import { AdministrarModule } from './modulos/administrar/administrar.module';
     GaleriaModule,
     CuentasModule,
     GestionWallpapersModule,
-    AdministrarModule
+    AdministrarModule,
+    
     
     
     

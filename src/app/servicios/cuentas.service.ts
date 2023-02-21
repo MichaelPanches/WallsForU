@@ -130,5 +130,19 @@ export class CuentasService {
     }
   }
 
+  validateEmail(email: string){
+    this.usuarios = JSON.parse(localStorage.getItem('Usuarios')!);
+
+    if(this.usuarios.find(x => x.email === email)){
+      var index = this.usuarios.findIndex(usuario => usuario.email === email)
+
+        return this.usuarios[index];
+
+        
+    } else {
+      return false;
+    }
+  }
+
 
 }

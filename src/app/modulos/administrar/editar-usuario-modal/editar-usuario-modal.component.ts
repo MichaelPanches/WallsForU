@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioInterfaz } from 'src/app/interfaces/usuario.interface';
@@ -12,19 +13,41 @@ import { CuentasService } from 'src/app/servicios/cuentas.service';
 export class EditarUsuarioModalComponent implements OnInit {
   @Input() public id!: number;
   usuario!: UsuarioInterfaz;
+  modUser!: FormGroup;
+  submitted = false;
 
 
-  constructor(private router: Router, public activeModal: NgbActiveModal,private _cuentasService: CuentasService) {
-    console.log(this.id)
-  } 
+  constructor(private router: Router, public activeModal: NgbActiveModal, private _cuentasService: CuentasService, private formBuilder: FormBuilder) { } 
   
   ngOnInit(): void {
     this.usuario = this._cuentasService.getUsuario(this.id);
     console.log(this.usuario)
+
+    this.modUser = this.formBuilder.group({
+      nombre: [this.usuario.nombre , [Validators.required]],
+      apellidos: [this.usuario.apellido, [Validators.required]],
+      email: [this.usuario.email, [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),]],
+      password: [this.usuario.password, [Validators.required]],
+      passwordConf: [this.usuario.password, [Validators.required]],
+
+    }, {
+      validators: [this.mailUsed('email'), this.samePassword('password', 'passwordConf'),],
+      updateOn: 'submit'
+    }
+    );
+
+
   }
+
+  get f() { return this.modUser.controls; }
   
 
-  onSubmit(nombre: string, apellidos: string, email: string, password: string, repeatPassword: string, admin: boolean) {
+  onSubmit(admin: boolean) {
+    this.submitted = true;
+    if (this.modUser.invalid) {
+      return;
+    }
+
     if (admin){
       this.usuario.rol = 1;
     } else {
@@ -33,14 +56,55 @@ export class EditarUsuarioModalComponent implements OnInit {
 
     this.usuario = {
       id: this.id,
-      nombre: nombre,
-      apellido: apellidos,
-      email: email,
+      nombre: this.modUser.controls['nombre'].value,
+      apellido: this.modUser.controls['apellidos'].value,
+      email: this.modUser.controls['email'].value,
       rol: this.usuario.rol,
-      password: password,
+      password: this.modUser.controls['password'].value,
     }
 
     this._cuentasService.modUsuario(this.usuario);
+  }
+
+  mailUsed(controlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+
+      if (control.errors && !control.errors['mailUsed']) {
+        return
+      }
+
+      if (this._cuentasService.validateEmail(control.value) && (control.value != this.usuario.email)) {
+        control.setErrors({ mailUsed: true });
+      } else {
+        control.setErrors(null);
+      }
+
+    }
+
+
+
+  }
+
+  samePassword(controlNamePassword: string, controlNameConfirmation: string) {
+    return (formGroup: FormGroup) => {
+      const controlPassword = formGroup.controls[controlNamePassword];
+      const controlConfirmation = formGroup.controls[controlNameConfirmation];
+
+      if (controlConfirmation.errors && controlConfirmation.errors['required']) {
+        return
+      }
+
+      if (controlPassword.value != controlConfirmation.value) {
+        controlConfirmation.setErrors({ samePassword: true });
+      } else {
+        controlConfirmation.setErrors(null);
+      }
+
+    }
+
+
+
   }
 
 }

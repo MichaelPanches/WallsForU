@@ -6,6 +6,7 @@ import { GaleriaService } from 'src/app/servicios/galeria.service';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL, list, deleteObject, StorageReference } from '@angular/fire/storage';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, Subject } from 'rxjs';
+import { CategoriaInterfaz } from 'src/app/interfaces/categoria.interface';
 
 @Component({
   selector: 'app-modificar-wallpaper-modal',
@@ -17,20 +18,44 @@ export class ModificarWallpaperModalComponent {
   @Input() wallpaperAnterior!: WallpaperInterfaz;
   wallpaperNuevo!: WallpaperInterfaz;
   file: any;
-  ref! : StorageReference;
+  ref!: StorageReference;
+  Categorias!: CategoriaInterfaz[];
 
-  constructor(private router: Router, public activeModal: NgbActiveModal, private storage: Storage, private galeria: GaleriaService, private httpClient: HttpClient) {
+
+  constructor(private router: Router, public activeModal: NgbActiveModal, private storage: Storage, private _galeriaService: GaleriaService, private httpClient: HttpClient) {
 
   }
 
   ngOnInit(): void {
     const reader = new FileReader();
     reader.onload = e => this.imageSrc = reader.result;
+    const self = this;
+
+    var categorias = this.wallpaperAnterior.categorias.split(",")
+
+    this.obtenerCategorias();
+
+    this.Categorias.forEach(function (value) {
+
+      if (self.wallpaperAnterior.categorias.includes(value.titulo)) {
+        value.check = true;
+      } else {
+        value.check = false;
+      }
+    });
 
 
 
 
   }
+
+  obtenerCategorias() {
+    this._galeriaService.getCategorias().subscribe(data => {
+      this.Categorias = data;
+
+    });
+
+  };
 
 
 
@@ -44,7 +69,14 @@ export class ModificarWallpaperModalComponent {
 
   }
 
-  editarImagen(titulo: string, descripcion: string, categorias: string, etiquetas: string) {
+  editarImagen(titulo: string, descripcion: string, etiquetas: string) {
+    var categorias = "";
+    this.Categorias.forEach(function (value) {
+      if (value.check == true) {
+        categorias = categorias + value.titulo + ", "
+      }
+    });
+
     if (this.file == null) {
       const imgUrl = this.imageSrc;
       const imgName = this.wallpaperAnterior.ruta.substr(this.wallpaperAnterior.ruta.lastIndexOf('/') + 1);
@@ -64,7 +96,6 @@ export class ModificarWallpaperModalComponent {
             autor: JSON.parse(localStorage.getItem("Usuario")!).nombre,
             categorias: categorias,
             tags: etiquetas,
-            likes: this.wallpaperAnterior.likes,
             ruta: ruta,
           };
 
@@ -72,7 +103,7 @@ export class ModificarWallpaperModalComponent {
 
           uploadBytes(imgRef, this.file)
             .then(() => {
-              this.galeria.modWallpaper(this.wallpaperAnterior, this.wallpaperNuevo);
+              this._galeriaService.modWallpaper(this.wallpaperAnterior, this.wallpaperNuevo);
               this.activeModal.close();
             })
             .catch(error => console.log(error))
@@ -91,19 +122,18 @@ export class ModificarWallpaperModalComponent {
         autor: JSON.parse(localStorage.getItem("Usuario")!).nombre,
         categorias: categorias,
         tags: etiquetas,
-        likes: this.wallpaperAnterior.likes,
         ruta: ruta,
       };
 
       this.borrarWallpaper(this.wallpaperAnterior);
 
       uploadBytes(imgRef, this.file)
-        .then(() =>{
-          this.galeria.modWallpaper(this.wallpaperAnterior, this.wallpaperNuevo);
-        this.activeModal.close();
-        
+        .then(() => {
+          this._galeriaService.modWallpaper(this.wallpaperAnterior, this.wallpaperNuevo);
+          this.activeModal.close();
+
         }
-        
+
         )
         .catch(error => console.log(error))
 
@@ -118,10 +148,10 @@ export class ModificarWallpaperModalComponent {
 
   borrarWallpaper(wallpaper: WallpaperInterfaz) {
     this.ref = ref(this.storage, wallpaper.ruta);
-    this.galeria.sendUpdate(true);
-    
+    this._galeriaService.sendUpdate(true);
+
     deleteObject(this.ref).then(() => {
-      
+
 
     }).catch((error) => {
       // Uh-oh, an error occurred!
@@ -140,7 +170,7 @@ export class ModificarWallpaperModalComponent {
     return <File>theBlob;
   }
 
-  refreshComponent(){
+  refreshComponent() {
     this.router.navigate([this.router.url])
   }
 

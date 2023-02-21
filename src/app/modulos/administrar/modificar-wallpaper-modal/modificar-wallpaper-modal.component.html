@@ -25,11 +25,26 @@
                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [value]="wallpaperAnterior.descripcion" #descripcion></textarea>
                 </div>
 
-                <div class="form-group pb-1 mx-2">
-                    <label for="exampleInputEmail1" class="form-label mt-2">Categorias <span> (Separadas por
-                            comas)</span></label>
-                    <input type="email" class="form-control" id="email" required [value]="wallpaperAnterior.categorias" #categorias>
-                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+                <div class="form-group pb-1 mx-1">
+                    <label for="exampleInputEmail1" class="form-label mt-2">Categorias</label>
+                    <div class="container align-content-start desplazable">
+
+
+                        <div class="d-flex row">
+
+                            <div class="col-sm-auto px-1 py-1" *ngFor="let Categoria of Categorias">
+                                <input type="checkbox" class="btn-check" id="btn-check {{Categoria.titulo}}"
+                                    autocomplete="off" [checked]="Categoria.check"
+                                    (change)="Categoria.check = !Categoria.check">
+                                <label class="btn btn-outline-secondary"
+                                    for="btn-check {{Categoria.titulo}}">{{Categoria.titulo}}</label><br>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
                 </div>
 
                 <div class="form-group pb-1 mx-2">
@@ -61,5 +76,5 @@
 
 </div>
 <div class="modal-footer d-flex justify-content-start">
-    <button type="submit" class="btn btn-primary" (click)="editarImagen(titulo.value, descripcion.value, categorias.value, etiquetas.value)">Guardar</button>
+    <button type="submit" class="btn btn-primary" (click)="editarImagen(titulo.value, descripcion.value, etiquetas.value)">Guardar</button>
 </div>

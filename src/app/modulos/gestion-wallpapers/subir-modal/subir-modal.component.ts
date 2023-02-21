@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL, list } from '@angular/fire/storage';
 import { WallpaperInterfaz } from 'src/app/interfaces/wallpaper.interface';
 import { GaleriaService } from 'src/app/servicios/galeria.service';
+import { CategoriaInterfaz } from 'src/app/interfaces/categoria.interface';
 
 @Component({
   selector: 'app-subir-modal',
@@ -14,16 +15,36 @@ export class SubirModalComponent implements OnInit {
   wallpaper!: WallpaperInterfaz;
   imageSrc: string | ArrayBuffer | null;
   file: any;
+  Categorias!: CategoriaInterfaz[];
 
-  constructor(private router: Router, public activeModal: NgbActiveModal, private storage: Storage, private galeria: GaleriaService) {
+  constructor(private router: Router, public activeModal: NgbActiveModal, private storage: Storage, private _galeriaService: GaleriaService) {
     this.imageSrc = "../assets/img/selecciona imagen.png";
   }
+
   ngOnInit(): void {
     const reader = new FileReader();
     reader.onload = e => this.imageSrc = reader.result;
+    
+    this.obtenerCategorias();
+
+    this.Categorias.forEach(function (value) {
+      value.check = false;
+    }); 
 
 
   }
+
+  refreshComponent(){
+    this.router.navigate([this.router.url])
+  }
+
+  obtenerCategorias(){
+    this._galeriaService.getCategorias().subscribe(data => {
+      this.Categorias = data;
+    
+    });
+    
+  };
 
   
 
@@ -37,9 +58,19 @@ export class SubirModalComponent implements OnInit {
 
   }
 
-  subirImagen(titulo: string, descripcion: string, categorias: string, etiquetas: string){
+  subirImagen(titulo: string, descripcion: string, etiquetas: string){
     
     var ext = this.file.type.split("/", 2);
+
+    var categorias = "";
+    this.Categorias.forEach(function (value) {
+      if (value.check == true){
+        categorias = categorias + value.titulo + ", "
+      }
+    }); 
+
+
+
     var ruta = 'wallpapers/' + JSON.parse(localStorage.getItem("Usuario")!).nombre + " - " + titulo + "." + ext[1];
 
     this.imageSrc = this.file.imagen;
@@ -52,13 +83,12 @@ export class SubirModalComponent implements OnInit {
       autor: JSON.parse(localStorage.getItem("Usuario")!).nombre,
       categorias: categorias,
       tags: etiquetas,
-      likes: 0,
       ruta: ruta,
     };
 
     uploadBytes(imgRef, this.file)
     .then(() => 
-      this.galeria.addWallpaper(this.wallpaper)
+      this._galeriaService.addWallpaper(this.wallpaper)
       )
     .catch(error => console.log(error))
 

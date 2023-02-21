@@ -1,0 +1,31 @@
+<div class="modal-header text-center ">
+    <button type="button" class="btn-close" style="visibility: hidden;"></button>
+    <h4 class="modal-title w-100 font-weight-bold">Agregar Categoría</h4>
+
+    <button type="button" class="btn-close d-flex justify-content-center" (click)="activeModal.close()"
+        aria-label="Close"></button>
+
+
+</div>
+
+
+<div class="modal-body needs-validation" novalidate>
+    <form>
+        <div class="form-group pb-2 mx-2">
+            <label for="titulo" class="form-label mt-3">Título</label>
+            <input type="text" class="form-control" id="titulo" required #titulo>
+            <div class="invalid-feedback">¡Ingrese un título!</div>
+        </div>
+
+        <div class="form-group pb-2 mx-2">
+            <label for="exampleInputEmail1" class="form-label mt-3">Descripción</label>
+            <textarea class="form-control" #descripcion></textarea>
+            <div class="invalid-feedback">¡Agregue una descripción!</div>
+        </div>
+
+    </form>
+
+</div>
+<div class="modal-footer d-flex justify-content-center">
+    <button type="submit" class="btn btn-primary" (click)="onSubmit(titulo.value, descripcion.value)">Agregar</button>
+</div>

@@ -12,6 +12,9 @@ import { HttpClientModule }from '@angular/common/http';
 import { GaleriaComponent } from './galeria/galeria.component';
 import { HeaderComponent } from 'src/app/componentes/header/header.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { ListarCategoriasComponent } from './listar-categorias/listar-categorias.component';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { ImagenesCategoriaComponent } from './imagenes-categoria/imagenes-categoria.component';
 
 
 
@@ -21,6 +24,9 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     ListarComponent,
     WallpaperComponent,
     GaleriaComponent,
+    ListarCategoriasComponent,
+    CategoriaComponent,
+    ImagenesCategoriaComponent,
   ],
   imports: [
     CommonModule,

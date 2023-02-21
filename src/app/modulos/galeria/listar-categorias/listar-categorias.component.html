@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="container px-4 py-5" id="custom-cards">
+        <h2 class="pb-2 border-bottom">Categorias</h2>
+        
+
+        <div class="row row-cols-md-auto align-items-stretch justify-content-center g-3 py-5">
+            <div *ngFor="let Categoria of Categorias">
+                <app-categoria [Categoria]="Categoria"></app-categoria>
+
+            </div>
+
+           
+        </div>
+    </div>
+</div>

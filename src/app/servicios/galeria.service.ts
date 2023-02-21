@@ -22,9 +22,8 @@ export class GaleriaService {
         titulo: 'Dark Future',
         descripcion: 'Un paisaje desolador, oscuro... En el cual se puede ver el avance tecnologico.',
         autor: 'Maximus32',
-        categorias: 'horizontal, oscuro',
+        categorias: 'horizontal, oscuro, futurista',
         tags: 'Futuro, Aliens, Cielo, Nubes, Montañas',
-        likes: 5,
         ruta: 'wallpapers/Admin - Dark Future.jpg',
       },
       {
@@ -33,7 +32,6 @@ export class GaleriaService {
         autor: 'Maria12',
         categorias: 'horizontal, Ciudad',
         tags: 'Ciudad, Lago, Cielo, Luces, Edificios',
-        likes: 13,
         ruta: 'wallpapers/Admin - City of Ligths.jpg',
       }
       ];
@@ -56,6 +54,10 @@ export class GaleriaService {
       {
         titulo: 'Futurista',
         descripcion: 'Texto generico de categoria No 4.',
+      },
+      {
+        titulo: 'Horizontal',
+        descripcion: 'Texto generico de categoria No 3.',
       }
       ];
       localStorage.setItem('Categorias', JSON.stringify(this.Categorias));
@@ -144,6 +146,21 @@ export class GaleriaService {
 
   getTermino(): Observable<string> {
     return this.terminoBusqueda$.asObservable();
+  }
+
+  getCategorias(){
+    this.Categorias = JSON.parse(localStorage.getItem('Categorias')!);
+
+    return of(this.Categorias);
+  }
+
+  getOneForTag(categoria: string) {
+    categoria = categoria.toLowerCase();
+    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { categorias: string; }) => Wallpapers.categorias.toLowerCase().includes(categoria)));
+    const random = Math.floor(Math.random() * this.Datos.length);
+
+    
+    return (this.Datos[random].ruta);
   }
 
 }

@@ -5,6 +5,7 @@ import { RegisterModalComponent } from './register-modal/register-modal.componen
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { ModificarCampoModalComponent } from './modificar-campo-modal/modificar-campo-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,6 +18,7 @@ import { ModificarCampoModalComponent } from './modificar-campo-modal/modificar-
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule
 
   ],
   exports: [

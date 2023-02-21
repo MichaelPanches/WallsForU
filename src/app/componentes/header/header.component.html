@@ -11,8 +11,7 @@
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a class="nav-link px-2 text-secondary" routerLink="">Inicio</a></li>
-                <!-- <li><a href="#" class="nav-link px-2 text-white">Categorias</a></li> -->
-                <!-- <li><a href="#" class="nav-link px-2 text-white">Etiquetas</a></li> -->
+                <li><a class="nav-link px-2 text-white" routerLink="categorias">Categorias</a></li>
             </ul>
 
             <div [ngSwitch]="menuType">
@@ -42,7 +41,7 @@
         </div>
 
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between" id="navbarsExample10" *ngSwitchCase="true">
-            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" routerLink="/inicioAdministrar">
+            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" routerLink="/administrador">
                 <img src="../assets/img/logo.png" height="35" alt="">
                 <span class="navbar-toggler-icon"></span>
                 <a class="navbar-brand text-white mb-0 h1" href="#">Admin Mode</a>
@@ -50,9 +49,10 @@
             
             
               <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary" routerLink="/inicioAdministrar">Inicio</a></li>
-                <li><a href="#" class="nav-link px-2 link-light" routerLink="/listaAdministrar">Wallpapers</a></li>
-                <li><a href="#" class="nav-link px-2 link-light" routerLink="/usuariosAdministrar">Usuarios</a></li>
+                <li><a href="#" class="nav-link px-2 link-secondary" routerLink="/administrador">Inicio</a></li>
+                <li><a href="#" class="nav-link px-2 link-light" routerLink="/administrador/wallpapers">Wallpapers</a></li>
+                <li><a href="#" class="nav-link px-2 link-light" routerLink="/administrador/usuarios">Usuarios</a></li>
+                <li><a href="#" class="nav-link px-2 link-light" routerLink="/administrador/categorias">Categorias</a></li>
               </ul>
         
               <div class="col-md-3 text-end">

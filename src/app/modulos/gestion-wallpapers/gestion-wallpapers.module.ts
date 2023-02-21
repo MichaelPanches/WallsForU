@@ -30,7 +30,8 @@ import { MiWallpaperComponent } from './mi-wallpaper/mi-wallpaper.component';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
     AppRoutingModule,
-    GaleriaModule
+    GaleriaModule,
+    ReactiveFormsModule
   ],
   exports: [
     SubirModalComponent,

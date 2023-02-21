@@ -7,6 +7,10 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
 import { AgregarUsuarioModalComponent } from './agregar-usuario-modal/agregar-usuario-modal.component';
 import { EditarUsuarioModalComponent } from './editar-usuario-modal/editar-usuario-modal.component';
 import { ModificarWallpaperModalComponent } from './modificar-wallpaper-modal/modificar-wallpaper-modal.component';
+import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.component';
+import { AgregarCategoriaModalComponent } from './agregar-categoria-modal/agregar-categoria-modal.component';
+import { ModificarCategoriaModalComponent } from './modificar-categoria-modal/modificar-categoria-modal.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,10 +22,15 @@ import { ModificarWallpaperModalComponent } from './modificar-wallpaper-modal/mo
     AgregarUsuarioModalComponent,
     EditarUsuarioModalComponent,
     ModificarWallpaperModalComponent,
+    ListaCategoriasComponent,
+    AgregarCategoriaModalComponent,
+    ModificarCategoriaModalComponent,
+    
   ],
   imports: [
     CommonModule,
-    GestionWallpapersModule
+    GestionWallpapersModule,
+    ReactiveFormsModule
   ]
 })
 export class AdministrarModule { }

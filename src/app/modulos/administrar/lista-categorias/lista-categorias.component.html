@@ -1,0 +1,63 @@
+<section class="jumbotron text-center">
+    <div class="container">
+        <h4 class="jumbotron-heading text-muted">Administrar Categorias</h4>
+    </div>
+</section>
+
+    <div class="container">
+        <div class="d-flex row justify-content-between">
+            <div class="col-auto">
+                <div class="input-group mb-3">
+
+                    <input type="text" class="form-control" aria-label="Text input with dropdown button" #busqueda>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" (click)="obtenerCategorias(busqueda.value)"><i class="bi bi-search"></i></button>
+                      </div>
+                  </div>
+            </div>
+
+            <div class="col-auto">
+                <button class="btn btn-outline-secondary" type="button"
+                (click)="openAgregar()">Agregar</button>
+
+            </div>
+
+            
+    </div>
+
+
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered mx-auto">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col" class="col-sm-1">#</th>
+                        <th scope="col" class="col-2">Titulo</th>
+                        <th scope="col" class="col-8">Descripcion</th>
+                        <th scope="col" class="col-2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let categoria of categorias;">
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{{categoria.titulo }}</td>
+                            <td>{{categoria.descripcion }}</td>
+                            <td>
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-primary"
+                                        (click)="openModificar(categoria.titulo)"><i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                        (click)="eliminarCategoria(categoria.titulo)"><i class="bi bi-trash3-fill"></i></button>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
