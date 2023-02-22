@@ -13,45 +13,54 @@
     <div class="row">
 
         <div class="col-4">
-            <form>
+            <form id="addWallForm" [formGroup]="addWall" (ngSubmit)="onSubmit()" novalidate>
                 <div class="form-group pb-1 mx-2">
-                    <label for="exampleInputEmail1" class="form-label mt-2">Titulo</label>
-                    <input type="email" class="form-control" id="email" required #titulo>
-                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+                    <label for="titulo" class="form-label mt-2">Titulo</label>
+                    <input type="text" class="form-control" id="titulo" formControlName="titulo"
+                        [ngClass]="{ 'is-invalid': submitted && f['titulo'].errors }">
+                    <div class="invalid-feedback" *ngIf="submitted && f['titulo'].errors">
+                        <div *ngIf="submitted && f['titulo'].errors['required']">¡Ingrese un titulo!</div>
+                    </div>
                 </div>
 
                 <div class="form-group pb-1 mx-2">
-                    <label for="exampleFormControlTextarea1" class="form-label mt-2">Descripcion</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" #descripcion></textarea>
+                    <label for="descripcion" class="form-label mt-2">Descripción</label>
+                    <textarea class="form-control" id="descripcion" rows="3" formControlName="descripcion"></textarea>
                 </div>
 
                 <div class="form-group pb-1 mx-1">
-                    <label for="exampleInputEmail1" class="form-label mt-2">Categorias</label>
+                    <label for="categorias" class="form-label mt-2">Categorías</label>
                     <div class="container align-content-start desplazable">
 
 
                         <div class="d-flex row">
 
-                            <div class="col-sm-auto px-1 py-1" *ngFor="let Categoria of Categorias">
-                                <input type="checkbox" class="btn-check" id="btn-check {{Categoria.titulo}}"
-                                    autocomplete="off" [checked]="Categoria.check"
-                                    (change)="Categoria.check = !Categoria.check">
+                            <div class="col-sm-auto px-1 py-1" formArrayName="categorias"
+                                *ngFor="let categoria of checkFormArray.controls; let i = index">
+                                <input type="checkbox" class="btn-check" id="btn-check {{Categorias[i].titulo}}"
+                                    autocomplete="off" [formControlName]="i">
                                 <label class="btn btn-outline-secondary"
-                                    for="btn-check {{Categoria.titulo}}">{{Categoria.titulo}}</label><br>
+                                    for="btn-check {{Categorias[i].titulo}}">{{Categorias[i].titulo}}</label><br>
 
                             </div>
+
+
                         </div>
 
 
+
                     </div>
+                    <div class="invalid-feedback d-block" *ngIf="submitted && f['categorias'].errors">
+                        <div>¡Seleccione al menos una categoría!</div>
+                    </div>
+
 
                 </div>
 
                 <div class="form-group pb-1 mx-2">
-                    <label for="exampleInputEmail1" class="form-label mt-2">Etiquetas <span> (Separadas por
+                    <label for="tags" class="form-label mt-2">Etiquetas <span> (Separadas por
                             comas)</span></label>
-                    <input type="email" class="form-control" id="email" required #etiquetas #categorias>
-                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+                    <input type="email" class="form-control" id="tags" formControlName="tags">
                 </div>
 
 
@@ -76,6 +85,5 @@
 
 </div>
 <div class="modal-footer d-flex justify-content-start">
-    <button type="submit" class="btn btn-primary"
-        (click)="subirImagen(titulo.value, descripcion.value, etiquetas.value)">Ingresar</button>
+    <button type="submit" class="btn btn-primary" type="submit" form="addWallForm">Ingresar</button>
 </div>

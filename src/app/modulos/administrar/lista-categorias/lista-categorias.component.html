@@ -37,9 +37,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <ng-container *ngFor="let categoria of categorias;">
+                    <ng-container *ngFor="let categoria of categorias; let row = index;">
                         <tr>
-                            <th scope="row">1</th>
+                            <th scope="row">{{row + 1}}</th>
                             <td>{{categoria.titulo }}</td>
                             <td>{{categoria.descripcion }}</td>
                             <td>

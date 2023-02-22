@@ -57,6 +57,7 @@ export class AgregarUsuarioModalComponent {
     }
 
     this._cuentasService.addUsuario(this.usuario);
+    this.activeModal.close();
 
   }
 

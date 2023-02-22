@@ -53,6 +53,7 @@ export class RegisterModalComponent {
     }
 
     this._cuentasService.addUsuario(this.usuario);
+    this.activeModal.close();
 
   }
 
@@ -69,11 +70,7 @@ export class RegisterModalComponent {
       } else {
         control.setErrors(null);
       }
-
     }
-
-
-
   }
 
   samePassword(controlNamePassword: string, controlNameConfirmation: string) {
