@@ -13,17 +13,12 @@ export class ListarComponent {
   wallpapers!: WallpaperInterfaz[];
   busqueda = "";
   messageReceived: any;
-  private subscriptionName: Subscription; //important to create a subscription
-    
-
 
   constructor(private router: Router, public _galeriaService: GaleriaService) {
-    this.subscriptionName= this._galeriaService.getUpdate().subscribe
-             (message => { //message contains the data sent from service
-              this.ngOnInit();
+    this._galeriaService.getUpdate().subscribe
+             (message => {
+              this.obtenerWallpapers();
              });
-
-
   };
 
   ngOnInit(): void {
@@ -35,10 +30,14 @@ export class ListarComponent {
   }
 
   obtenerWallpapers(){
-    this._galeriaService.getWallpapersByUser(JSON.parse(localStorage.getItem("Usuario")!).nombre).subscribe(data => {
+    this._galeriaService.getWallpapersByUser(JSON.parse(localStorage.getItem("Usuario")!).id).subscribe(data => {
+      console.log(data)
       this.wallpapers = data;
+      console.log(this.wallpapers)
     
     });
     
   };
+
+  
 }

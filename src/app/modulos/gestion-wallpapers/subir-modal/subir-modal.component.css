@@ -1,14 +1,73 @@
 img {
   object-fit: contain;
-  max-height: 310px;
-}
-
-.card-image {
-  width: 80%;
-  height: 80%;
+  max-height: 370px;
 }
 
 .desplazable {
-  height: 100px ;
+  height: 100px;
   overflow: auto;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    pointer-events: none;
+
+}
+
+contener {
+  object-fit: contain;
+  min-height: 370px;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.image-container img {
+  width: 100%;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 0 0 4px #000;
+  cursor: pointer;
+}
+
+.image-overlay.centered {
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.image-overlay.centered img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  
 }

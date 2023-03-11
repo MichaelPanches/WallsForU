@@ -37,7 +37,9 @@ export class AgregarCategoriaModalComponent {
       descripcion: this.addCategoria.controls["descripcion"].value,
     }
 
-    this._categoriasService.addCategoria(this.categoria);
+    this._categoriasService.addCategoria(this.categoria).subscribe( data => {
+      this._categoriasService.sendUpdate(true);
+    });
     this.activeModal.close();
 
   }

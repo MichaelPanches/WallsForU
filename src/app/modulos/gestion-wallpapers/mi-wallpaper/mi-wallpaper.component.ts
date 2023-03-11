@@ -43,7 +43,7 @@ export class MiWallpaperComponent {
   }
 
   borrarWallpaper() {
-    this.galeria.deleteWallpaper(this.wallpaper);
+    this.galeria.deleteWallpaper(this.wallpaper.id!).subscribe({})
     
     deleteObject(this.ref).then(() => {
       
@@ -66,7 +66,7 @@ export class MiWallpaperComponent {
       document.body.appendChild(link); // for Firefox
 
       link.setAttribute("href", this.base64Image);
-      link.setAttribute("download", this.wallpaper.autor + " - " + this.wallpaper.titulo + ".jpg");
+      link.setAttribute("download", this.wallpaper.usuario + " - " + this.wallpaper.titulo + ".jpg");
       link.click();
     });
   }

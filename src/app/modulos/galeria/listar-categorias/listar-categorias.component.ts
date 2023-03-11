@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoriaInterfaz } from 'src/app/interfaces/categoria.interface';
+import { CategoriasService } from 'src/app/servicios/categorias.service';
 import { GaleriaService } from 'src/app/servicios/galeria.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class ListarCategoriasComponent {
     
 
 
-  constructor(private router: Router, public _galeriaService: GaleriaService) {
+  constructor(private router: Router, public _categoriasService: CategoriasService) {
 
   };
 
@@ -28,7 +29,8 @@ export class ListarCategoriasComponent {
   }
 
   obtenerCategorias(){
-    this._galeriaService.getCategorias().subscribe(data => {
+    this._categoriasService.getCategorias().subscribe(data => {
+      console.log(data)
       this.Categorias = data;
     
     });

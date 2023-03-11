@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject, BehaviorSubject  } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 import { CategoriaInterfaz } from '../interfaces/categoria.interface';
 import { WallpaperInterfaz } from '../interfaces/wallpaper.interface';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,133 +13,118 @@ export class GaleriaService {
   Datos!: WallpaperInterfaz[];
   Categorias!: CategoriaInterfaz[];
   private terminoBusqueda$ = new Subject<string>();
-  private subjectName = new Subject<any>();
   private refresh: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-
-
-  constructor() {
-    if (localStorage.getItem('Wallpapers') === null || JSON.parse(localStorage.getItem('Wallpapers')!).length === 0) {
-      this.Datos = [{
-        titulo: 'Dark Future',
-        descripcion: 'Un paisaje desolador, oscuro... En el cual se puede ver el avance tecnologico.',
-        autor: 'Maximus32',
-        categorias: 'horizontal, oscuro, futurista',
-        tags: 'Futuro, Aliens, Cielo, Nubes, Montañas',
-        ruta: 'wallpapers/Admin - Dark Future.jpg',
-      },
-      {
-        titulo: 'City of Ligths',
-        descripcion: 'Un paisaje desolador, oscuro... En el cual se puede ver el avance tecnologico.',
-        autor: 'Maria12',
-        categorias: 'horizontal, Ciudad',
-        tags: 'Ciudad, Lago, Cielo, Luces, Edificios',
-        ruta: 'wallpapers/Admin - City of Ligths.jpg',
-      }
-      ];
-      localStorage.setItem('Wallpapers', JSON.stringify(this.Datos));
-    }
-
-    if (localStorage.getItem('Categorias') === null || JSON.parse(localStorage.getItem('Categorias')!).length === 0) {
-      this.Categorias = [{
-        titulo: 'Animales',
-        descripcion: 'Texto generico de categoria No 1.',
-      },
-      {
-        titulo: 'Paisajes',
-        descripcion: 'Texto generico de categoria No 2.',
-      },
-      {
-        titulo: 'Anime',
-        descripcion: 'Texto generico de categoria No 3.',
-      },
-      {
-        titulo: 'Futurista',
-        descripcion: 'Texto generico de categoria No 4.',
-      },
-      {
-        titulo: 'Horizontal',
-        descripcion: 'Texto generico de categoria No 3.',
-      }
-      ];
-      localStorage.setItem('Categorias', JSON.stringify(this.Categorias));
-    }
-  }
-
-  addWallpaper(dato: WallpaperInterfaz) {
-    this.Datos.push(dato);
-    let Datos = [];
-    if (localStorage.getItem('Wallpapers') === null) {
-      Datos = [];
-      Datos.push(dato);
-      localStorage.setItem('Wallpapers', JSON.stringify(Datos));
-      
-    } else {
-      Datos = JSON.parse(localStorage.getItem('Wallpapers')!);
-      Datos.push(dato);
-      localStorage.setItem('Wallpapers', JSON.stringify(Datos));
-    }
-    this.sendUpdate(true);
-  }
+  constructor(private http: HttpClient) { }
 
   public getUpdate(): Observable<boolean> {
-
     return this.refresh.asObservable();
   }
 
   public sendUpdate(value: boolean): void {
-
     this.refresh.next(value);
   }
 
+  getWallpapers(busqueda?: string): Observable<any> {
+    var url: any;
 
+    if (!busqueda) {
+      url = `${environment.urlBAse}${environment.pathUrl.wallpapers.urlListarWallpapers}`;
+    } else {
+      url = `${environment.urlBAse}${environment.pathUrl.wallpapers.urlBuscarWallpapers}` + busqueda;
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+        ,
+      })
+    }
 
-  deleteWallpaper(dato: WallpaperInterfaz) {
-    let Datos: WallpaperInterfaz[] = [];
-    Datos = JSON.parse(localStorage.getItem('Wallpapers')!);
-    Datos.forEach((element: WallpaperInterfaz, index: any) => {
-      if (element.autor == dato.autor && element.titulo == dato.titulo) Datos.splice(index, 1);
-    });
-    localStorage.setItem('Wallpapers', JSON.stringify(Datos));
-    this.sendUpdate(true);
+    return this.http.get(url, httpOptions);
   }
 
-  modWallpaper(wallpaperAnterior: WallpaperInterfaz, wallpaperNuevo: WallpaperInterfaz) {
-    let Datos: WallpaperInterfaz[] = [];
-    Datos = JSON.parse(localStorage.getItem('Wallpapers')!);
-    Datos.forEach((element: WallpaperInterfaz, index: any) => {
-      if (element.autor == wallpaperAnterior.autor && element.titulo == wallpaperAnterior.titulo) Datos[index] = wallpaperNuevo;
-    });
-    localStorage.setItem('Wallpapers', JSON.stringify(Datos));
-    this.sendUpdate(true);
+  addWallpaper(dato: WallpaperInterfaz): Observable<any> {
+    const post = {
+      titulo: dato.titulo,
+      descripcion: dato.descripcion,
+      usuario: dato.usuario,
+      categorias: dato.categorias,
+      tags: dato.tags,
+      ruta: dato.ruta,
+    };
+    const url = `${environment.urlBAse}${environment.pathUrl.wallpapers.urlAgregarWallpapers}`;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      })
+    }
+    return this.http.post(url, post, httpOptions);
   }
 
-  getWallpapers(busqueda: string): Observable<any[]> {
-    busqueda = busqueda.toLowerCase();
-    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { titulo: string; categorias: string; tags: string; }) => Wallpapers.titulo.toLowerCase().includes(busqueda) || Wallpapers.categorias.toLowerCase().includes(busqueda) || Wallpapers.tags.toLowerCase().includes(busqueda)));
+  deleteWallpaper(id: number) {
+    const url = `${environment.urlBAse}${environment.pathUrl.wallpapers.urlBorrarWallpapers}` + id;
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+        ,
+      })
+    }
 
-    return of(this.Datos);
+    return this.http.post(url, httpOptions);
   }
 
-  getWallpapersByUser(user: string): Observable<any[]> {
-    user = user.toLowerCase();
-    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { autor: string; }) => Wallpapers.autor.toLowerCase().includes(user)));
-
-    return of(this.Datos);
+  modWallpaper(dato: WallpaperInterfaz) {
+    const post = {
+      id: dato.id,
+      titulo: dato.titulo,
+      descripcion: dato.descripcion,
+      usuario: dato.usuario,
+      categorias: dato.categorias,
+      tags: dato.tags,
+      ruta: dato.ruta,
+    };
+    const url = `${environment.urlBAse}${environment.pathUrl.wallpapers.urlModificarWallpapers}`;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      })
+    }
+    console.log(post)
+    console.log(url)
+    return this.http.post(url, post, httpOptions);
   }
 
-  getWallpapersByFilter(propiedad: string, termino: string): Observable<any[]> {
-    termino = termino.toLowerCase();
-    const propiedadFiltro = propiedad;
-    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers : any) => Wallpapers[propiedadFiltro].toLowerCase().includes(termino)));
 
-    return of(this.Datos);
+  getWallpapersByUser(user: number): Observable<any> {
+    var url = `${environment.urlBAse}${environment.pathUrl.wallpapers.urlWallpaperUsuario}` + user;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+        ,
+      })
+    }
+
+    return this.http.get(url, httpOptions);
   }
 
-  getWallpapersAll(): Observable<any[]> {
-    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!);
+  getWallpapersByCategoria(titulo: string): Observable<WallpaperInterfaz[]> {
+    const url = `${environment.urlBAse}${environment.pathUrl.wallpapers.urlBuscarCategorias}` + titulo;
 
-    return of(this.Datos);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+        ,
+      })
+    }
+
+    return this.http.get<WallpaperInterfaz[]>(url, httpOptions);
   }
 
   sendTermino(busqueda: string) {
@@ -148,19 +135,6 @@ export class GaleriaService {
     return this.terminoBusqueda$.asObservable();
   }
 
-  getCategorias(){
-    this.Categorias = JSON.parse(localStorage.getItem('Categorias')!);
 
-    return of(this.Categorias);
-  }
-
-  getOneForTag(categoria: string) {
-    categoria = categoria.toLowerCase();
-    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { categorias: string; }) => Wallpapers.categorias.toLowerCase().includes(categoria)));
-    const random = Math.floor(Math.random() * this.Datos.length);
-
-    
-    return (this.Datos[random].ruta);
-  }
 
 }

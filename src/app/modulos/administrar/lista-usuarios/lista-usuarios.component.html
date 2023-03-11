@@ -4,75 +4,71 @@
     </div>
 </section>
 
-    <div class="container">
-        <div class="d-flex row justify-content-between">
-            <div class="col-auto">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <select class="form-select" id="inputGroupSelect01" #selector>
-                            <option value="0" selected>Filtro..</option>
-                            <option value="id">Id</option>
-                            <option value="nombre">Nombre</option>
-                            <option value="apellido">Apellidos</option>
-                            <option value="email">Email</option>
-                          </select>
-                      
-                    </div>
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button" #busqueda>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" (click)="obtenerUsuarios(selector.value, busqueda.value)"><i class="bi bi-search"></i></button>
-                      </div>
-                  </div>
+<div class="container">
+    <div class="d-flex row justify-content-between">
+        <div class="col-auto">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <select class="form-select" style="border-radius: 0.25rem 0 0 0.25rem;" id="inputGroupSelect01" [(ngModel)]="filtro">
+                        <option value="nombre" selected>Nombre</option>
+                        <option value="apellido">Apellidos</option>
+                        <option value="email">Email</option>
+                        <option value="id">Id</option>
+                    </select>
+
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                    [(ngModel)]="busqueda">
             </div>
-
-            <div class="col-auto">
-                <button class="btn btn-outline-secondary" type="button"
-                (click)="openAgregar()">Agregar</button>
-
-            </div>
-
-            
-    </div>
-
-
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered mx-auto">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col" class="col-sm-1">#</th>
-                        <th scope="col" class="col-2">Nombre</th>
-                        <th scope="col" class="col-2">Apellido</th>
-                        <th scope="col" class="col-3">Email</th>
-                        <th scope="col" class="col-2">Contraseña</th>
-                        <th scope="col" class="col-1">Rol</th>
-                        <th scope="col" class="col-1 col-auto">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngFor="let usuario of usuarios;">
-                        <tr>
-                            <th scope="row">{{usuario.id}}</th>
-                            <td>{{usuario.nombre }}</td>
-                            <td>{{usuario.apellido }}</td>
-                            <td>{{usuario.email }}</td>
-                            <td>{{usuario.password }}</td>
-                            <td>{{usuario.rol }}</td>
-                            <td>
-
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-primary"
-                                        (click)="openModificar(usuario.id)"><i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-outline-danger"
-                                        (click)="eliminarUsuario(usuario.id)"><i class="bi bi-trash3-fill"></i></button>
-                                </div>
-
-
-                            </td>
-                        </tr>
-                    </ng-container>
-                </tbody>
-            </table>
         </div>
 
+        <div class="col-auto">
+            <button class="btn btn-outline-secondary" type="button" (click)="openAgregar()">Agregar</button>
+
+        </div>
+
+
     </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered mx-auto">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col" class="col-sm-1">#</th>
+                    <th scope="col" class="col-2">Nombre</th>
+                    <th scope="col" class="col-2">Apellido</th>
+                    <th scope="col" class="col-3">Email</th>
+                    <th scope="col" class="col-2">Contraseña</th>
+                    <th scope="col" class="col-1">Rol</th>
+                    <th scope="col" class="col-1 col-auto">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let usuario of (usuarios ? filtrar() : []);">
+                    <tr>
+                        <th scope="row">{{usuario.id}}</th>
+                        <td>{{usuario.nombre }}</td>
+                        <td>{{usuario.apellido }}</td>
+                        <td>{{usuario.email }}</td>
+                        <td>{{convertirEnAsteriscos(usuario.password)}}</td>
+                        <td>{{usuario.rol }}</td>
+                        <td>
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-primary"
+                                    (click)="openModificar(usuario)"><i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                    (click)="eliminarUsuario(usuario.id!)"><i class="bi bi-trash3-fill"></i></button>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+
+</div>

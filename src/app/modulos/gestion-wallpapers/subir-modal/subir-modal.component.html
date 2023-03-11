@@ -1,18 +1,14 @@
-<div class="modal-header text-center ">
+<div class="modal-header text-center " style="z-index: 1040;">
     <button type="button" class="btn-close" style="visibility: hidden;"></button>
     <h4 class="modal-title w-100 font-weight-bold">Subir Wallpaper</h4>
 
     <button type="button" class="btn-close d-flex justify-content-center" (click)="activeModal.close()"
         aria-label="Close"></button>
-
-
 </div>
-
 
 <div class="modal-body">
     <div class="row">
-
-        <div class="col-4">
+        <div class="col-md-4">
             <form id="addWallForm" [formGroup]="addWall" (ngSubmit)="onSubmit()" novalidate>
                 <div class="form-group pb-1 mx-2">
                     <label for="titulo" class="form-label mt-2">Titulo</label>
@@ -25,65 +21,65 @@
 
                 <div class="form-group pb-1 mx-2">
                     <label for="descripcion" class="form-label mt-2">Descripción</label>
-                    <textarea class="form-control" id="descripcion" rows="3" formControlName="descripcion"></textarea>
+                    <textarea class="form-control" id="descripcion" rows="3" formControlName="descripcion"
+                        style="resize: none;"></textarea>
                 </div>
 
                 <div class="form-group pb-1 mx-1">
                     <label for="categorias" class="form-label mt-2">Categorías</label>
                     <div class="container align-content-start desplazable">
-
-
                         <div class="d-flex row">
-
                             <div class="col-sm-auto px-1 py-1" formArrayName="categorias"
                                 *ngFor="let categoria of checkFormArray.controls; let i = index">
-                                <input type="checkbox" class="btn-check" id="btn-check {{Categorias[i].titulo}}"
-                                    autocomplete="off" [formControlName]="i">
+                                <input type="checkbox" class="btn-check" id="btn-check{{i}}" autocomplete="off"
+                                    [formControlName]="i">
                                 <label class="btn btn-outline-secondary"
-                                    for="btn-check {{Categorias[i].titulo}}">{{Categorias[i].titulo}}</label><br>
-
+                                    for="btn-check{{i}}">{{Categorias[i].titulo}}</label><br>
                             </div>
-
-
                         </div>
-
-
-
                     </div>
                     <div class="invalid-feedback d-block" *ngIf="submitted && f['categorias'].errors">
                         <div>¡Seleccione al menos una categoría!</div>
                     </div>
-
-
                 </div>
 
                 <div class="form-group pb-1 mx-2">
-                    <label for="tags" class="form-label mt-2">Etiquetas <span> (Separadas por
-                            comas)</span></label>
+                    <label for="tags" class="form-label mt-2">Etiquetas <span> (Separadas por comas)</span></label>
                     <input type="email" class="form-control" id="tags" formControlName="tags">
                 </div>
-
-
-
             </form>
         </div>
-
-        <div class="col-8 justify-content-center">
+        <div class="col-md-8 justify-content-center" [formGroup]="addWall">
 
             <div class="card">
-                <div class="card-body">
-                    <input type="file" class="custom-file-input" id="customFileLang" (change)="guardarEvento($event)"
+                <div class="form-group">
+                    <input type="file" class="form-control custom-file-input mx-2 my-2" id="archivo"
+                        style="width: fit-content;" id="customFileLang" formControlName="archivo"
+                        [ngClass]="{ 'is-invalid': submitted && f['archivo'].errors }" (change)="guardarEvento($event)"
                         lang="es">
                 </div>
-                <img class="card-img-bottom" src="{{imageSrc}}">
             </div>
+
+            <div class="card mt-2">
+                <div (click)="onImageClick()" class="image-container">
+                  <img src="{{imageSrc}}" (mouseover)="onImageMouseOver()" (mouseleave)="onImageMouseLeave()" 
+                    [ngStyle]="{'filter': isImageHovered && archivoSeleccionado? 'brightness(80%)' : 'brightness(100%)'}" />
+                  <div class="image-overlay" *ngIf="isImageHovered && archivoSeleccionado">Clic para ampliar</div>
+                </div>
+              </div>
+
+            <div class="invalid-feedback d-block mx-2 mb-2" *ngIf="submitted && f['archivo'].errors">
+                <div *ngIf="submitted && f['archivo'].errors['archivoSelected']">¡Seleccione una imagen!</div>
+                <div *ngIf="submitted && f['archivo'].errors['badFile']">¡El archivo seleccionado no es una imagen!
+                </div>
+            </div>
+
         </div>
 
-
+        
     </div>
-
-
 </div>
 <div class="modal-footer d-flex justify-content-start">
     <button type="submit" class="btn btn-primary" type="submit" form="addWallForm">Ingresar</button>
 </div>
+

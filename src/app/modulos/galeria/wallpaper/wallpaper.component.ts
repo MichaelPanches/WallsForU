@@ -50,7 +50,7 @@ export class WallpaperComponent implements OnInit {
       document.body.appendChild(link); // for Firefox
 
       link.setAttribute("href", this.base64Image);
-      link.setAttribute("download", this.wallpaper.autor + " - " + this.wallpaper.titulo + ".jpg");
+      link.setAttribute("download", this.wallpaper.usuario + " - " + this.wallpaper.titulo + ".jpg");
       link.click();
     });
   }

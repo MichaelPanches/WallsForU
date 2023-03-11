@@ -13,6 +13,7 @@ import { FormGroup, Validators } from '@angular/forms';
 export class LoginModalComponent {
   login!: FormGroup;
   submitted = false;
+  usuario: any;
 
   constructor(private router: Router, public activeModal: NgbActiveModal, private _cuentasService: CuentasService, private formBuilder: FormBuilder) {
     this.login = this.formBuilder.group({
@@ -21,25 +22,31 @@ export class LoginModalComponent {
     },
       {
         validators: [this.mailExist('email'), this.passwordBad('email', 'password'),],
-        updateOn: 'submit'
       }
     );
   }
 
   onSubmit() {
-    this.submitted = true;
-    if (this.login.invalid) {
-      return;
-    }
+    this._cuentasService.getUsuarioEmail(this.login.controls['email'].value).subscribe(data => {
+      this.usuario = data;
+      this.submitted = true;
 
-    if (JSON.parse(localStorage.getItem("Usuario")!).rol == 1) {
-      this.router.navigate(['/administrador']);
-      this.activeModal.close();
-    } else {
-      this.refreshComponent();
-      this.activeModal.close();
-    }
+      if (this.login.invalid) {
+        return;
+      }
 
+      localStorage.setItem('Usuario', JSON.stringify(this.usuario));
+
+      if (JSON.parse(localStorage.getItem("Usuario")!).rol == 1) {
+        this.router.navigate(['/administrador']);
+        this.activeModal.close();
+      } else {
+        this.refreshComponent();
+        this.activeModal.close();
+      }
+
+
+    });
   }
 
   get f() { return this.login.controls; }
@@ -53,15 +60,22 @@ export class LoginModalComponent {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
 
-      if (control.errors && !control.errors['mailExist']) {
+      if ((control.errors && !control.errors['mailExist'])) {
         return
       }
 
-      if (!this._cuentasService.validateEmail(control.value)) {
-        control.setErrors({ mailExist: true });
-      } else {
-        control.setErrors(null);
-      }
+      this._cuentasService.getUsuarioEmail(control.value).subscribe(data => {
+        this.usuario = data;
+        if (data == null) {
+
+          control.setErrors({ mailExist: true });
+        } else {
+          control.setErrors(null);
+          return
+
+        }
+        this.submitted = false;
+      });
 
     }
   }
@@ -71,16 +85,20 @@ export class LoginModalComponent {
       const control = formGroup.controls[controlName];
       const controlPassword = formGroup.controls[controlNamePassword];
 
-      if (control.errors || (controlPassword.errors && controlPassword.errors['required'])) {
+      if (controlPassword.errors && !(controlPassword.errors['passwordBad'])) {
         return
       }
 
-      if (!this._cuentasService.validateUsuario(control.value, controlPassword.value)) {
-        console.log("si")
-        controlPassword.setErrors({ passwordBad: true });
-      } else {
-        controlPassword.setErrors(null);
+      if (this.usuario != undefined){
+        if (this.usuario.password != controlPassword.value) {
+          controlPassword.setErrors({ passwordBad: true });
+          
+
+        } else {
+          controlPassword.setErrors(null);
+        }
       }
+        this.submitted = false;
 
     }
   }

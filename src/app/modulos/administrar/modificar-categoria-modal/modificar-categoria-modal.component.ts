@@ -12,22 +12,33 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ModificarCategoriaModalComponent {
   @Input() public titulo!: string;
-  categoria!: CategoriaInterfaz;
+  categoria!: any;
   modCategoria!: FormGroup;
   submitted = false;
 
 
   constructor(private router: Router, public activeModal: NgbActiveModal,private _categoriasService: CategoriasService, private formBuilder: FormBuilder) {
+    
   } 
   
   ngOnInit(): void {
-    this.categoria = this._categoriasService.getCategoria(this.titulo);
-
     this.modCategoria = this.formBuilder.group({
-      titulo: [this.categoria.titulo, [Validators.required]],
-      descripcion: [this.categoria.descripcion, [Validators.required]]
+      titulo: ["", [Validators.required]],
+      descripcion: ["", [Validators.required]]
     }
     );
+     
+    this._categoriasService.getCategoria(this.titulo).subscribe(data => {
+      this.categoria = data;
+
+      this.modCategoria = this.formBuilder.group({
+        titulo: [this.categoria.titulo, [Validators.required]],
+        descripcion: [this.categoria.descripcion, [Validators.required]]
+      }
+      );
+    
+    });
+
   }
   
 
@@ -38,11 +49,14 @@ export class ModificarCategoriaModalComponent {
     }
 
     var categoria = {
+      id: this.categoria.id,
       titulo: this.modCategoria.controls["titulo"].value,
       descripcion: this.modCategoria.controls["descripcion"].value,
     }
 
-    this._categoriasService.modCategoria(categoria, this.categoria);
+    this._categoriasService.modCategoria(categoria).subscribe( data => {
+      this._categoriasService.sendUpdate(true);
+    });
     this.activeModal.close();
 
     

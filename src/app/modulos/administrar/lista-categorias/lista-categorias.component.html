@@ -4,60 +4,65 @@
     </div>
 </section>
 
-    <div class="container">
-        <div class="d-flex row justify-content-between">
-            <div class="col-auto">
-                <div class="input-group mb-3">
+<div class="container">
+    <div class="d-flex row justify-content-between">
+        <div class="col-auto">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <select class="form-select" style="border-radius: 0.25rem 0 0 0.25rem;" id="inputGroupSelect01" [(ngModel)]="filtro">
+                        <option value="titulo" selected>Titulo</option>
+                        <option value="descripcion">Descripción</option>
+                        <option value="id">Id</option>
+                    </select>
 
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button" #busqueda>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" (click)="obtenerCategorias(busqueda.value)"><i class="bi bi-search"></i></button>
-                      </div>
-                  </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button"
+                    [(ngModel)]="busqueda">
             </div>
-
-            <div class="col-auto">
-                <button class="btn btn-outline-secondary" type="button"
-                (click)="openAgregar()">Agregar</button>
-
-            </div>
-
-            
-    </div>
-
-
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered mx-auto">
-                <thead class="table-dark">
-                    <tr>
-                        <th scope="col" class="col-sm-1">#</th>
-                        <th scope="col" class="col-2">Titulo</th>
-                        <th scope="col" class="col-8">Descripcion</th>
-                        <th scope="col" class="col-2">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngFor="let categoria of categorias; let row = index;">
-                        <tr>
-                            <th scope="row">{{row + 1}}</th>
-                            <td>{{categoria.titulo }}</td>
-                            <td>{{categoria.descripcion }}</td>
-                            <td>
-
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-primary"
-                                        (click)="openModificar(categoria.titulo)"><i class="bi bi-pencil-square"></i>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-outline-danger"
-                                        (click)="eliminarCategoria(categoria.titulo)"><i class="bi bi-trash3-fill"></i></button>
-                                </div>
-
-
-                            </td>
-                        </tr>
-                    </ng-container>
-                </tbody>
-            </table>
         </div>
 
+        <div class="col-auto">
+            <button class="btn btn-outline-secondary" type="button" (click)="openAgregar()">Agregar</button>
+
+        </div>
+
+
     </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered mx-auto">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col" class="col-sm-1">#</th>
+                    <th scope="col" class="col-2">Titulo</th>
+                    <th scope="col" class="col-8">Descripcion</th>
+                    <th scope="col" class="col-2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let categoria of (categorias ? filtrar() : []);">
+                    <tr>
+                        <th scope="row">{{categoria.id}}</th>
+                        <td>{{categoria.titulo }}</td>
+                        <td>{{categoria.descripcion }}</td>
+                        <td>
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-sm btn-outline-primary"
+                                    (click)="openModificar(categoria.titulo)"><i class="bi bi-pencil-square"></i>
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-danger"
+                                    (click)="eliminarCategoria(categoria.id!)"><i
+                                        class="bi bi-trash3-fill"></i></button>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+
+</div>

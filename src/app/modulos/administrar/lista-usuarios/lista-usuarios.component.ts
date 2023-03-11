@@ -14,58 +14,59 @@ import { EditarUsuarioModalComponent } from '../editar-usuario-modal/editar-usua
 export class ListaUsuariosComponent implements OnInit {
   usuarios!: UsuarioInterfaz[];
   busqueda = "";
-  filtro = "0";
+  filtro = "nombre";
 
-  constructor(private _cuentasService: CuentasService, private router: Router, private modalService: NgbModal){
-
+  constructor(private _cuentasService: CuentasService, private router: Router, private modalService: NgbModal) {
 
   }
   ngOnInit(): void {
-    this.obtenerUsuarios(this.filtro, this.busqueda);
+    this.obtenerUsuarios();
     this._cuentasService.getUpdate().subscribe((value: boolean) => {
-      if(value) {
-  
-        this.obtenerUsuarios(this.filtro, this.busqueda);
+      if (value) {
+        this.obtenerUsuarios();
       }
-    
-  })
+
+    })
   }
 
   openAgregar(): void {
     const modalRef = this.modalService.open(AgregarUsuarioModalComponent, { centered: true, size: 'md' });
   }
 
-  openModificar(id: number): void {
+  openModificar(usuario: UsuarioInterfaz): void {
     const modalRef = this.modalService.open(EditarUsuarioModalComponent, { centered: true, size: 'md' });
-    modalRef.componentInstance.id = id;
-      
-    
+    modalRef.componentInstance.usuario = usuario;
   }
 
-  
-
-  eliminarUsuario(id: number){
-    this._cuentasService.deleteUsuario(id);
+  eliminarUsuario(id: number) {
+    this._cuentasService.deleteUsuario(id).subscribe(data => {
+      this._cuentasService.sendUpdate(true);
+    });
   }
 
-  refreshComponent() {
-    this.router.navigate([this.router.url])
-  }
-
-  obtenerUsuarios(filtro: string, termino: string){
-    if(filtro == "0"){
-      this._cuentasService.getUsuariosSearch(termino).subscribe(data => {
-        this.usuarios = data;
-      });
-
-    }else{
-      this._cuentasService.getUsuariosByFilter(filtro, termino).subscribe(data => {
-        this.usuarios = data;
-      });
-
-    }
-    
-    
+  obtenerUsuarios() {
+    this._cuentasService.getUsuarios().subscribe(data => {
+      this.usuarios = data;
+    })
   };
+
+  convertirEnAsteriscos(texto: string): string {
+    const asteriscos = new Array(texto.length).fill('*');
+    return asteriscos.join('');
+  }
+
+  filtrar() {
+    if (this.filtro == "nombre") {
+      return this.usuarios.filter(usuario => usuario.nombre.toLocaleLowerCase().includes(this.busqueda.toLocaleLowerCase()));
+    } else if (this.filtro == "id" && this.busqueda != "") {
+      return this.usuarios.filter(usuario => usuario.id!.toString() == this.busqueda);
+    } else if (this.filtro == "apellido") {
+      return this.usuarios.filter(usuario => usuario.apellido.toLocaleLowerCase().includes(this.busqueda.toLocaleLowerCase()));
+    } else if (this.filtro == "email") {
+      return this.usuarios.filter(usuario => usuario.email.toLocaleLowerCase().includes(this.busqueda.toLocaleLowerCase()));
+    }
+
+    return this.usuarios;
+  }
 
 }

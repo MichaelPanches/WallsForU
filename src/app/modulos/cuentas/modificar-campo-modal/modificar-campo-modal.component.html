@@ -8,46 +8,49 @@
 
 </div>
 
-<div [ngSwitch]="propiedad">
-    <div *ngSwitchDefault>
+<div>
+    <div>
         <div class="modal-body">
-            <form>
-                <div class="form-group pb-3 mx-2 mt-3">
-                    <input type="email" class="form-control" id="email" [value]="valor" required #nuevoValor>
-                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
+            <form id="modUserFomr" [formGroup]="modUser" (ngSubmit)="modificar()" novalidate>
+                <div class="form-group pb-3 mx-2 mt-3" *ngIf="campo != 'Contraseña'">
+                    <input type="text" class="form-control" id="campo" formControlName="campo" [ngClass]="{ 'is-invalid': submitted && f['campo'].errors }" required>
+                    <div class="invalid-feedback" *ngIf="submitted && f['campo'].errors">
+                        <div *ngIf="f['campo'].errors['required'] && campo =='Email'">¡Ingrese un Email!</div>
+                        <div *ngIf="f['campo'].errors['required'] && campo =='Nombre'">¡Ingrese un Nombre!</div>
+                        <div *ngIf="f['campo'].errors['required'] && campo =='Apellidos'">¡Ingrese sus Apellidos!</div>
+                        <div *ngIf="f['campo'].errors['correoInvalido']">¡Ingrese un email valido!</div>
+                    </div>
                 </div>
+
+                <div class="form-group pb-3 mx-2 mt-3" *ngIf="campo == 'Contraseña'">
+                    <input type="email" class="form-control" placeholder="Anterior Contraseña"  id="contra" formControlName="contra" [ngClass]="{ 'is-invalid': submitted && f['contra'].errors }" required>
+                    <div class="invalid-feedback" *ngIf="submitted && f['contra'].errors">
+                        <div *ngIf="f['contra'].errors['required']">¡Ingrese su anterior contraseña!</div>
+                        <div *ngIf="f['contra'].errors['anteriorContra']">¡Contraseña incorrecta!</div>
+                    </div>
+                </div>
+
+                <div class="form-group pb-3 mx-2 mt-3" *ngIf="campo == 'Contraseña'">
+                    <input type="password" class="form-control" placeholder="Nueva Contraseña" id="nuevaContra" formControlName="nuevaContra"
+                      [ngClass]="{ 'is-invalid': submitted && f['nuevaContra'].errors }" required>
+                    <div class="invalid-feedback" *ngIf="submitted && f['nuevaContra'].errors">
+                      <div *ngIf="f['nuevaContra'].errors['required']">Ingrese su nueva contraseña</div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group pb-3 mx-2 mt-3" *ngIf="campo == 'Contraseña'">
+                    <input type="password" class="form-control" id="repetirContra" placeholder="Repetir Contraseña" formControlName="repetirContra"
+                      [ngClass]="{ 'is-invalid': submitted && f['repetirContra'].errors }" required>
+                    <div class="invalid-feedback" *ngIf="submitted && f['repetirContra'].errors">
+                      <div *ngIf="f['repetirContra'].errors['required']">Repita su nueva contraseña</div>
+                      <div *ngIf="f['repetirContra'].errors['samePassword']">Las contraseñas no coinciden</div>
+                    </div>
+                  </div>
             </form>
         </div>
 
         <div class="modal-footer d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary" (click)="modificar(nuevoValor.value)">Guardar</button>
-        </div>
-    </div>
-
-    <div *ngSwitchCase="'password'">
-        <div class="modal-body">
-            <form>
-                <div class="form-group pb-3 mx-2 mt-3">
-                    <input type="email" class="form-control" placeholder="Anterior Contraseña" required #nuevoValor>
-                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
-                </div>
-
-                <div class="form-group pb-3 mx-2 mt-3">
-                    <input type="email" class="form-control" placeholder="Nueva Contraseña" required #nuevoValor>
-                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
-                </div>
-
-                <div class="form-group pb-3 mx-2 mt-3">
-                    <input type="email" class="form-control" id="email" placeholder="Repetir Contraseña" required #nuevoValor>
-                    <div class="invalid-feedback">Correo Electronico incorrecto!</div>
-                </div>
-
-
-            </form>
-        </div>
-
-        <div class="modal-footer d-flex justify-content-center">
-            <button type="submit" class="btn btn-primary" (click)="modificar(nuevoValor.value)">Guardar</button>
+            <button type="submit" class="btn btn-primary" form="modUserFomr" >Guardar</button>
         </div>
     </div>
 </div>

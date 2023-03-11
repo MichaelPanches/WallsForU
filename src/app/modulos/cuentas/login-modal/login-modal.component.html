@@ -7,14 +7,14 @@
 </div>
 
 <div class="modal-body">
-    <form id="loginForm" [formGroup]="login" (ngSubmit)="onSubmit()" novalidate>
+    <form id="loginForm" [formGroup]="login"  (ngSubmit)="onSubmit()" novalidate>
         <div class="form-group pb-2 mx-2">
             <label for="email" class="form-label mt-3">Correo electrónico</label>
             <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f['email'].errors }">
             <div class="invalid-feedback" *ngIf="submitted && f['email'].errors">
                 <div *ngIf="submitted && f['email'].errors['required']">¡Ingrese un email!</div>
                 <div *ngIf="submitted && f['email'].errors['pattern']">¡Ingrese un email valido!</div>
-                <div *ngIf="submitted && f['email'].errors['mailExist']">¡Email no registrado!</div>
+                <div *ngIf="submitted && f['email'].errors['mailExist']">¡Email no registrado!</div> 
             </div>
         </div>
 

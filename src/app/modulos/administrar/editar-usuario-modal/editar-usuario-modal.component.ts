@@ -11,8 +11,7 @@ import { CuentasService } from 'src/app/servicios/cuentas.service';
   styleUrls: ['./editar-usuario-modal.component.css']
 })
 export class EditarUsuarioModalComponent implements OnInit {
-  @Input() public id!: number;
-  usuario!: UsuarioInterfaz;
+  @Input() public usuario!: UsuarioInterfaz;
   modUser!: FormGroup;
   submitted = false;
 
@@ -20,7 +19,6 @@ export class EditarUsuarioModalComponent implements OnInit {
   constructor(private router: Router, public activeModal: NgbActiveModal, private _cuentasService: CuentasService, private formBuilder: FormBuilder) { } 
   
   ngOnInit(): void {
-    this.usuario = this._cuentasService.getUsuario(this.id);
     console.log(this.usuario)
 
     this.modUser = this.formBuilder.group({
@@ -55,7 +53,7 @@ export class EditarUsuarioModalComponent implements OnInit {
     }
 
     this.usuario = {
-      id: this.id,
+      id: this.usuario.id,
       nombre: this.modUser.controls['nombre'].value,
       apellido: this.modUser.controls['apellidos'].value,
       email: this.modUser.controls['email'].value,
@@ -63,7 +61,9 @@ export class EditarUsuarioModalComponent implements OnInit {
       password: this.modUser.controls['password'].value,
     }
 
-    this._cuentasService.modUsuario(this.usuario);
+    this._cuentasService.modUsuario(this.usuario).subscribe( data => {
+      this._cuentasService.sendUpdate(true);
+        });
     this.activeModal.close();
   }
 
@@ -75,11 +75,11 @@ export class EditarUsuarioModalComponent implements OnInit {
         return
       }
 
-      if (this._cuentasService.validateEmail(control.value) && (control.value != this.usuario.email)) {
+      /*if (this._cuentasService.getUsuarioEmail(control.value) && (control.value != this.usuario.email)) {
         control.setErrors({ mailUsed: true });
-      } else {
+      } else {*/
         control.setErrors(null);
-      }
+      /*}*/
 
     }
 

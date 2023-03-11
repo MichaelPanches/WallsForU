@@ -23,10 +23,17 @@ export class MiPerfilComponent {
     modalRef.componentInstance.propiedad = propiedad;
 
     modalRef.closed.subscribe(() => {
+      console.log(this.usuario)
       localStorage.setItem("Usuario", JSON.stringify(this.usuario))
-      this._cuentasService.modUsuario(this.usuario);
+      this._cuentasService.modUsuario(this.usuario).subscribe(data => {
+        console.log("Exito")
+      })
     
     })
+  }
+
+  censurarTexto(texto: string): string {
+    return texto.replace(/./g, '*');
   }
 
 

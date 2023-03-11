@@ -25,7 +25,7 @@ export class ListarComponent implements OnInit {
 
 
   }ngOnInit(): void {
-    this._galeriaService.getWallpapersAll().subscribe(data => {
+    this._galeriaService.getWallpapers(this.busqueda).subscribe(data => {
       this.wallpapers = data;
     
     });
@@ -35,6 +35,7 @@ export class ListarComponent implements OnInit {
   obtenerWallpapers(){
     this._galeriaService.getWallpapers(this.busqueda).subscribe(data => {
       this.wallpapers = data;
+      console.log(data)
     
     });
     

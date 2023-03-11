@@ -5,6 +5,7 @@ import { Storage, ref, uploadBytes, listAll, getDownloadURL, list, deleteObject,
 import { GaleriaService } from 'src/app/servicios/galeria.service';
 import { Router } from '@angular/router';
 import { WallpaperInterfaz } from 'src/app/interfaces/wallpaper.interface';
+import { CategoriasService } from 'src/app/servicios/categorias.service';
 
 @Component({
   selector: 'app-categoria',
@@ -16,22 +17,20 @@ export class CategoriaComponent {
   imagen = "";
   ruta  = "";
 
-  constructor(private storage: Storage, private galeria: GaleriaService, private router: Router) { 
+  constructor(private storage: Storage, private _categoriasService: CategoriasService, private router: Router) { 
 
   }
 
   ngOnInit(): void {
-    this.cargarWallpaper();
+    this.cargarWallpaper(this.wallpaper.ruta);
   }
 
-  async cargarWallpaper() {
-    this.ruta = this.galeria.getOneForTag(this.Categoria.titulo);
-    console.log(this.ruta)
-    const referencia = ref(this.storage, this.ruta);
-    const url = await getDownloadURL(referencia);
-    this.imagen = url;
+  async cargarWallpaper(ruta: string) {
 
+      const referencia = ref(this.storage, ruta);
+      const url = await getDownloadURL(referencia);
+      this.ref = referencia;
+      this.imagen = url;
 
   }
-
 }

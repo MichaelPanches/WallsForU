@@ -8,21 +8,16 @@
     <div class="row">
         <div class="input-group mb-3 col-4">
             <div class="input-group-prepend">
-                <select class="form-select" id="inputGroupSelect01" #selector>
-                    <option value="0" selected>Filtro..</option>
-                    <option value="titulo">Titulo</option>
-                    <option value="autor">Autor</option>
-                    <option value="categorias">Categoria</option>
-                    <option value="tags">Etiquetas</option>
-                  </select>
-              
-            </div>
+                <select class="form-select" style="border-radius: 0.25rem 0 0 0.25rem;" id="inputGroupSelect01" [(ngModel)]="filtro">
+                  <option value="" selected>Filtro..</option>
+                  <option value="titulo">Titulo</option>
+                  <option value="categorias">Categorias</option>
+                  <option value="tags">Etiquetas</option>
+                </select>
+              </div>
 
             
-            <input type="text" class="form-control" aria-label="Text input with dropdown button" #busqueda>
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" (click)="obtenerWallpapers(selector.value, busqueda.value)"><i class="bi bi-search"></i></button>
-              </div>
+            <input type="text" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="busqueda">
           </div>
     </div>
     
@@ -31,7 +26,7 @@
 <div class="d-flex container justify-content-center ">
     <div class="row row-cols-md-auto g-3 justify-content-center">
         
-        <div *ngFor="let wallpaper of wallpapers">
+        <div *ngFor="let wallpaper of  (wallpapers ? filtrar() : [])">
             <app-mi-wallpaper [wallpaper]="wallpaper"></app-mi-wallpaper>
         </div>
 

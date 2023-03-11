@@ -10,7 +10,7 @@ import { ModificarWallpaperModalComponent } from './modificar-wallpaper-modal/mo
 import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.component';
 import { AgregarCategoriaModalComponent } from './agregar-categoria-modal/agregar-categoria-modal.component';
 import { ModificarCategoriaModalComponent } from './modificar-categoria-modal/modificar-categoria-modal.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -30,7 +30,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     GestionWallpapersModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class AdministrarModule { }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CategoriaInterfaz } from '../interfaces/categoria.interface';
-import { Observable, of, Subject, BehaviorSubject  } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ export class CategoriasService {
   categorias!: CategoriaInterfaz[];
   private update: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   public getUpdate(): Observable<boolean> {
 
@@ -21,53 +23,96 @@ export class CategoriasService {
     this.update.next(value);
   }
 
+  getCategorias(): Observable<any> {
+    var url: any;
+      url = `${environment.urlBAse}${environment.pathUrl.categorias.urlListarCategorias}`;
 
-  getCategoriasSearch(busqueda: string): Observable<any[]> {
-    busqueda = busqueda.toLowerCase();
-    this.categorias = JSON.parse(localStorage.getItem('Categorias')!).filter(((Usuarios: { titulo: string;}) => Usuarios.titulo.toLowerCase().includes(busqueda)));
-
-    return of(this.categorias);
-  }
-
-  deleteCategoria(titulo: string) {
-    this.categorias = JSON.parse(localStorage.getItem('Categorias')!);
-
-    this.categorias.forEach((categoria, index) => {
-      if (categoria.titulo == titulo) this.categorias.splice(index, 1);
-    });
-
-    localStorage.setItem('Categorias', JSON.stringify(this.categorias));
-    this.sendUpdate(true);
-  }
-
-  addCategoria(categoria: CategoriaInterfaz) {
-    this.categorias = JSON.parse(localStorage.getItem('Categorias')!);
-    this.categorias.push(categoria);
-
-    localStorage.setItem('Categorias', JSON.stringify(this.categorias));
-    this.sendUpdate(true);
-  }
-
-  modCategoria(categoriaNueva: CategoriaInterfaz, categoriaVieja: CategoriaInterfaz) {
-    this.categorias = JSON.parse(localStorage.getItem('Categorias')!);
-    var index = this.categorias.findIndex(categoria => categoria.titulo === categoriaVieja.titulo)
-
-    if (index !== -1) {
-      this.categorias[index] = categoriaNueva;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+        ,
+      })
     }
-    localStorage.setItem('Categorias', JSON.stringify(this.categorias));
-    this.sendUpdate(true);
+
+    return this.http.get(url, httpOptions);
   }
 
   getCategoria(titulo: string) {
-    var categoria: CategoriaInterfaz;
-    this.categorias = JSON.parse(localStorage.getItem('Categorias')!);
-    categoria = this.categorias.find(x => x.titulo === titulo)!;
-    
-    return categoria;
+
+    const url = `${environment.urlBAse}${environment.pathUrl.categorias.urlBuscarCategoria}` + titulo;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+        ,
+      })
+    }
+
+    return this.http.get(url, httpOptions);
   }
 
 
+
+  modCategoria(dato: CategoriaInterfaz) {
+    const post = {
+      id: dato.id,
+      titulo: dato.titulo,
+      descripcion: dato.descripcion
+    };
+    const url = `${environment.urlBAse}${environment.pathUrl.categorias.urlModificarCategoria}`;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      })
+    }
+    console.log(post)
+    console.log(url)
+    return this.http.post(url, post, httpOptions);
+  }
+
+
+  deleteCategoria(id: number) {
+    const url = `${environment.urlBAse}${environment.pathUrl.categorias.urlEliminarCategoria}` + id;
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+        ,
+      })
+    }
+
+    return this.http.post(url, httpOptions);
+  }
+
+  addCategoria(dato: CategoriaInterfaz) {
+    const post = {
+      titulo: dato.titulo,
+      descripcion: dato.descripcion,
+    };
+    const url = `${environment.urlBAse}${environment.pathUrl.categorias.urlAgregarCategoria}`;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      })
+    }
+    return this.http.post(url, post, httpOptions);
+  }
+
+
+
+  getOneForCat(categoria: string) {
+    /*categoria = categoria.toLowerCase();
+    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { categorias: string; }) => Wallpapers.categorias.toLowerCase().includes(categoria)));
+    const random = Math.floor(Math.random() * this.Datos.length);
+
+
+    return (this.Datos[0].ruta);*/
+  }
 
 
 }

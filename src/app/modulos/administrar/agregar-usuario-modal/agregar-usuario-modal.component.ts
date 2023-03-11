@@ -56,7 +56,9 @@ export class AgregarUsuarioModalComponent {
       password: this.addUser.controls['password'].value,
     }
 
-    this._cuentasService.addUsuario(this.usuario);
+    this._cuentasService.addUsuario(this.usuario).subscribe( data => {
+      this._cuentasService.sendUpdate(true);
+        });
     this.activeModal.close();
 
   }
@@ -72,11 +74,11 @@ export class AgregarUsuarioModalComponent {
         return
       }
 
-      if (this._cuentasService.validateEmail(control.value)) {
+     /* if (this._cuentasService.getUsuarioEmail(control.value)) {
         control.setErrors({ mailUsed: true });
-      } else {
+      } else {*/
         control.setErrors(null);
-      }
+     /* }*/
 
     }
 

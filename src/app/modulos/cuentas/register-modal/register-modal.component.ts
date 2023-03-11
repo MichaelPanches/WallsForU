@@ -27,7 +27,6 @@ export class RegisterModalComponent {
 
     }, {
       validators: [this.mailUsed('email'), this.samePassword('password', 'passwordConf'),],
-      updateOn: 'submit'
     }
     );
   }
@@ -44,15 +43,15 @@ export class RegisterModalComponent {
     }
 
     this.usuario = {
-      id: 0,
       nombre: this.register.controls['nombre'].value,
       apellido: this.register.controls['apellidos'].value,
       email: this.register.controls['email'].value,
-      rol: 1,
+      rol: 0,
       password: this.register.controls['password'].value,
     }
 
-    this._cuentasService.addUsuario(this.usuario);
+    this._cuentasService.addUsuario(this.usuario).subscribe(data => {
+    });
     this.activeModal.close();
 
   }
@@ -65,11 +64,16 @@ export class RegisterModalComponent {
         return
       }
 
-      if (this._cuentasService.validateEmail(control.value)) {
-        control.setErrors({ mailUsed: true });
-      } else {
-        control.setErrors(null);
-      }
+      this._cuentasService.getUsuarioEmail(control.value).subscribe(data => {
+
+        if (data != null) {
+          control.setErrors({ mailUsed: true });
+        } else {
+          control.setErrors(null);
+        }
+
+        this.submitted = false;
+      });
     }
   }
 
@@ -87,6 +91,8 @@ export class RegisterModalComponent {
       } else {
         controlConfirmation.setErrors(null);
       }
+
+      this.submitted = false;
 
     }
 

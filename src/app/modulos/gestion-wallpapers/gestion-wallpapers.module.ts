@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbCarouselConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { HeaderComponent } from 'src/app/componentes/header/header.component';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { ListarComponent } from './listar/listar.component';

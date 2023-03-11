@@ -10,53 +10,47 @@ import { GaleriaService } from 'src/app/servicios/galeria.service';
   styleUrls: ['./lista-administrar.component.css']
 })
 export class ListaAdministrarComponent {
-
   wallpapers!: WallpaperInterfaz[];
   busqueda = "";
-  messageReceived: any;
-  filtro = "0";
-  private subscriptionName: Subscription; //important to create a subscription
-    
-
+  filtro = "";
 
   constructor(private router: Router, public _galeriaService: GaleriaService) {
-    this.subscriptionName= this._galeriaService.getUpdate().subscribe
-             (message => { //message contains the data sent from service
-              this.ngOnInit();
-             });
-
-
+    this._galeriaService.getUpdate().subscribe
+      (message => {
+        this.ngOnInit();
+      });
   };
 
   ngOnInit(): void {
-    this.obtenerWallpapers(this.filtro, this.busqueda);
+    this.obtenerWallpapers();
     this._galeriaService.getUpdate().subscribe((value: boolean) => {
-      if(value) {
-  
-        this.obtenerWallpapers(this.filtro, this.busqueda);
+      if (value) {
+        this.obtenerWallpapers();
       }
-    
-  })
+    })
   }
 
-  refreshComponent(){
+  refreshComponent() {
     this.router.navigate([this.router.url])
   }
 
-  obtenerWallpapers(filtro: string, termino: string){
-    if(filtro == "0"){
-      this._galeriaService.getWallpapers(termino).subscribe(data => {
-        this.wallpapers = data;
-      });
-
-    }else{
-      this._galeriaService.getWallpapersByFilter(filtro, termino).subscribe(data => {
-        this.wallpapers = data;
-      });
-
-    }
-    
-    
+  obtenerWallpapers() {
+    this._galeriaService.getWallpapers("").subscribe(data => {
+      console.log(data)
+      this.wallpapers = data;
+    });
   };
+
+  filtrar() {
+    if (this.filtro == "titulo") {
+      return this.wallpapers.filter(wallpaper => wallpaper.titulo.toLocaleLowerCase().includes(this.busqueda.toLocaleLowerCase()));
+    } else if (this.filtro == "categorias") {
+      return this.wallpapers.filter(wallpaper => wallpaper.categorias.toLocaleLowerCase().includes(this.busqueda.toLocaleLowerCase()));
+    } else if (this.filtro == "tags") {
+      return this.wallpapers.filter(wallpaper => wallpaper.tags.toLocaleLowerCase().includes(this.busqueda.toLocaleLowerCase()));
+    } 
+
+    return this.wallpapers.filter(wallpaper => wallpaper.titulo.toLocaleLowerCase().includes(this.busqueda.toLocaleLowerCase()) || wallpaper.categorias.toLocaleLowerCase().includes(this.busqueda.toLocaleLowerCase()) || wallpaper.tags.toLocaleLowerCase().includes(this.busqueda.toLocaleLowerCase()));
+  }
 
 }

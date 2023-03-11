@@ -7,4 +7,43 @@ export const environment = {
     apiKey: 'AIzaSyC8mfs64ZtqdvB03MgYWw5r9FVorE4zTfI',
     authDomain: 'wallsforu-storage.firebaseapp.com',
     messagingSenderId: '265643251050',
-  },};
+  },
+
+  urlBAse: "https://localhost:7219",
+  pathUrl: {
+    wallpapers: {
+      urlListarWallpapers: "/api/wallpaper/listar",
+      urlBuscarWallpapers: "/api/wallpaper/buscar?busqueda=",
+      urlAgregarWallpapers: "/api/wallpaper/grabar",
+      urlBorrarWallpapers: "/api/wallpaper/eliminar?Id=",
+      urlModificarWallpapers: "/api/wallpaper/editar",
+      urlWallpaperUsuario: "/api/wallpaper/buscarxusuario?usuario=",
+      urlBuscarCategorias: "/api/wallpaper/buscarxcategoria?categoria=",
+    },
+
+    categorias: {
+      urlListarCategorias: "/api/categoria/listar",
+      urlBuscarCategoria: "/api/categoria/buscarUna?titulo=",
+      urlModificarCategoria: "/api/categoria/editar",
+      urlAgregarCategoria: "/api/categoria/grabar",
+      urlEliminarCategoria: "/api/categoria/eliminar?Id=",
+    },
+
+    usuarios: {
+      urlListarUsuarios: "/api/usuario/listar",
+      urlBuscarUsuario: "/api/usuario/buscarUno?usuario=",
+      urlBuscarUsuarioEmail: "/api/usuario/buscarEmail?email=",
+      urlBuscarUsuarios: "/api/usuario/buscar?usuario=",
+      urlModificarUsuario: "/api/usuario/editar",
+      urlAgregarUsuario: "/api/usuario/grabar",
+      urlEliminarUsuario: "/api/usuario/eliminar?Id=",
+    },
+
+
+
+
+
+    
+
+  }
+};
