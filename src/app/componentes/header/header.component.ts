@@ -25,11 +25,11 @@ export class HeaderComponent {
     this.route.events.subscribe((val: any) => {
       if (val.url) {
         if (localStorage.getItem("Usuario") != null && JSON.parse(localStorage.getItem("Usuario")!).rol == 1) {
-          this.usuario = JSON.parse(localStorage.getItem("Usuario")!).nombre;
+          this.usuario = JSON.parse(localStorage.getItem("Usuario")!).nombre + " " + JSON.parse(localStorage.getItem("Usuario")!).apellido ;
           this.adminMode = true;
         } else if (localStorage.getItem("Usuario") != null && JSON.parse(localStorage.getItem("Usuario")!).rol == 0) {
           this.adminMode = false;
-          this.usuario = JSON.parse(localStorage.getItem("Usuario")!).nombre;
+          this.usuario = JSON.parse(localStorage.getItem("Usuario")!).nombre + " " + JSON.parse(localStorage.getItem("Usuario")!).apellido ;
           this.menuType = "logeado";
         } else {
           this.menuType = "default";

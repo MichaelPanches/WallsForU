@@ -1,12 +1,14 @@
 <div class="contenedor">
-    <ngb-carousel>
-        <p></p>
-        <ng-template ngbSlide *ngFor="let image of images">
-            <div class="wrapper">
-                <img class="carousel-wall" [src]="image.src" height="500" width="100%" alt="Random first slide">
-            </div>
-        </ng-template>
-    </ngb-carousel>
+    <div style="min-height: 500px;">
+        <ngb-carousel>
+            <p></p>
+            <ng-template ngbSlide *ngFor="let image of images">
+                <div class="wrapper">
+                    <img class="carousel-wall" [src]="image" height="500" width="100%" alt="Random first slide" onerror="this.src='../assets/img/carousel1.jpg'">
+                </div>
+            </ng-template>
+        </ngb-carousel>
+    </div>
 
     <div class="d-flex justify-content-center centrado">
         <div class="col-md-4">

@@ -1,11 +1,24 @@
 .subir::after {
-  content: "+";
   font-weight: bold;
 }
 
 .subir:hover::after {
-  content: "+ Subir Wallpaper";
+  content: " Subir Wallpaper";
   font-weight: normal;
+}
+
+.subir i {
+  transition: transform 0.2s ease-in-out;
+}
+
+
+.subir p {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.subir:hover p {
+  opacity: 1;
 }
 
 .dropdown:hover .dropdown-menu {

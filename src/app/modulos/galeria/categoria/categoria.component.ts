@@ -14,23 +14,35 @@ import { CategoriasService } from 'src/app/servicios/categorias.service';
 })
 export class CategoriaComponent {
   @Input() Categoria!: CategoriaInterfaz;
+  wallpaper!: WallpaperInterfaz;
   imagen = "";
   ruta  = "";
+  ref! : StorageReference;
 
-  constructor(private storage: Storage, private _categoriasService: CategoriasService, private router: Router) { 
+
+  constructor(private storage: Storage, private _galeriaService: GaleriaService, private router: Router) { 
 
   }
 
   ngOnInit(): void {
-    this.cargarWallpaper(this.wallpaper.ruta);
+    this._galeriaService.oneByCategoria(this.Categoria.titulo).subscribe(data => {
+      this.wallpaper = data[0];
+      if (this.wallpaper != undefined) {
+        this.cargarWallpaper(this.wallpaper.ruta);
+      }
+      
+    })
+
+
   }
 
   async cargarWallpaper(ruta: string) {
+    console.log(ruta)
 
       const referencia = ref(this.storage, ruta);
       const url = await getDownloadURL(referencia);
       this.ref = referencia;
       this.imagen = url;
-
+    
   }
 }

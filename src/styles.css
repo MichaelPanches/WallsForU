@@ -1,1 +1,19 @@
 @import '~bootstrap-icons/font/bootstrap-icons.css';
+
+.mint {
+  background-color: #00c7b7; /* Menta */
+  border-color: #02b3a4;
+  color: #fff; /* Texto blanco */
+}
+
+.mint:hover {
+  background-color: #02b3a4; /* Menta oscuro */
+  border-color: #02b3a4;
+  color: #fff; /* Texto blanco */
+}
+
+.mint:active {
+  background-color: #009c8c; /* Menta oscuro */
+  border-color: #009c8c;
+  color: #fff; /* Texto blanco */
+}

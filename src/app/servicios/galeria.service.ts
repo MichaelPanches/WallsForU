@@ -127,6 +127,34 @@ export class GaleriaService {
     return this.http.get<WallpaperInterfaz[]>(url, httpOptions);
   }
 
+  oneByCategoria(titulo: string): Observable<WallpaperInterfaz[]> {
+    const url = `${environment.urlBAse}${environment.pathUrl.wallpapers.urlUnoPorCategoria}` + titulo;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+        ,
+      })
+    }
+    console.log(url)
+    return this.http.get<WallpaperInterfaz[]>(url, httpOptions);
+  }
+
+  randomBanners(): Observable<WallpaperInterfaz[]> {
+    const url = `${environment.urlBAse}${environment.pathUrl.wallpapers.urlRandomBanners}`;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+        ,
+      })
+    }
+    console.log(url)
+    return this.http.get<WallpaperInterfaz[]>(url, httpOptions);
+  }
+
   sendTermino(busqueda: string) {
     this.terminoBusqueda$.next(busqueda);
   }

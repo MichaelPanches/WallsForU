@@ -19,6 +19,8 @@ export const environment = {
       urlModificarWallpapers: "/api/wallpaper/editar",
       urlWallpaperUsuario: "/api/wallpaper/buscarxusuario?usuario=",
       urlBuscarCategorias: "/api/wallpaper/buscarxcategoria?categoria=",
+      urlUnoPorCategoria: "/api/wallpaper/unoxcategoria?categoria=",
+      urlRandomBanners: "/api/wallpaper/treswallpapers"
     },
 
     categorias: {

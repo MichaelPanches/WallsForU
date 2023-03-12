@@ -27,6 +27,7 @@ export class MiWallpaperComponent {
   }
 
   async cargarWallpaper(ruta: string) {
+    console.log(ruta)
 
       const referencia = ref(this.storage, ruta);
       const url = await getDownloadURL(referencia);
