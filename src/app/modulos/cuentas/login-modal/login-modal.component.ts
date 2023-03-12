@@ -4,6 +4,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder } from '@angular/forms';
 import { CuentasService } from 'src/app/servicios/cuentas.service';
 import { FormGroup, Validators } from '@angular/forms';
+import { UsuarioInterfaz } from 'src/app/interfaces/usuario.interface';
+import { createCipheriv, createDecipheriv, randomBytes } from 'crypto';
+
 
 @Component({
   selector: 'app-login-modal',
@@ -13,7 +16,7 @@ import { FormGroup, Validators } from '@angular/forms';
 export class LoginModalComponent {
   login!: FormGroup;
   submitted = false;
-  usuario: any;
+  usuario!: UsuarioInterfaz;
 
   constructor(private router: Router, public activeModal: NgbActiveModal, private _cuentasService: CuentasService, private formBuilder: FormBuilder) {
     this.login = this.formBuilder.group({
@@ -28,7 +31,13 @@ export class LoginModalComponent {
 
   onSubmit() {
     this._cuentasService.getUsuarioEmail(this.login.controls['email'].value).subscribe(data => {
-      this.usuario = data;
+      this.usuario = {
+        id: data.id,
+        nombre: data.nombre,
+        apellido: data.apellido,
+        email: data.email,
+        rol: data.rol,
+      };
       this.submitted = true;
 
       if (this.login.invalid) {
@@ -79,7 +88,7 @@ export class LoginModalComponent {
 
     }
   }
-
+  
   passwordBad(controlName: string, controlNamePassword: string) {
     return (formGroup: FormGroup) => {
       const control = formGroup.controls[controlName];
