@@ -1,63 +1,70 @@
 <div class="container">
-    <div class="row mt-4">
-        <div class="col-md-8">
-            <div style="height: 600px;" class="card shadow">
-                <img [src]="imagen" alt="Descripción de la imagen" class="w-100 h-100 rounded"
-                    style="object-fit: cover; object-position: center;">
-            </div>
+  <div class="row mt-4">
+    <div class="col-md-8">
+      <div class="image-wrapper">
+        <div style="height: 600px;" class="card shadow image-container" (click)="onImageClick()">
+          <img [src]="imagen" alt="Descripción de la imagen" class="w-100 h-100 rounded"
+            style="object-fit: cover; object-position: center;">
+
         </div>
-        <div class="col-md-4">
-            <div class="card shadow mb-4" style="height: 485px;">
-              <div class="card-body mx-2">
-                <h4 class="text-dark mb-3 text-center mt-2">{{wallpaper.titulo}}</h4>
-                <hr class="my-4">
-                <p class="text-dark description-container" style="height: 100px; overflow-y: auto;">{{wallpaper.descripcion}}</p>
-                <hr class="my-4">
-                <div class="d-flex flex-wrap categories-container" style="height: 100px; overflow-x: auto;">
-                  <div class="col-sm-auto px-1 py-1" *ngFor="let categoria of categorias;" style="width: fit-content;">
-                    <label class="btn btn-outline-secondary w-100">{{categoria.titulo}}</label>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer">
-                <p class="text-dark mb-">Etiquetas: <a class="text-dark">{{wallpaper.tags}}</a>
-              </div>
-            </div>
-          
-            <div class="card shadow" style="height: 90px;">
-              <div class="card-body" style="background-color: rgb(23, 172, 172);">
-                <div class="d-flex align-items-center mt-1 ">
-                  <img class="mr-3" src="..\assets\img\Perfil Usuario.jpg" alt="" width="48" height="48">
-                  <div class="lh-100 mx-2">
-                    <h6 class="mb-0 text-white lh-100">{{usuario.nombre}} {{usuario.apellido}}</h6>
-                    <small class="text-white">{{usuario.email}}</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <button class="btn btn-outline-light btn-circle image-button" (click)="downloadImage()"><i
+            class="bi bi-arrow-down"></i>
+        </button>
+      </div>
     </div>
-
-    <div class="card shadow my-4 mb-5">
-        <div class="card-body mx-0 px-0">
-          <h5 class="text-dark mb-3 mt-2 mx-4">Mas de este Autor</h5>
-          <hr class="my-4 mx-4">
-
-          <div class="d-flex container py-2 mb-2 justify-content-center">
-
-            <div class="row row-cols-md-auto g-3 justify-content-center">
-              <ng-container *ngFor="let wallpaper of wallpapers">
-                <app-wallpaper [wallpaper]="wallpaper"></app-wallpaper>
-              </ng-container>
-          
+    <div class="col-md-4">
+      <div class="card shadow mb-4" style="height: 485px;">
+        <div class="card-body mx-2">
+          <h4 class="text-dark mb-3 text-center mt-2">{{wallpaper.titulo}}</h4>
+          <hr class="my-4">
+          <p class="text-dark description-container" style="height: 100px; overflow-y: auto;">{{wallpaper.descripcion}}
+          </p>
+          <hr class="my-4">
+          <div class="d-flex flex-wrap categories-container" style="height: 100px; overflow-x: auto;">
+            <div class="col-sm-auto px-1 py-1" *ngFor="let categoria of categorias;" style="width: fit-content;">
+              <label class="btn btn-outline-secondary w-100">{{categoria.titulo}}</label>
             </div>
-          
-          
           </div>
-
-
-
-
+        </div>
+        <div class="card-footer">
+          <p class="text-dark mb-">Etiquetas: <a class="text-dark">{{wallpaper.tags}}</a>
         </div>
       </div>
+
+      <div class="card shadow" style="height: 90px;">
+        <div class="card-body">
+          <div class="d-flex align-items-center mt-1 ">
+            <img class="mr-3" src="..\assets\img\Perfil Usuario.jpg" alt="" width="48" height="48">
+            <div class="lh-100 mx-2">
+              <h6 class="mb-0 text-dark lh-100">{{usuario.nombre}} {{usuario.apellido}}</h6>
+              <small class="text-dark">{{usuario.email}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card shadow my-4 mb-5">
+    <div class="card-body mx-0 px-0">
+      <h5 class="text-dark mb-3 mt-2 mx-4">Mas de este Autor</h5>
+      <hr class="my-4 mx-4">
+
+      <div class="d-flex container py-2 mb-2 justify-content-center">
+
+        <div class="row row-cols-md-auto g-3 justify-content-center">
+          <ng-container *ngFor="let wallpaper of wallpapers">
+            <app-wallpaper [wallpaper]="wallpaper"></app-wallpaper>
+          </ng-container>
+
+        </div>
+
+
+      </div>
+
+
+
+
+    </div>
+  </div>
 </div>

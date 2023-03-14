@@ -104,7 +104,10 @@ export class WallpaperComponent implements OnInit {
         wallpaper: this.wallpaper,
         imagen: this.imagen
       }
+    }).then(() => {
+      window.location.reload();
     });
+
   }
 
 
