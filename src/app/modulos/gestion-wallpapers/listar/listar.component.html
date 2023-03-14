@@ -1,16 +1,46 @@
 <section class="jumbotron text-center">
-    <div class="container">
-      <h4 class="jumbotron-heading text-muted">Mis Wallpapers</h4>
-       </div>
-  </section>
-<div class="d-flex container justify-content-center ">
+  <div class="container">
+    <h4 class="jumbotron-heading text-muted">Mis Wallpapers</h4>
+  </div>
+</section>
 
-    <div class="row row-cols-md-auto g-3 justify-content-center">
-      <div *ngFor="let wallpaper of wallpapers">
-        <app-mi-wallpaper [wallpaper]="wallpaper"></app-mi-wallpaper>
-      </div>
-  
-    </div>
+<div class="d-flex container justify-content-center py-2">
+  <div class="row">
+      <div class="input-group mb-3 col-4">
+          <div class="input-group-prepend">
+              <select class="form-select" style="border-radius: 0.25rem 0 0 0.25rem;" id="inputGroupSelect01" [(ngModel)]="filtro">
+                <option value="" selected>Filtro..</option>
+                <option value="titulo">Titulo</option>
+                <option value="categorias">Categorias</option>
+                <option value="tags">Etiquetas</option>
+              </select>
+            </div>
+
+          
+          <input type="text" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="busqueda">
+        </div>
   </div>
   
-  
+</div>
+
+<div class="d-flex container justify-content-center mb-4">
+
+  <div class="row row-cols-md-auto g-3 justify-content-center">
+    <div
+      *ngFor="let wallpaper of (wallpapers ? filtrar() : []).slice((currentPage - 1) * pageSize, currentPage * pageSize)">
+      <app-mi-wallpaper [wallpaper]="wallpaper"></app-mi-wallpaper>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="d-flex container justify-content-center mb-4" *ngIf="(wallpapers ? filtrar() : []).length > pageSize">
+  <button class="btn btn-primary mx-1" (click)="previousPage()" [disabled]="currentPage === 1"><i
+      class="bi bi-caret-left-fill"></i>
+  </button>
+
+  <button class="btn btn-primary mx-1" (click)="nextPage()" [disabled]="currentPage === totalPages()"><i
+      class="bi bi-caret-right-fill"></i>
+  </button>
+</div>

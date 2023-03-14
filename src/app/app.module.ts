@@ -11,12 +11,14 @@ import { RouterModule } from '@angular/router';
 import { GestionWallpapersModule } from './modulos/gestion-wallpapers/gestion-wallpapers.module';
 import { ListaAdministrarComponent } from './modulos/administrar/lista-administrar/lista-administrar.component';
 import { AdministrarModule } from './modulos/administrar/administrar.module';
+import { SpinnerComponent } from './componentes/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ErrorComponent,
-    HeaderComponent
+    HeaderComponent,
+    SpinnerComponent
   ],
   imports: [
     RouterModule,

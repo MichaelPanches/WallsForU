@@ -39,8 +39,9 @@ export class AgregarCategoriaModalComponent {
 
     this._categoriasService.addCategoria(this.categoria).subscribe( data => {
       this._categoriasService.sendUpdate(true);
+      this.activeModal.close();
     });
-    this.activeModal.close();
+
 
   }
 

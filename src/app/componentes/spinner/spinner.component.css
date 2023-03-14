@@ -1,0 +1,34 @@
+
+.descripcion {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.mensaje {
+    font-size: 20px;
+    color: #111111;
+}
+
+.icon-display {
+    font-size: 100px;
+    height: 100px;
+    width: 100px;
+    color: green;
+}
+
+.spinner {
+    display: inline-block;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-top-color: #333;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

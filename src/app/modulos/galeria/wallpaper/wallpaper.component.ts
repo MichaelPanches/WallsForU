@@ -5,6 +5,7 @@ import { saveAs } from 'file-saver';
 
 
 import { Observable, Observer } from "rxjs";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class WallpaperComponent implements OnInit {
   base64Image: any;
   name = "Mr";
 
-  constructor(private storage: Storage) { }
+  constructor(private storage: Storage, private router: Router) { }
 
   ngOnInit(): void {
     this.cargarWallpaper(this.wallpaper.ruta);
@@ -84,6 +85,26 @@ export class WallpaperComponent implements OnInit {
     const dataURL: string = canvas.toDataURL("image/png");
 
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  }
+
+  cortarTexto(texto: string, longitud: number) {
+    if (texto.length <= longitud) {
+      return texto;
+    }
+    return texto.slice(0, longitud) + '..';
+  }
+
+  replaceSpacesWithHyphens(str: string): string {
+    return str.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-');
+  }
+
+  paginaWallpaper() {
+    this.router.navigate(['galeria', 'wallpaper',  this.replaceSpacesWithHyphens(this.wallpaper.titulo)], {
+      state: {
+        wallpaper: this.wallpaper,
+        imagen: this.imagen
+      }
+    });
   }
 
 

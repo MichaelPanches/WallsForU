@@ -4,7 +4,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
 
-                <small class="text">{{wallpaper.titulo}}</small> 
+                <small class="text">{{cortarTexto(wallpaper.titulo, 38)}}</small> 
                 <div class="btn-group">
                     <button type="button" (click)="downloadImage()" class="btn btn-sm btn-outline-success">Descargar</button>
                     <button type="button" (click)="editarWallpaper()" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i>

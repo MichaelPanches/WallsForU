@@ -14,6 +14,7 @@ img {
   z-index: 1;
   padding: 10px;
   background-color: #fff;
+  height: 4rem;
   overflow: hidden;
 }
 

@@ -58,8 +58,8 @@ export class AgregarUsuarioModalComponent {
 
     this._cuentasService.addUsuario(this.usuario).subscribe( data => {
       this._cuentasService.sendUpdate(true);
+      this.activeModal.close();
         });
-    this.activeModal.close();
 
   }
 

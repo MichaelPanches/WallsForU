@@ -56,6 +56,7 @@ export class CategoriasService {
 
 
   modCategoria(dato: CategoriaInterfaz) {
+    let auth_token = localStorage.getItem("Token");
     const post = {
       id: dato.id,
       titulo: dato.titulo,
@@ -65,7 +66,7 @@ export class CategoriasService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Authorization': `bearer ${auth_token}`
       })
     }
     console.log(post)
@@ -75,13 +76,13 @@ export class CategoriasService {
 
 
   deleteCategoria(id: number) {
+    let auth_token = localStorage.getItem("Token");
     const url = `${environment.urlBAse}${environment.pathUrl.categorias.urlEliminarCategoria}` + id;
     
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-        ,
+        'Authorization': `bearer ${auth_token}`
       })
     }
 
@@ -89,6 +90,7 @@ export class CategoriasService {
   }
 
   addCategoria(dato: CategoriaInterfaz) {
+    let auth_token = localStorage.getItem("Token");
     const post = {
       titulo: dato.titulo,
       descripcion: dato.descripcion,
@@ -97,21 +99,10 @@ export class CategoriasService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Authorization': `bearer ${auth_token}`
       })
     }
     return this.http.post(url, post, httpOptions);
-  }
-
-
-
-  getOneForCat(categoria: string) {
-    /*categoria = categoria.toLowerCase();
-    this.Datos = JSON.parse(localStorage.getItem('Wallpapers')!).filter(((Wallpapers: { categorias: string; }) => Wallpapers.categorias.toLowerCase().includes(categoria)));
-    const random = Math.floor(Math.random() * this.Datos.length);
-
-
-    return (this.Datos[0].ruta);*/
   }
 
 

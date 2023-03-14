@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { WallpaperInterfaz } from 'src/app/interfaces/wallpaper.interface';
 import { GaleriaService } from 'src/app/servicios/galeria.service';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL, list, deleteObject, StorageReference } from '@angular/fire/storage';
@@ -10,6 +10,7 @@ import { CategoriaInterfaz } from 'src/app/interfaces/categoria.interface';
 import { FormBuilder, FormArray, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { CategoriasService } from 'src/app/servicios/categorias.service';
+import { SpinnerComponent } from 'src/app/componentes/spinner/spinner.component';
 
 @Component({
   selector: 'app-modificar-wallpaper-modal',
@@ -30,7 +31,7 @@ export class ModificarWallpaperModalComponent {
   archivoSeleccionado = false;
 
 
-  constructor(private router: Router, public activeModal: NgbActiveModal, private storage: Storage, private _galeriaService: GaleriaService, private _categoriasService: CategoriasService, private httpClient: HttpClient, private formBuilder: FormBuilder) {
+  constructor(private modalService: NgbModal, private router: Router, public activeModal: NgbActiveModal, private storage: Storage, private _galeriaService: GaleriaService, private _categoriasService: CategoriasService, private httpClient: HttpClient, private formBuilder: FormBuilder) {
 
   }
 
@@ -155,6 +156,9 @@ export class ModificarWallpaperModalComponent {
       return;
     }
 
+    const modalRef = this.modalService.open(SpinnerComponent, { centered: true, size: 'sm', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.mensaje = "Guardando cambios...";
+
     const selectedCat = this.modWall.value.categorias
       .map((checked: any, i: number) => checked ? this.Categorias[i].titulo : null)
       .filter((v: any) => v !== null);
@@ -196,6 +200,7 @@ export class ModificarWallpaperModalComponent {
       tap(() => {
         this._galeriaService.sendUpdate(true);
         this.activeModal.close();
+        modalRef.close();
       }),
       catchError((error: any) => {
         console.log(error);
@@ -245,6 +250,7 @@ export class ModificarWallpaperModalComponent {
 
     }
   }
+
 
 }
 

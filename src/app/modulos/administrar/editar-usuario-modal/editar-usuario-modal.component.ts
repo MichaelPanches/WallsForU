@@ -63,8 +63,9 @@ export class EditarUsuarioModalComponent implements OnInit {
 
     this._cuentasService.modUsuario(this.usuario).subscribe( data => {
       this._cuentasService.sendUpdate(true);
+      this.activeModal.close();
+
         });
-    this.activeModal.close();
   }
 
   mailUsed(controlName: string) {

@@ -45,6 +45,7 @@ export class GaleriaService {
   }
 
   addWallpaper(dato: WallpaperInterfaz): Observable<any> {
+    let auth_token = localStorage.getItem("Token");
     const post = {
       titulo: dato.titulo,
       descripcion: dato.descripcion,
@@ -57,19 +58,20 @@ export class GaleriaService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Authorization': `bearer ${auth_token}`
       })
     }
     return this.http.post(url, post, httpOptions);
   }
 
   deleteWallpaper(id: number) {
+    let auth_token = localStorage.getItem("Token");
     const url = `${environment.urlBAse}${environment.pathUrl.wallpapers.urlBorrarWallpapers}` + id;
     
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Authorization': `bearer ${auth_token}`
         ,
       })
     }
@@ -78,6 +80,7 @@ export class GaleriaService {
   }
 
   modWallpaper(dato: WallpaperInterfaz) {
+    let auth_token = localStorage.getItem("Token");
     const post = {
       id: dato.id,
       titulo: dato.titulo,
@@ -91,11 +94,11 @@ export class GaleriaService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Authorization': `bearer ${auth_token}`
       })
     }
     console.log(post)
-    console.log(url)
+    console.log(httpOptions)
     return this.http.post(url, post, httpOptions);
   }
 

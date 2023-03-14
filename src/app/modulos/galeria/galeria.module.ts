@@ -15,6 +15,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { ListarCategoriasComponent } from './listar-categorias/listar-categorias.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { ImagenesCategoriaComponent } from './imagenes-categoria/imagenes-categoria.component';
+import { PaginaWallpaperComponent } from './pagina-wallpaper/pagina-wallpaper.component';
 
 
 
@@ -27,6 +28,7 @@ import { ImagenesCategoriaComponent } from './imagenes-categoria/imagenes-catego
     ListarCategoriasComponent,
     CategoriaComponent,
     ImagenesCategoriaComponent,
+    PaginaWallpaperComponent,
   ],
   imports: [
     CommonModule,

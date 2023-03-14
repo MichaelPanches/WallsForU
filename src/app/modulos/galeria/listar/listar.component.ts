@@ -11,14 +11,17 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./listar.component.css']
 })
 export class ListarComponent implements OnInit {
-  wallpapers!: WallpaperInterfaz[];
+  wallpapers: WallpaperInterfaz[] = [];
   busqueda = "";
   suscription: Subscription;
+  currentPage = 1;
+  pageSize = 20;
 
 
   constructor(private router: Router, public _galeriaService: GaleriaService) {
     this.suscription = this._galeriaService.getTermino().subscribe(data => {
       this.busqueda = data;
+      this.currentPage = 1;
       this.obtenerWallpapers();
     
     });
@@ -41,7 +44,17 @@ export class ListarComponent implements OnInit {
     
   };
 
+  previousPage() {
+    this.currentPage--;
+  }
   
+  nextPage() {
+    this.currentPage++;
+  }
+
   
+  totalPages() {
+    return Math.ceil(this.wallpapers.length / this.pageSize);
+  }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL, list } from '@angular/fire/storage';
 import { WallpaperInterfaz } from 'src/app/interfaces/wallpaper.interface';
 import { GaleriaService } from 'src/app/servicios/galeria.service';
@@ -8,6 +8,7 @@ import { CategoriaInterfaz } from 'src/app/interfaces/categoria.interface';
 import { FormBuilder, FormArray, FormControl, AbstractControl, ValidationErrors } from '@angular/forms';
 import { FormGroup, Validators, ValidatorFn } from '@angular/forms';
 import { CategoriasService } from 'src/app/servicios/categorias.service';
+import { SpinnerComponent } from 'src/app/componentes/spinner/spinner.component';
 
 
 
@@ -29,7 +30,7 @@ export class SubirModalComponent implements OnInit {
 
 
 
-  constructor(private router: Router, public activeModal: NgbActiveModal, private storage: Storage, private _galeriaService: GaleriaService, private _categoriasService: CategoriasService, private formBuilder: FormBuilder) {
+  constructor(private modalService: NgbModal, private router: Router, public activeModal: NgbActiveModal, private storage: Storage, private _galeriaService: GaleriaService, private _categoriasService: CategoriasService, private formBuilder: FormBuilder) {
     this.imageSrc = "../assets/img/selecciona imagen.png";
 
     this.addWall = this.formBuilder.group({
@@ -152,6 +153,8 @@ export class SubirModalComponent implements OnInit {
       return;
     }
 
+    const modalRef = this.modalService.open(SpinnerComponent, { centered: true, size: 'sm', backdrop: 'static', keyboard: false });
+    modalRef.componentInstance.mensaje = "Subiendo wallpaper...";
     
     var ruta = 'wallpapers/' + JSON.parse(localStorage.getItem("Usuario")!).nombre + " - " + this.addWall.controls["titulo"].value + "." + this.getFileExtension();
     console.log(this.getFileExtension())
@@ -172,6 +175,7 @@ export class SubirModalComponent implements OnInit {
         this._galeriaService.addWallpaper(this.wallpaper).subscribe(data => {
           this._galeriaService.sendUpdate(true);
           this.activeModal.close();
+          modalRef.close();
         })
       )
       .catch(error => console.log(error))

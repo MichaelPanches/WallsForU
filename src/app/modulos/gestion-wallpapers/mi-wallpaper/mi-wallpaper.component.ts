@@ -102,4 +102,12 @@ export class MiWallpaperComponent {
 
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
+
+  
+  cortarTexto(texto: string, longitud: number) {
+    if (texto.length <= longitud) {
+      return texto;
+    }
+    return texto.slice(0, longitud) + '..';
+  }
 }

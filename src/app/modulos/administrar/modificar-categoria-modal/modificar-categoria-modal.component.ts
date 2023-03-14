@@ -56,8 +56,9 @@ export class ModificarCategoriaModalComponent {
 
     this._categoriasService.modCategoria(categoria).subscribe( data => {
       this._categoriasService.sendUpdate(true);
+      this.activeModal.close();
+
     });
-    this.activeModal.close();
 
     
   }

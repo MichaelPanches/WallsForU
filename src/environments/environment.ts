@@ -35,6 +35,7 @@ export const environment = {
       urlListarUsuarios: "/api/usuario/listar",
       urlBuscarUsuario: "/api/usuario/buscarUno?usuario=",
       urlBuscarUsuarioEmail: "/api/usuario/buscarEmail?email=",
+      urlValidarUsuario: "/api/usuario/obtenerUsuario?email=",
       urlBuscarUsuarios: "/api/usuario/buscar?usuario=",
       urlModificarUsuario: "/api/usuario/editar",
       urlAgregarUsuario: "/api/usuario/grabar",

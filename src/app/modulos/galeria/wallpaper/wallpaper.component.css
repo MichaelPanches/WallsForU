@@ -15,6 +15,7 @@ img {
   padding: 10px;
   background-color: #fff;
   overflow: hidden;
+  height: 3rem;
 }
 
 .card-img-top {

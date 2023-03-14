@@ -25,26 +25,27 @@ export class LoginModalComponent {
     },
       {
         validators: [this.mailExist('email'), this.passwordBad('email', 'password'),],
+        updateOn: 'submit'
       }
     );
   }
 
   onSubmit() {
-    this._cuentasService.getUsuarioEmail(this.login.controls['email'].value).subscribe(data => {
+    this._cuentasService.validarUsuario(this.login.controls['email'].value, this.login.controls['password'].value).subscribe(data => {
       this.usuario = {
-        id: data.id,
-        nombre: data.nombre,
-        apellido: data.apellido,
-        email: data.email,
-        rol: data.rol,
+        id: data.Usuario.Id,
+        nombre: data.Usuario.Nombre,
+        apellido: data.Usuario.Apellido,
+        email: data.Usuario.Email,
+        rol: data.Usuario.rol,
       };
-      this.submitted = true;
 
       if (this.login.invalid) {
         return;
       }
 
       localStorage.setItem('Usuario', JSON.stringify(this.usuario));
+      localStorage.setItem('Token', data.Token);
 
       if (JSON.parse(localStorage.getItem("Usuario")!).rol == 1) {
         this.router.navigate(['/administrador']);

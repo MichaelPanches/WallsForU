@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { UsuarioInterfaz } from '../interfaces/usuario.interface';
-
 import { Observable, of, Subject, BehaviorSubject  } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -59,13 +58,13 @@ export class CuentasService {
   }
 
   deleteUsuario(id: number) {
+    let auth_token = localStorage.getItem("Token");
     const url = `${environment.urlBAse}${environment.pathUrl.usuarios.urlEliminarUsuario}` + id;
     
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-        ,
+        'Authorization': `bearer ${auth_token}`
       })
     }
 
@@ -73,6 +72,7 @@ export class CuentasService {
   }
 
   modUsuario(dato: UsuarioInterfaz): Observable<any> {
+    let auth_token = localStorage.getItem("Token");
     const post = {
       id: dato.id,
       nombre: dato.nombre,
@@ -85,7 +85,7 @@ export class CuentasService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Authorization': `bearer ${auth_token}`
       })
     }
     console.log(post)
@@ -94,6 +94,7 @@ export class CuentasService {
   }
 
   addUsuario(dato: UsuarioInterfaz): Observable<any> {
+    let auth_token = localStorage.getItem("Token");
     const post = {
       nombre: dato.nombre,
       apellido: dato.apellido,
@@ -105,14 +106,28 @@ export class CuentasService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Authorization': `bearer ${auth_token}`
       })
     }
     return this.http.post(url, post, httpOptions);
   }
 
   getUsuarioEmail(email: string): Observable <any> {
+    let auth_token = localStorage.getItem("Token");
     const url = `${environment.urlBAse}${environment.pathUrl.usuarios.urlBuscarUsuarioEmail}` + email;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `bearer ${auth_token}`
+      })
+    }
+
+    return this.http.get(url, httpOptions);
+  }
+
+  validarUsuario(email: string, password: string): Observable <any> {
+    const url = `${environment.urlBAse}${environment.pathUrl.usuarios.urlValidarUsuario}` + email + "&password=" + password;
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -123,25 +138,6 @@ export class CuentasService {
     }
 
     return this.http.get(url, httpOptions);
-  }
-
-  validateUsuario(email: string, password: string){
-
-    this.usuarios = JSON.parse(localStorage.getItem('Usuarios')!);
-
-    if(this.usuarios.find(x => x.email === email)){
-      var index = this.usuarios.findIndex(usuario => usuario.email === email)
-      if(this.usuarios[index].password === password){
-        localStorage.setItem("Usuario", JSON.stringify(this.usuarios[index]));
-        return this.usuarios[index];
-        
-      } else {
-        return false;
-      }
-        
-    } else {
-      return false;
-    }
   }
 
   
