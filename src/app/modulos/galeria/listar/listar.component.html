@@ -1,6 +1,6 @@
 <div class="d-flex container py-3 justify-content-center ">
 
-  <div class="row row-cols-md-auto g-3 justify-content-center">
+  <div class="row row-cols-md-auto g-3 justify-content-center mb-1">
     <ng-container *ngFor="let wallpaper of wallpapers.slice((currentPage - 1) * pageSize, currentPage * pageSize)">
       <app-wallpaper [wallpaper]="wallpaper"></app-wallpaper>
     </ng-container>
@@ -10,10 +10,11 @@
 
 </div>
 
-<div class="d-flex container py-3 justify-content-center mb-3" >
-  <button class="btn btn-primary mx-1" (click)="previousPage()" [disabled]="currentPage === 1"><i class="bi bi-caret-left-fill"></i>
+<div class="d-flex container py-2 justify-content-center mb-3" *ngIf="wallpapers.length > pageSize">
+  <button class="btn btn-primary mx-1 btn-{{color}}" (click)="previousPage()" [disabled]="currentPage === 1"><i class="bi bi-caret-left-fill"></i>
   </button>
 
-  <button class="btn btn-primary mx-1" (click)="nextPage()" [disabled]="currentPage === totalPages()"><i class="bi bi-caret-right-fill"></i>
+  <button class="btn btn-primary mx-1 btn-{{color}}" (click)="nextPage()" [disabled]="currentPage === totalPages()"><i class="bi bi-caret-right-fill"></i>
   </button>
 </div>
+

@@ -17,7 +17,8 @@ export class WallpaperComponent implements OnInit {
   @Input() wallpaper!: WallpaperInterfaz;
   imagen = "";
   base64Image: any;
-  name = "Mr";
+  color = localStorage.getItem("siteColor");
+
 
   constructor(private storage: Storage, private router: Router) { }
 

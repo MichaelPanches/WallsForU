@@ -18,6 +18,7 @@ import { SpinnerComponent } from 'src/app/componentes/spinner/spinner.component'
   styleUrls: ['./subir-modal.component.css']
 })
 export class SubirModalComponent implements OnInit {
+  color = localStorage.getItem("siteColor"); 
   wallpaper!: WallpaperInterfaz;
   imageSrc: string | ArrayBuffer | null;
   file: any;

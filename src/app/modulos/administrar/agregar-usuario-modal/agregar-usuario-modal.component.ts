@@ -14,7 +14,7 @@ export class AgregarUsuarioModalComponent {
   usuario!: UsuarioInterfaz;
   addUser!: FormGroup;
   submitted = false;
-
+  color = localStorage.getItem("siteColor"); 
 
   constructor(private router: Router, public activeModal: NgbActiveModal, private _cuentasService: CuentasService, private formBuilder: FormBuilder) {
     this.addUser = this.formBuilder.group({

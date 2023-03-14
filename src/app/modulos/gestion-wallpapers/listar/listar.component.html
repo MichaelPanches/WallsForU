@@ -36,11 +36,11 @@
 
 
 <div class="d-flex container justify-content-center mb-4" *ngIf="(wallpapers ? filtrar() : []).length > pageSize">
-  <button class="btn btn-primary mx-1" (click)="previousPage()" [disabled]="currentPage === 1"><i
+  <button class="btn btn-primary mx-1 btn-{{color}}" (click)="previousPage()" [disabled]="currentPage === 1"><i
       class="bi bi-caret-left-fill"></i>
   </button>
 
-  <button class="btn btn-primary mx-1" (click)="nextPage()" [disabled]="currentPage === totalPages()"><i
+  <button class="btn btn-primary mx-1 btn-{{color}}" (click)="nextPage()" [disabled]="currentPage === totalPages()"><i
       class="bi bi-caret-right-fill"></i>
   </button>
 </div>

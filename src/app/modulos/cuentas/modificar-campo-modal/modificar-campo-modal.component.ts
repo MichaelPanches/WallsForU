@@ -18,7 +18,7 @@ export class ModificarCampoModalComponent implements OnInit {
   modUser!: FormGroup;
   submitted = false;
   contrasenaNoCoincide = false;
-
+  color = localStorage.getItem("siteColor"); 
 
   constructor(private router: Router, public activeModal: NgbActiveModal, private _cuentasService: CuentasService, private formBuilder: FormBuilder) {
   }

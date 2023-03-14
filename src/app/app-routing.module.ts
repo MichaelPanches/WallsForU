@@ -49,7 +49,13 @@ const routes: Routes = [
     path: 'categorias',
     children: [
       { path: '', component: ListarCategoriasComponent },
-      { path: ':titulo', component: ImagenesCategoriaComponent }
+      {
+        path: ':titulo',
+        children: [
+          { path: '', component: ImagenesCategoriaComponent },
+          { path: 'wallpaper/:titulo', component: PaginaWallpaperComponent }
+        ]
+      }
     ]
   },
   {

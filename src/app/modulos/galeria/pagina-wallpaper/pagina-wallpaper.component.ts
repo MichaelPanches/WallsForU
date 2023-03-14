@@ -20,6 +20,7 @@ export class PaginaWallpaperComponent {
   imagen!: string;
   categorias!: CategoriaInterfaz[];
   base64Image: any;
+  color = localStorage.getItem("siteColor");
 
 
   constructor(private route: ActivatedRoute, private _categoriasService: CategoriasService, private _galeriaService: GaleriaService, private _cuentasService: CuentasService) { }

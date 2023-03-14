@@ -19,6 +19,7 @@ export class MiWallpaperComponent {
   base64Image: any;
   name = "Mr";
   ref! : StorageReference;
+  color = localStorage.getItem("siteColor");
 
   constructor(private storage: Storage, private galeria:GaleriaService, private router:Router, private modalService: NgbModal) { }
 
@@ -101,6 +102,22 @@ export class MiWallpaperComponent {
     const dataURL: string = canvas.toDataURL("image/png");
 
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  }
+
+  replaceSpacesWithHyphens(str: string): string {
+    return str.replace(/[^\w\s]/gi, '').replace(/\s+/g, '-');
+  }
+
+  paginaWallpaper() {
+    this.router.navigate(['galeria', 'wallpaper',  this.replaceSpacesWithHyphens(this.wallpaper.titulo)], {
+      state: {
+        wallpaper: this.wallpaper,
+        imagen: this.imagen
+      }
+    }).then(() => {
+      window.location.reload();
+    });
+
   }
 
   

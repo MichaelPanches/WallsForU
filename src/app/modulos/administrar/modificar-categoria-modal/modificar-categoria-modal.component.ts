@@ -15,7 +15,7 @@ export class ModificarCategoriaModalComponent {
   categoria!: any;
   modCategoria!: FormGroup;
   submitted = false;
-
+  color = localStorage.getItem("siteColor"); 
 
   constructor(private router: Router, public activeModal: NgbActiveModal,private _categoriasService: CategoriasService, private formBuilder: FormBuilder) {
     

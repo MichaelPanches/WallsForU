@@ -12,6 +12,7 @@ import { FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./agregar-categoria-modal.component.css']
 })
 export class AgregarCategoriaModalComponent {
+  color = localStorage.getItem("siteColor");
   categoria!: CategoriaInterfaz;
   addCategoria!: FormGroup;
   submitted = false;

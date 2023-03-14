@@ -16,6 +16,8 @@ export class ListarComponent implements OnInit {
   suscription: Subscription;
   currentPage = 1;
   pageSize = 20;
+  color = localStorage.getItem("siteColor");
+
 
 
   constructor(private router: Router, public _galeriaService: GaleriaService) {

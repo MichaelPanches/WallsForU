@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class ListarComponent {
   wallpapers!: WallpaperInterfaz[];
-
+  color = localStorage.getItem("siteColor"); 
   busqueda = "";
   filtro = "";
   messageReceived: any;

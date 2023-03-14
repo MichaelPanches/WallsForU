@@ -15,7 +15,8 @@ export class ListaAdministrarComponent {
   filtro = "";
   currentPage = 1;
   pageSize = 16;
-
+  color = localStorage.getItem("siteColor"); 
+  
   constructor(private router: Router, public _galeriaService: GaleriaService) {
     this._galeriaService.getUpdate().subscribe
       (message => {

@@ -2,7 +2,8 @@
     <div class="container-sm" [ngSwitch]="adminMode">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
             *ngSwitchCase="false">
-            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none"
+                (mouseenter)="showColorPicker()">
                 <img src="../assets/img/logo.png" height="35" alt="">
             </a>
             <span class="navbar-toggler-icon"></span>
@@ -14,53 +15,110 @@
                 <li><a class="nav-link px-2 text-white" routerLink="categorias">Categorias</a></li>
             </ul>
 
+
+            <div id="color-picker-popup" [ngClass]="{'visible': colorPickerVisible}" (mouseleave)="hideColorPicker()">
+                <div class="row">
+                  <div class="col-md-1 mx-2">
+                    <div class="color-circle my-1 mint" (click)="changeColor('mint')"></div>
+                    <div class="color-circle my-1 light-blue" (click)="changeColor('light-blue')"></div>
+                  </div>
+                  <div class="col-md-1 mx-2">
+                    <div class="color-circle my-1 yellow" (click)="changeColor('yellow')"></div>
+                    <div class="color-circle my-1 red" (click)="changeColor('red')"></div>
+                  </div>
+                  <div class="col-md-1 mx-2">
+                    <div class="color-circle my-1 green" (click)="changeColor('green')"></div>
+                    <div class="color-circle my-1 orange" (click)="changeColor('orange')"></div>
+                  </div>
+                  <div class="col-md-1 mx-2">
+                    <div class="color-circle my-1 purple" (click)="changeColor('purple')"></div>
+                    <div class="color-circle my-1 turquoise" (click)="changeColor('turquoise')"></div>
+                  </div>
+                  <div class="col-md-1 mx-2">
+                    <div class="color-circle my-1 fuchsia" (click)="changeColor('fuchsia')"></div>
+                    <div class="color-circle my-1 blue" (click)="changeColor('blue')"></div>
+                  </div>
+                </div>
+              </div>
+
             <div [ngSwitch]="menuType">
                 <div *ngSwitchCase="'default'" class="text-end">
                     <button type="button" class="btn btn-outline-light me-2" (click)="openLogin()">Inicia
                         sesión</button>
-                    <button type="button" class="btn btn-primary" (click)="openRegister()">Registrarse</button>
+                    <button type="button" class="btn btn-primary btn-{{color}}"
+                        (click)="openRegister()">Registrarse</button>
                 </div>
 
                 <div *ngSwitchCase="'logeado'" class="text-end">
-                    <button type="button" class="btn btn-outline-light me-2 subir"
-                        (click)="subirWallpaper()"><i class="bi bi-upload"></i>
+                    <button type="button" class="btn btn-outline-light me-2 subir" (click)="subirWallpaper()"><i
+                            class="bi bi-upload"></i>
                     </button>
                     <div class="btn-group ">
-                        <button type="button" class="btn btn-primary dropdown-toggle " data-toggle="dropdown"
+                        <button type="button" class="btn btn-primary dropdown-toggle  btn-{{color}}" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             {{usuario}}
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" routerLink="/misWallpapers">Mis Wallpapers</a>
-                            <a class="dropdown-item" routerLink="/miPerfil">Mi Perfil</a>
+                            <a class="dropdown-item item-{{color}}" routerLink="/misWallpapers">Mis Wallpapers</a>
+                            <a class="dropdown-item item-{{color}}" routerLink="/miPerfil">Mi Perfil</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" (click)="cerrarSesion()">Cerrar Sesion</a>
+                            <a class="dropdown-item item-{{color}}" (click)="cerrarSesion()">Cerrar Sesion</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between" id="navbarsExample10" *ngSwitchCase="true">
-            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" routerLink="/administrador">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between"
+            id="navbarsExample10" *ngSwitchCase="true">
+            <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
+                routerLink="/administrador" (mouseenter)="showColorPicker()">
                 <img src="../assets/img/logo.png" height="35" alt="">
                 <span class="navbar-toggler-icon"></span>
                 <a class="navbar-brand text-white mb-0 h1" href="#">Admin Mode</a>
             </a>
-            
-            
-              <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 link-secondary" routerLink="/administrador">Inicio</a></li>
-                <li><a href="#" class="nav-link px-2 link-light" routerLink="/administrador/wallpapers">Wallpapers</a></li>
-                <li><a href="#" class="nav-link px-2 link-light" routerLink="/administrador/usuarios">Usuarios</a></li>
-                <li><a href="#" class="nav-link px-2 link-light" routerLink="/administrador/categorias">Categorias</a></li>
-              </ul>
-        
-              <div class="col-md-3 text-end">
-                <button type="button" title="Subir Wallpaper" class="btn btn-outline-light me-2 subir"
-                        (click)="subirWallpaper()"></button>
-                <button type="button" class="btn btn-primary me-2" (click)="cerrarSesion()">Cerrar Sesion</button>
+
+            <div id="color-picker-popup" [ngClass]="{'visible': colorPickerVisible}" (mouseleave)="hideColorPicker()">
+                <div class="row">
+                  <div class="col-md-1 mx-2">
+                    <div class="color-circle my-1 mint" (click)="changeColor('mint')"></div>
+                    <div class="color-circle my-1 light-blue" (click)="changeColor('light-blue')"></div>
+                  </div>
+                  <div class="col-md-1 mx-2">
+                    <div class="color-circle my-1 yellow" (click)="changeColor('yellow')"></div>
+                    <div class="color-circle my-1 red" (click)="changeColor('red')"></div>
+                  </div>
+                  <div class="col-md-1 mx-2">
+                    <div class="color-circle my-1 green" (click)="changeColor('green')"></div>
+                    <div class="color-circle my-1 orange" (click)="changeColor('orange')"></div>
+                  </div>
+                  <div class="col-md-1 mx-2">
+                    <div class="color-circle my-1 purple" (click)="changeColor('purple')"></div>
+                    <div class="color-circle my-1 turquoise" (click)="changeColor('turquoise')"></div>
+                  </div>
+                  <div class="col-md-1 mx-2">
+                    <div class="color-circle my-1 fuchsia" (click)="changeColor('fuchsia')"></div>
+                    <div class="color-circle my-1 blue" (click)="changeColor('blue')"></div>
+                  </div>
+                </div>
               </div>
+
+
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="#" class="nav-link px-2 link-secondary" routerLink="/administrador">Inicio</a></li>
+                <li><a href="#" class="nav-link px-2 link-light" routerLink="/administrador/wallpapers">Wallpapers</a>
+                </li>
+                <li><a href="#" class="nav-link px-2 link-light" routerLink="/administrador/usuarios">Usuarios</a></li>
+                <li><a href="#" class="nav-link px-2 link-light" routerLink="/administrador/categorias">Categorias</a>
+                </li>
+            </ul>
+
+            <div class="col-md-3 text-end">
+                <button type="button" class="btn btn-outline-light me-2 subir" (click)="subirWallpaper()"><i
+                    class="bi bi-upload"></i>
+            </button>
+                <button type="button" class="btn btn-primary me-2  btn-{{color}}" (click)="cerrarSesion()">Cerrar Sesion</button>
+            </div>
         </div>
 
     </div>

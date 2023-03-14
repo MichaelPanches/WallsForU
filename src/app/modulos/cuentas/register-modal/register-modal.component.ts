@@ -16,6 +16,7 @@ export class RegisterModalComponent {
   usuario!: UsuarioInterfaz;
   register!: FormGroup;
   submitted = false;
+  color = localStorage.getItem("siteColor"); 
 
   constructor(private router: Router, public activeModal: NgbActiveModal, private _cuentasService: CuentasService, private formBuilder: FormBuilder) {
     this.register = this.formBuilder.group({

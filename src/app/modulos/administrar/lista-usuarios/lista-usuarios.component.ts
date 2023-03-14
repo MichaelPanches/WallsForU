@@ -15,7 +15,8 @@ export class ListaUsuariosComponent implements OnInit {
   usuarios!: UsuarioInterfaz[];
   busqueda = "";
   filtro = "nombre";
-
+  color = localStorage.getItem("siteColor"); 
+  
   constructor(private _cuentasService: CuentasService, private router: Router, private modalService: NgbModal) {
 
   }

@@ -24,3 +24,114 @@
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+
+
+#color-picker-popup {
+  position: absolute;
+  display: none;
+  width: 210px;
+  height: 75spx;
+  border: 1px solid #ccc;
+  background-color: #ffffff;
+  z-index: 9999;
+  top: 80px;
+  border-radius: 5%;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
+}
+
+#color-picker-popup {
+  display: none;
+}
+
+#color-picker-popup.visible {
+  display: block;
+}
+
+.color-circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.mint {
+  background-color: #55c2b0;
+}
+
+.light-blue {
+  background-color: #82caff;
+}
+
+.yellow {
+  background-color: #ffdb58;
+}
+
+.red {
+  background-color: #ff5a5f;
+}
+
+.green {
+  background-color: #2ecc71;
+}
+
+.orange {
+  background-color: #f39c12;
+}
+
+.purple {
+  background-color: #9b59b6;
+}
+
+.fuchsia {
+  background-color: #e83e8c;
+}
+
+.blue {
+  background-color: #2980b9;
+}
+
+.turquoise {
+  background-color: #1abc9c;
+}
+
+
+
+.mint:hover {
+  background-color: #46af9e;
+}
+
+.light-blue:hover {
+  background-color: #60aadf;
+}
+
+.yellow:hover {
+  background-color: #e9c544;
+}
+
+.red:hover {
+  background-color: #e73f45;
+}
+
+.green:hover {
+  background-color: #23bd63;
+}
+
+.orange:hover {
+  background-color: #dd8a05;
+}
+
+.purple:hover {
+  background-color: #8641a1;
+}
+
+.fuchsia:hover {
+  background-color: #ce2674;
+}
+
+.blue:hover {
+  background-color: #1c6ea5;
+}
+
+.turquoise:hover {
+  background-color: #0daa8b;
+}
+

@@ -14,7 +14,7 @@ export class EditarUsuarioModalComponent implements OnInit {
   @Input() public usuario!: UsuarioInterfaz;
   modUser!: FormGroup;
   submitted = false;
-
+  color = localStorage.getItem("siteColor"); 
 
   constructor(private router: Router, public activeModal: NgbActiveModal, private _cuentasService: CuentasService, private formBuilder: FormBuilder) { } 
   

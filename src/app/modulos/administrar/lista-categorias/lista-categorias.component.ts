@@ -15,7 +15,8 @@ export class ListaCategoriasComponent {
   categorias!: CategoriaInterfaz[];
   busqueda = "";
   filtro = "titulo";
-
+  color = localStorage.getItem("siteColor"); 
+  
   constructor(private _categoriasService: CategoriasService, private router: Router, private modalService: NgbModal){
 
 

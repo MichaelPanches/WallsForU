@@ -26,7 +26,7 @@ export class ModificarWallpaperModalComponent {
   Categorias!: CategoriaInterfaz[];
   modWall!: FormGroup;
   submitted = false;
-
+  color = localStorage.getItem("siteColor"); 
   isImageHovered = false;
   archivoSeleccionado = false;
 

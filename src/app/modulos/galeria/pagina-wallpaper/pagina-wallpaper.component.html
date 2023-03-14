@@ -22,7 +22,7 @@
           <hr class="my-4">
           <div class="d-flex flex-wrap categories-container" style="height: 100px; overflow-x: auto;">
             <div class="col-sm-auto px-1 py-1" *ngFor="let categoria of categorias;" style="width: fit-content;">
-              <label class="btn btn-outline-secondary w-100">{{categoria.titulo}}</label>
+              <label class="btn btn-outline-secondary w-100 btn-{{color}}-line">{{categoria.titulo}}</label>
             </div>
           </div>
         </div>
@@ -31,13 +31,13 @@
         </div>
       </div>
 
-      <div class="card shadow" style="height: 90px;">
+      <div class="card shadow  btn-{{color}}" style="height: 90px;">
         <div class="card-body">
           <div class="d-flex align-items-center mt-1 ">
             <img class="mr-3" src="..\assets\img\Perfil Usuario.jpg" alt="" width="48" height="48">
             <div class="lh-100 mx-2">
-              <h6 class="mb-0 text-dark lh-100">{{usuario.nombre}} {{usuario.apellido}}</h6>
-              <small class="text-dark">{{usuario.email}}</small>
+              <h6 class="mb-0 text-white lh-100">{{usuario.nombre}} {{usuario.apellido}}</h6>
+              <small class="text-white">{{usuario.email}}</small>
             </div>
           </div>
         </div>

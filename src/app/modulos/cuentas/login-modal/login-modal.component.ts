@@ -17,7 +17,8 @@ export class LoginModalComponent {
   login!: FormGroup;
   submitted = false;
   usuario!: UsuarioInterfaz;
-
+  color = localStorage.getItem("siteColor"); 
+  
   constructor(private router: Router, public activeModal: NgbActiveModal, private _cuentasService: CuentasService, private formBuilder: FormBuilder) {
     this.login = this.formBuilder.group({
       email: ['', [Validators.required, , Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$"),]],
