@@ -9,7 +9,7 @@ export const environment = {
     messagingSenderId: '265643251050',
   },
 
-  urlBAse: "https://localhost:7219",
+  urlBAse: "http://localhost:32774",
   pathUrl: {
     wallpapers: {
       urlListarWallpapers: "/api/wallpaper/listar",
